@@ -1,0 +1,23 @@
+{
+  "name": "@synergatika/synergy-core",
+  "version": "0.0.2",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "peerDependencies": {
+    "@agm/core": "^3.0.0-beta.0",
+    "@angular/cdk": "~10.0.2",
+    "@angular/common": "^10.0.4",
+    "@angular/core": "^10.0.4",
+    "@angular/material": "^10.0.2",
+    "@ng-bootstrap/ng-bootstrap": "^7.0.0",
+    "@ngx-translate/core": "^13.0.0",
+    "angularx-qrcode": "^10.0.5",
+    "ngx-owl-carousel-o": "4.0.0",
+    "ngx-pagination": "^5.0.0",
+    "ngx-infinite-scroll": "^9.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  }
+}
