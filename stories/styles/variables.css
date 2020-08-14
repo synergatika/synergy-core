@@ -1,0 +1,23 @@
+:root {
+  /* Colors */
+  --background-default: #f4f4f4;
+  --background-secondary: #a3b9cc;
+  --background-tertiary: #5c7d99;
+  --background-light: #ffffff;
+
+  --top-toolbar-color: #f4f4f4;
+  --top-toolbar-background-color: #415daa;
+
+  --primary-color: #415daa;
+  --primary-light-color: #6986db;
+
+  --secondary-color: #e4509e;
+  --tertiary-color: #fdca27;
+
+  --menu-font-color: #f1f1f1;
+
+  --font-primary-color: #415daa;
+  --font-dark-color: rgb(34, 34, 34);
+
+  --amount-color: #575757;
+}
