@@ -14,3 +14,6 @@ export * from './message.model';
 export * from './activity.model';
 export * from './content.model';
 export * from './event.model';
+export * from './member.model';
+export * from './statistics.model';
+export * from './general-list.model';
