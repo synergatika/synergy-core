@@ -2065,7 +2065,159 @@
             "methods": []
         }
     ],
-    "injectables": [],
+    "injectables": [
+        {
+            "name": "PartnersService",
+            "id": "injectable-PartnersService-0571ad1e4d7c25f6e9ce5d9b78407a23",
+            "file": "stories/services/partners.service.ts",
+            "properties": [],
+            "methods": [
+                {
+                    "name": "readPartnerInfo",
+                    "args": [
+                        {
+                            "name": "partnerId",
+                            "type": "string"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<Partner>",
+                    "typeParameters": [],
+                    "line": 13,
+                    "jsdoctags": [
+                        {
+                            "name": "partnerId",
+                            "type": "string",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "readPartnerInfo",
+                    "args": [
+                        {
+                            "name": "partnerId",
+                            "type": "string"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<Partner>",
+                    "typeParameters": [],
+                    "line": 9,
+                    "modifierKind": [
+                        117
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "partnerId",
+                            "type": "string",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ],
+                    "inheritance": {
+                        "file": "IPartnersService"
+                    }
+                },
+                {
+                    "name": "readPartners",
+                    "args": [
+                        {
+                            "name": "offset",
+                            "type": "string"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<Partner[]>",
+                    "typeParameters": [],
+                    "line": 7,
+                    "modifierKind": [
+                        117
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "offset",
+                            "type": "string",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ],
+                    "inheritance": {
+                        "file": "IPartnersService"
+                    }
+                },
+                {
+                    "name": "updatePartnerInfo",
+                    "args": [
+                        {
+                            "name": "partnerId",
+                            "type": "string"
+                        },
+                        {
+                            "name": "formData",
+                            "type": "FormData"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<Partner>",
+                    "typeParameters": [],
+                    "line": 11,
+                    "modifierKind": [
+                        117
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "partnerId",
+                            "type": "string",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "formData",
+                            "type": "FormData",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ],
+                    "inheritance": {
+                        "file": "IPartnersService"
+                    }
+                }
+            ],
+            "description": "",
+            "sourceCode": "import { Injectable } from '@angular/core';\r\nimport { Observable, of } from 'rxjs';\r\n\r\nimport {\r\n  Partner,\r\n  IPartnersService,\r\n} from 'sng-core';\r\n\r\n@Injectable({\r\n  providedIn: 'root'\r\n})\r\nexport class PartnersService  extends IPartnersService {\r\n  readPartnerInfo(partnerId: string): Observable<Partner> {\r\n    return of({\r\n      markers: [\r\n        {\r\n          lat: 30,\r\n          lng: 30,\r\n        },\r\n      ],\r\n    });\r\n  }\r\n}\r\n",
+            "extends": "IPartnersService",
+            "type": "injectable"
+        },
+        {
+            "name": "StaticDataService",
+            "id": "injectable-StaticDataService-e983405dda211264b44c985dab7e2427",
+            "file": "stories/services/static-data.service.ts",
+            "properties": [],
+            "methods": [],
+            "description": "",
+            "sourceCode": "import { Injectable } from '@angular/core';\r\nimport {\r\n  IStaticDataService,\r\n} from 'sng-core';\r\n\r\n@Injectable({\r\n  providedIn: 'root'\r\n})\r\nexport class StaticDataService extends IStaticDataService {\r\n  public get getMapPinStyle() {\r\n    return {\r\n      pin: {\r\n        url: 'assets/media/images/pin.png',\r\n        scaledSize: {\r\n          width: 15,\r\n          height: 15\r\n        }\r\n      },\r\n      mapStyle: [{\r\n        \"featureType\": \"all\", \"elementType\": \"labels\",\r\n        \"stylers\": [{ \"visibility\": \"off\" }]\r\n      }, {\r\n        \"featureType\": \"administrative\", \"elementType\": \"labels\",\r\n        \"stylers\": [{ \"visibility\": \"off\" }]\r\n      }, {\r\n        \"featureType\": \"administrative\", \"elementType\": \"labels.text.fill\",\r\n        \"stylers\": [{ \"color\": \"#444444\" }, { \"visibility\": \"off\" }]\r\n      }, {\r\n        \"featureType\": \"administrative.neighborhood\", \"elementType\": \"labels\",\r\n        \"stylers\": [{ \"visibility\": \"off\" }]\r\n      }, {\r\n        \"featureType\": \"landscape\", \"elementType\": \"all\",\r\n        \"stylers\": [{ \"visibility\": \"on\" }, { \"color\": \"#e0dfe0\" }]\r\n      }, {\r\n        \"featureType\": \"landscape\", \"elementType\": \"labels\",\r\n        \"stylers\": [{ \"visibility\": \"off\" }]\r\n      }, {\r\n        \"featureType\": \"poi\", \"elementType\": \"all\",\r\n        \"stylers\": [{ \"visibility\": \"off\" }]\r\n      }, {\r\n        \"featureType\": \"poi\", \"elementType\": \"labels\",\r\n        \"stylers\": [{ \"visibility\": \"off\" }]\r\n      }, {\r\n        \"featureType\": \"poi.park\", \"elementType\": \"geometry\",\r\n        \"stylers\": [{ \"color\": \"#a8a9a8\" }, { \"visibility\": \"on\" }]\r\n      }, {\r\n        \"featureType\": \"road\", \"elementType\": \"all\",\r\n        \"stylers\": [{ \"saturation\": -100 }, { \"lightness\": 45 }]\r\n      }, {\r\n        \"featureType\": \"road\", \"elementType\": \"geometry.fill\",\r\n        \"stylers\": [{ \"visibility\": \"on\" }, { \"color\": \"#5b5b5a\" }]\r\n      }, {\r\n        \"featureType\": \"road\", \"elementType\": \"labels\",\r\n        \"stylers\": [{ \"visibility\": \"on\" }]\r\n      }, {\r\n        \"featureType\": \"road.highway\", \"elementType\": \"all\",\r\n        \"stylers\": [{ \"visibility\": \"simplified\" }]\r\n      }, {\r\n        \"featureType\": \"road.highway\", \"elementType\": \"labels\",\r\n        \"stylers\": [{ \"visibility\": \"on\" }]\r\n      }, {\r\n        \"featureType\": \"road.arterial\", \"elementType\": \"labels.icon\",\r\n        \"stylers\": [{ \"visibility\": \"on\" }]\r\n      }, {\r\n        \"featureType\": \"transit\", \"elementType\": \"all\",\r\n        \"stylers\": [{ \"visibility\": \"off\" }]\r\n      }, {\r\n        \"featureType\": \"transit\", \"elementType\": \"labels\",\r\n        \"stylers\": [{ \"visibility\": \"on\" }]\r\n      }, {\r\n        \"featureType\": \"water\", \"elementType\": \"all\",\r\n        \"stylers\": [{ \"color\": \"#ffffff\" }, { \"visibility\": \"on\" }]\r\n      }, {\r\n        \"featureType\": \"water\", \"elementType\": \"labels\",\r\n        \"stylers\": [{ \"visibility\": \"off\" }]\r\n      },\r\n      {\r\n        \"featureType\": \"all\", \"elementType\": \"labels\",\r\n        \"stylers\": [{ \"gamma\": 0.26 }, { \"visibility\": \"off\" }]\r\n      },\r\n      {\r\n        \"featureType\": \"road\", \"elementType\": \"all\",\r\n        \"stylers\": [{ \"hue\": \"#ffffff\" }]\r\n      },\r\n      {\r\n        \"featureType\": \"road.highway\", \"elementType\": \"geometry\",\r\n        \"stylers\": [{ \"lightness\": 50 }, { \"hue\": \"#ffffff\" }]\r\n      },\r\n      {\r\n        \"featureType\": \"road.highway\", \"elementType\": \"labels.text\",\r\n        \"stylers\": [{ \"visibility\": \"on\" }]\r\n      }, {\r\n        \"featureType\": \"road.arterial\", \"elementType\": \"geometry\",\r\n        \"stylers\": [{ \"lightness\": 20 }]\r\n      },\r\n      {\r\n        \"featureType\": \"road.arterial\", \"elementType\": \"labels.text\",\r\n        \"stylers\": [{ \"visibility\": \"on\" }]\r\n      },\r\n      {\r\n        \"featureType\": \"road.local\", \"elementType\": \"labels.text\",\r\n        \"stylers\": [{ \"visibility\": \"on\" }]\r\n      }]\r\n    };\r\n  }\r\n}\r\n",
+            "accessors": {
+                "getMapPinStyle": {
+                    "name": "getMapPinStyle",
+                    "getSignature": {
+                        "name": "getMapPinStyle",
+                        "type": "",
+                        "returnType": "",
+                        "line": 10
+                    }
+                }
+            },
+            "extends": "IStaticDataService",
+            "type": "injectable"
+        }
+    ],
     "classes": [
         {
             "name": "IAuthenticationService",
@@ -10662,12 +10814,28 @@
                 "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
             },
             {
+                "name": "environment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "stories/services/environment.ts",
+                "type": "object",
+                "defaultValue": "{\r\n  production: false,\r\n\r\n  apiUrl: 'https://api.synergatika.gr',\r\n  openUrl: 'https://open.synergatika.gr',\r\n  staticUrl: 'https://wp.synergatika.gr/wp-json/wp/v2',\r\n  authTimeOuter: 5000,\r\n\r\n  mapApiKey: 'AIzaSyC8tI34nghyWlMaQhGluC9f6jG7E8swyVQ',\r\n  mapOptions: { \"latitude\": 37.9709831, \"longitude\": 23.7224135, \"zoom\": 12 },\r\n\r\n  access: [\r\n    true, // community,\r\n    true, // loyalty,\r\n    true, // microcredit,\r\n    false // microfunding\r\n  ],\r\n  subAccess: [\r\n    true, //partner_address,\r\n    true, // partner_contact,\r\n    true, // partner_payments,\r\n    true, // partner_auto_registration,\r\n    false // partner_fixed_campaign\r\n  ],\r\n\r\n  version: '0.5.0',\r\n\r\n  fixedMicrocreditCampaign: {\r\n    'title': 'One Click Microcredit Campaign',\r\n    'subtitle': 'Support',\r\n    'terms': 'Support Us',\r\n    'description': 'Description',\r\n    'category': 'Random',\r\n    'access': 'public',\r\n    'quantitative': 'true',\r\n    'minAllowed': '1',\r\n    'maxAllowed': '15',\r\n    'stepAmount': '1',\r\n    'maxAmount': '5000',\r\n    'whenSupportStarts': 0, //days\r\n    'whenSupportEnds': 360, //days\r\n    'whenRedeemStarts': 361, //days\r\n    'whenRedeemEnds': 720, //days\r\n  }\r\n}"
+            },
+            {
                 "name": "MapComponentStory",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "stories/1-widgets/11-Map.stories.ts",
+                "file": "stories/2-layout/21-Footer.stories.ts",
                 "type": "",
-                "defaultValue": "() => ({\r\n  template: `<h1>Test</h1>`,\r\n})"
+                "defaultValue": "() => ({\r\n  template: `<sng-footer></sng-footer>`,\r\n})"
+            },
+            {
+                "name": "MapComponentStory",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "stories/5-widgets/51-Map.stories.ts",
+                "type": "",
+                "defaultValue": "() => ({\r\n  template: `<sng-map></sng-map>`,\r\n})"
             },
             {
                 "name": "require",
@@ -10680,7 +10848,7 @@
                 "name": "ShareIconComponentStory",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "stories/1-widgets/12-Share.stories.ts",
+                "file": "stories/5-widgets/52-Share.stories.ts",
                 "type": "",
                 "defaultValue": "() => ({\r\n  template: `<sng-share-icon></sng-share-icon>`,\r\n  styleUrls: ['../styles/variables.css']\r\n})"
             }
@@ -10716,22 +10884,42 @@
                     "type": "literal type"
                 }
             ],
-            "stories/1-widgets/11-Map.stories.ts": [
+            "stories/services/environment.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "stories/services/environment.ts",
+                    "type": "object",
+                    "defaultValue": "{\r\n  production: false,\r\n\r\n  apiUrl: 'https://api.synergatika.gr',\r\n  openUrl: 'https://open.synergatika.gr',\r\n  staticUrl: 'https://wp.synergatika.gr/wp-json/wp/v2',\r\n  authTimeOuter: 5000,\r\n\r\n  mapApiKey: 'AIzaSyC8tI34nghyWlMaQhGluC9f6jG7E8swyVQ',\r\n  mapOptions: { \"latitude\": 37.9709831, \"longitude\": 23.7224135, \"zoom\": 12 },\r\n\r\n  access: [\r\n    true, // community,\r\n    true, // loyalty,\r\n    true, // microcredit,\r\n    false // microfunding\r\n  ],\r\n  subAccess: [\r\n    true, //partner_address,\r\n    true, // partner_contact,\r\n    true, // partner_payments,\r\n    true, // partner_auto_registration,\r\n    false // partner_fixed_campaign\r\n  ],\r\n\r\n  version: '0.5.0',\r\n\r\n  fixedMicrocreditCampaign: {\r\n    'title': 'One Click Microcredit Campaign',\r\n    'subtitle': 'Support',\r\n    'terms': 'Support Us',\r\n    'description': 'Description',\r\n    'category': 'Random',\r\n    'access': 'public',\r\n    'quantitative': 'true',\r\n    'minAllowed': '1',\r\n    'maxAllowed': '15',\r\n    'stepAmount': '1',\r\n    'maxAmount': '5000',\r\n    'whenSupportStarts': 0, //days\r\n    'whenSupportEnds': 360, //days\r\n    'whenRedeemStarts': 361, //days\r\n    'whenRedeemEnds': 720, //days\r\n  }\r\n}"
+                }
+            ],
+            "stories/2-layout/21-Footer.stories.ts": [
                 {
                     "name": "MapComponentStory",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "stories/1-widgets/11-Map.stories.ts",
+                    "file": "stories/2-layout/21-Footer.stories.ts",
                     "type": "",
-                    "defaultValue": "() => ({\r\n  template: `<h1>Test</h1>`,\r\n})"
+                    "defaultValue": "() => ({\r\n  template: `<sng-footer></sng-footer>`,\r\n})"
                 }
             ],
-            "stories/1-widgets/12-Share.stories.ts": [
+            "stories/5-widgets/51-Map.stories.ts": [
+                {
+                    "name": "MapComponentStory",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "stories/5-widgets/51-Map.stories.ts",
+                    "type": "",
+                    "defaultValue": "() => ({\r\n  template: `<sng-map></sng-map>`,\r\n})"
+                }
+            ],
+            "stories/5-widgets/52-Share.stories.ts": [
                 {
                     "name": "ShareIconComponentStory",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "stories/1-widgets/12-Share.stories.ts",
+                    "file": "stories/5-widgets/52-Share.stories.ts",
                     "type": "",
                     "defaultValue": "() => ({\r\n  template: `<sng-share-icon></sng-share-icon>`,\r\n  styleUrls: ['../styles/variables.css']\r\n})"
                 }
@@ -11434,7 +11622,7 @@
                 "status": "low"
             },
             {
-                "filePath": "stories/1-widgets/11-Map.stories.ts",
+                "filePath": "stories/2-layout/21-Footer.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -11444,11 +11632,49 @@
                 "status": "low"
             },
             {
-                "filePath": "stories/1-widgets/12-Share.stories.ts",
+                "filePath": "stories/5-widgets/51-Map.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "MapComponentStory",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "stories/5-widgets/52-Share.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "ShareIconComponentStory",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "stories/services/environment.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "environment",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "stories/services/partners.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "PartnersService",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "stories/services/static-data.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "StaticDataService",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
