@@ -2067,8 +2067,134 @@
     ],
     "injectables": [
         {
+            "name": "AuthenticationService",
+            "id": "injectable-AuthenticationService-f4f46767bdb2afe76d0e5317d3bf5894",
+            "file": "stories/services/authentication.service.ts",
+            "properties": [
+                {
+                    "name": "currentUser",
+                    "type": "Observable<AuthUser>",
+                    "optional": false,
+                    "description": "",
+                    "line": 7,
+                    "modifierKind": [
+                        114
+                    ],
+                    "inheritance": {
+                        "file": "IAuthenticationService"
+                    }
+                }
+            ],
+            "methods": [
+                {
+                    "name": "logout",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 11,
+                    "modifierKind": [
+                        114,
+                        117
+                    ],
+                    "inheritance": {
+                        "file": "IAuthenticationService"
+                    }
+                }
+            ],
+            "description": "",
+            "sourceCode": "import { Injectable } from '@angular/core';\r\n\r\nimport {\r\n  IAuthenticationService\r\n} from 'sng-core';\r\n\r\n@Injectable({ providedIn: 'root' })\r\nexport class AuthenticationService extends IAuthenticationService {\r\n  get currentUserValue () {\r\n    return {\r\n      user: {\r\n        access: 'member',\r\n      },\r\n    };\r\n  }\r\n}\r\n",
+            "accessors": {
+                "currentUserValue": {
+                    "name": "currentUserValue",
+                    "getSignature": {
+                        "name": "currentUserValue",
+                        "type": "",
+                        "returnType": "",
+                        "line": 10
+                    }
+                }
+            },
+            "extends": "IAuthenticationService",
+            "type": "injectable"
+        },
+        {
+            "name": "MenuService",
+            "id": "injectable-MenuService-d0891c738bce526df9c0929cb5d0961b",
+            "file": "stories/services/menu.service.ts",
+            "properties": [
+                {
+                    "name": "memberMenu",
+                    "defaultValue": "[\r\n\t\t{\r\n\t\t\ttitle: 'MENU.DISCOVER',\r\n\t\t\tlink: 'explore',\r\n\t\t\ticon: 'compass-outline',\r\n\t\t\tenable: true\r\n\t\t},\r\n\t\t{\r\n\t\t\ttitle: 'MENU.OFFERS',\r\n\t\t\tlink: 'offers',\r\n\t\t\ticon: 'muffin',\r\n\t\t\tenable: true\r\n\t\t},\r\n\t\t{\r\n\t\t\ttitle: 'MENU.SUPPORT',\r\n\t\t\tlink: 'support',\r\n\t\t\ticon: 'handshake',\r\n\t\t\tenable: true\r\n\t\t},\r\n\t\t{\r\n\t\t\ttitle: 'MENU.WALLET',\r\n\t\t\tlink: 'wallet',\r\n\t\t\ticon: 'wallet-outline',\r\n\t\t\tenable: true\r\n\t\t},\r\n  ]",
+                    "type": "Menu[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                }
+            ],
+            "methods": [
+                {
+                    "name": "closeNav",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 6,
+                    "modifierKind": [
+                        117
+                    ],
+                    "inheritance": {
+                        "file": "IMenuService"
+                    }
+                },
+                {
+                    "name": "openNav",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 4,
+                    "modifierKind": [
+                        117
+                    ],
+                    "inheritance": {
+                        "file": "IMenuService"
+                    }
+                },
+                {
+                    "name": "toggleNav",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 8,
+                    "modifierKind": [
+                        117
+                    ],
+                    "inheritance": {
+                        "file": "IMenuService"
+                    }
+                }
+            ],
+            "description": "",
+            "sourceCode": "import { Injectable } from '@angular/core';\r\n\r\nimport { IMenuService, Menu } from 'sng-core';\r\n\r\n@Injectable({\r\n\tprovidedIn: 'root'\r\n})\r\nexport class MenuService extends IMenuService {\r\n  memberMenu: Menu[] = [\r\n\t\t{\r\n\t\t\ttitle: 'MENU.DISCOVER',\r\n\t\t\tlink: 'explore',\r\n\t\t\ticon: 'compass-outline',\r\n\t\t\tenable: true\r\n\t\t},\r\n\t\t{\r\n\t\t\ttitle: 'MENU.OFFERS',\r\n\t\t\tlink: 'offers',\r\n\t\t\ticon: 'muffin',\r\n\t\t\tenable: true\r\n\t\t},\r\n\t\t{\r\n\t\t\ttitle: 'MENU.SUPPORT',\r\n\t\t\tlink: 'support',\r\n\t\t\ticon: 'handshake',\r\n\t\t\tenable: true\r\n\t\t},\r\n\t\t{\r\n\t\t\ttitle: 'MENU.WALLET',\r\n\t\t\tlink: 'wallet',\r\n\t\t\ticon: 'wallet-outline',\r\n\t\t\tenable: true\r\n\t\t},\r\n  ];\r\n\r\n  public get getMemberMenu(): Menu[] {\r\n\t\treturn this.memberMenu.filter((el) => {\r\n\t\t\treturn el.enable === true\r\n\t\t});\r\n  };\r\n\r\n}\r\n",
+            "accessors": {
+                "getMemberMenu": {
+                    "name": "getMemberMenu",
+                    "getSignature": {
+                        "name": "getMemberMenu",
+                        "type": "[]",
+                        "returnType": "Menu[]",
+                        "line": 36
+                    }
+                }
+            },
+            "extends": "IMenuService",
+            "type": "injectable"
+        },
+        {
             "name": "PartnersService",
-            "id": "injectable-PartnersService-0571ad1e4d7c25f6e9ce5d9b78407a23",
+            "id": "injectable-PartnersService-f6ec5f15f1ba5023cf1f4f9f71343aac",
             "file": "stories/services/partners.service.ts",
             "properties": [],
             "methods": [
@@ -2083,7 +2209,7 @@
                     "optional": false,
                     "returnType": "Observable<Partner>",
                     "typeParameters": [],
-                    "line": 13,
+                    "line": 46,
                     "jsdoctags": [
                         {
                             "name": "partnerId",
@@ -2191,7 +2317,7 @@
                 }
             ],
             "description": "",
-            "sourceCode": "import { Injectable } from '@angular/core';\r\nimport { Observable, of } from 'rxjs';\r\n\r\nimport {\r\n  Partner,\r\n  IPartnersService,\r\n} from 'sng-core';\r\n\r\n@Injectable({\r\n  providedIn: 'root'\r\n})\r\nexport class PartnersService  extends IPartnersService {\r\n  readPartnerInfo(partnerId: string): Observable<Partner> {\r\n    return of({\r\n      markers: [\r\n        {\r\n          lat: 30,\r\n          lng: 30,\r\n        },\r\n      ],\r\n    });\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\r\nimport { Observable, of } from 'rxjs';\r\n\r\nconst partner = {\r\n  data: {\r\n    slug: \"lacadona\",\r\n    sector: \"Food\",\r\n    _id: \"5eeb39af568ce3cbc3b26fc5\",\r\n    email: \"info@lacandona.gr\",\r\n    name: \"Lacadona\",\r\n    description: \"Παντωπολείο\",\r\n    subtitle: \"Συνεργατικό Παντωπολείο\",\r\n    imageURL: \"https://api.synergatika.gr/assets/profile/5e111575eb6f66426d8794b6_1592474031553\",\r\n    address: {\r\n      coordinates: [\"37.9742903\", \"23.7317143\"],\r\n      street: \"Ιπίττου 4\",\r\n      city: \"Αθήνα\",\r\n      postCode: \"10557\"\r\n    },\r\n    timetable: \"09:00-21:00\",\r\n    contact: {\r\n      phone: \"2110125653\",\r\n      websiteURL: \"\"\r\n    },\r\n    payments: [\r\n      {\r\n        bic: \"ETHNGRAA\",\r\n        name: \"NationalBankofGreece\",\r\n        value: \"GR41213213131\"\r\n      }\r\n    ],\r\n    createdAt: \"2020-06-18T09:53:51.647Z\"\r\n  },\r\n  code: 200\r\n};\r\n\r\nimport {\r\n  Partner,\r\n  IPartnersService,\r\n} from 'sng-core';\r\n\r\n@Injectable({\r\n  providedIn: 'root'\r\n})\r\nexport class PartnersService extends IPartnersService {\r\n  readPartnerInfo(partnerId: string): Observable<Partner> {\r\n\r\n    return of(partner.data);\r\n  }\r\n}\r\n",
             "extends": "IPartnersService",
             "type": "injectable"
         },
@@ -2215,6 +2341,160 @@
                 }
             },
             "extends": "IStaticDataService",
+            "type": "injectable"
+        },
+        {
+            "name": "TranslationService",
+            "id": "injectable-TranslationService-9a40fc223942609dae37d38a0d480ecb",
+            "file": "stories/services/translation.service.ts",
+            "properties": [
+                {
+                    "name": "langIds",
+                    "defaultValue": "[]",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 23,
+                    "modifierKind": [
+                        112
+                    ]
+                }
+            ],
+            "methods": [
+                {
+                    "name": "loadTranslations",
+                    "args": [
+                        {
+                            "name": "args",
+                            "type": "Locale[]",
+                            "dotDotDotToken": true
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 36,
+                    "jsdoctags": [
+                        {
+                            "name": "args",
+                            "type": "Locale[]",
+                            "dotDotDotToken": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getAvailableLanguages",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "LanguageFlag[]",
+                    "typeParameters": [],
+                    "line": 11,
+                    "modifierKind": [
+                        117
+                    ],
+                    "inheritance": {
+                        "file": "ITranslationService"
+                    }
+                },
+                {
+                    "name": "getSelectedLanguage",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 7,
+                    "modifierKind": [
+                        117
+                    ],
+                    "inheritance": {
+                        "file": "ITranslationService"
+                    }
+                },
+                {
+                    "name": "loadTranslations",
+                    "args": [
+                        {
+                            "name": "args",
+                            "type": "Locale[]",
+                            "dotDotDotToken": true
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 9,
+                    "modifierKind": [
+                        117
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "args",
+                            "type": "Locale[]",
+                            "dotDotDotToken": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ],
+                    "inheritance": {
+                        "file": "ITranslationService"
+                    }
+                },
+                {
+                    "name": "setLanguage",
+                    "args": [
+                        {
+                            "name": "lang",
+                            "type": "string"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 5,
+                    "modifierKind": [
+                        117
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "lang",
+                            "type": "string",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ],
+                    "inheritance": {
+                        "file": "ITranslationService"
+                    }
+                }
+            ],
+            "description": "",
+            "sourceCode": "import { Injectable } from '@angular/core';\r\nimport { TranslateService } from '@ngx-translate/core';\r\n\r\nimport { ITranslationService, LanguageFlag, Locale } from 'sng-core';\r\n\r\nconst translations: Locale = {\r\n  lang: 'en',\r\n  data: {\r\n    MENU: {\r\n      OFFERS: 'Offers',\r\n      WALLET: 'Wallet',\r\n      SUPPORT: 'Suppport',\r\n      DISCOVER: 'Discover',\r\n    }\r\n  },\r\n};\r\n\r\n@Injectable({\r\n  providedIn: 'root'\r\n})\r\nexport class TranslationService extends ITranslationService {\r\n\r\n  private langIds: any = [];\r\n\r\n  constructor(private translate: TranslateService) {\r\n    super();\r\n    // add new langIds to the list\r\n    this.translate.addLangs(['en']);\r\n\r\n    // this language will be used as a fallback when a translation isn't found in the current language\r\n    this.translate.setDefaultLang('en');\r\n    console.log(translations);\r\n    this.loadTranslations(translations);\r\n  }\r\n\r\n  loadTranslations(...args: Locale[]): void {\r\n    const locales = [...args];\r\n\r\n    locales.forEach(locale => {\r\n      // use setTranslation() with the third argument set to true\r\n      // to append translations instead of replacing them\r\n      this.translate.setTranslation(locale.lang, locale.data, true);\r\n\r\n      this.langIds.push(locale.lang);\r\n    });\r\n\r\n    // add new languages to the list\r\n    this.translate.addLangs(this.langIds);\r\n  }\r\n}\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "translate",
+                        "type": "TranslateService"
+                    }
+                ],
+                "line": 23,
+                "jsdoctags": [
+                    {
+                        "name": "translate",
+                        "type": "TranslateService",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": "ITranslationService",
             "type": "injectable"
         }
     ],
@@ -10822,7 +11102,7 @@
                 "defaultValue": "{\r\n  production: false,\r\n\r\n  apiUrl: 'https://api.synergatika.gr',\r\n  openUrl: 'https://open.synergatika.gr',\r\n  staticUrl: 'https://wp.synergatika.gr/wp-json/wp/v2',\r\n  authTimeOuter: 5000,\r\n\r\n  mapApiKey: 'AIzaSyC8tI34nghyWlMaQhGluC9f6jG7E8swyVQ',\r\n  mapOptions: { \"latitude\": 37.9709831, \"longitude\": 23.7224135, \"zoom\": 12 },\r\n\r\n  access: [\r\n    true, // community,\r\n    true, // loyalty,\r\n    true, // microcredit,\r\n    false // microfunding\r\n  ],\r\n  subAccess: [\r\n    true, //partner_address,\r\n    true, // partner_contact,\r\n    true, // partner_payments,\r\n    true, // partner_auto_registration,\r\n    false // partner_fixed_campaign\r\n  ],\r\n\r\n  version: '0.5.0',\r\n\r\n  fixedMicrocreditCampaign: {\r\n    'title': 'One Click Microcredit Campaign',\r\n    'subtitle': 'Support',\r\n    'terms': 'Support Us',\r\n    'description': 'Description',\r\n    'category': 'Random',\r\n    'access': 'public',\r\n    'quantitative': 'true',\r\n    'minAllowed': '1',\r\n    'maxAllowed': '15',\r\n    'stepAmount': '1',\r\n    'maxAmount': '5000',\r\n    'whenSupportStarts': 0, //days\r\n    'whenSupportEnds': 360, //days\r\n    'whenRedeemStarts': 361, //days\r\n    'whenRedeemEnds': 720, //days\r\n  }\r\n}"
             },
             {
-                "name": "MapComponentStory",
+                "name": "FooterComponentStory",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "stories/2-layout/21-Footer.stories.ts",
@@ -10838,6 +11118,22 @@
                 "defaultValue": "() => ({\r\n  template: `<sng-map></sng-map>`,\r\n})"
             },
             {
+                "name": "partner",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "stories/services/partners.service.ts",
+                "type": "object",
+                "defaultValue": "{\r\n  data: {\r\n    slug: \"lacadona\",\r\n    sector: \"Food\",\r\n    _id: \"5eeb39af568ce3cbc3b26fc5\",\r\n    email: \"info@lacandona.gr\",\r\n    name: \"Lacadona\",\r\n    description: \"Παντωπολείο\",\r\n    subtitle: \"Συνεργατικό Παντωπολείο\",\r\n    imageURL: \"https://api.synergatika.gr/assets/profile/5e111575eb6f66426d8794b6_1592474031553\",\r\n    address: {\r\n      coordinates: [\"37.9742903\", \"23.7317143\"],\r\n      street: \"Ιπίττου 4\",\r\n      city: \"Αθήνα\",\r\n      postCode: \"10557\"\r\n    },\r\n    timetable: \"09:00-21:00\",\r\n    contact: {\r\n      phone: \"2110125653\",\r\n      websiteURL: \"\"\r\n    },\r\n    payments: [\r\n      {\r\n        bic: \"ETHNGRAA\",\r\n        name: \"NationalBankofGreece\",\r\n        value: \"GR41213213131\"\r\n      }\r\n    ],\r\n    createdAt: \"2020-06-18T09:53:51.647Z\"\r\n  },\r\n  code: 200\r\n}"
+            },
+            {
+                "name": "provider",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "stories/services/dependency.helper.ts",
+                "type": "[]",
+                "defaultValue": "[\r\n  { provide: IMenuService, useClass: MenuService },\r\n  { provide: IPartnersService, useClass: PartnersService },\r\n  { provide: IStaticDataService, useClass: StaticDataService },\r\n  { provide: ITranslationService, useClass: TranslationService },\r\n  { provide: IAuthenticationService, useClass: AuthenticationService },\r\n  { provide: IEnvironmentService, useValue: environment }\r\n]"
+            },
+            {
                 "name": "require",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -10851,6 +11147,14 @@
                 "file": "stories/5-widgets/52-Share.stories.ts",
                 "type": "",
                 "defaultValue": "() => ({\r\n  template: `<sng-share-icon></sng-share-icon>`,\r\n  styleUrls: ['../styles/variables.css']\r\n})"
+            },
+            {
+                "name": "translations",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "stories/services/translation.service.ts",
+                "type": "Locale",
+                "defaultValue": "{\r\n  lang: 'en',\r\n  data: {\r\n    MENU: {\r\n      OFFERS: 'Offers',\r\n      WALLET: 'Wallet',\r\n      SUPPORT: 'Suppport',\r\n      DISCOVER: 'Discover',\r\n    }\r\n  },\r\n}"
             }
         ],
         "functions": [],
@@ -10896,7 +11200,7 @@
             ],
             "stories/2-layout/21-Footer.stories.ts": [
                 {
-                    "name": "MapComponentStory",
+                    "name": "FooterComponentStory",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "stories/2-layout/21-Footer.stories.ts",
@@ -10914,6 +11218,26 @@
                     "defaultValue": "() => ({\r\n  template: `<sng-map></sng-map>`,\r\n})"
                 }
             ],
+            "stories/services/partners.service.ts": [
+                {
+                    "name": "partner",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "stories/services/partners.service.ts",
+                    "type": "object",
+                    "defaultValue": "{\r\n  data: {\r\n    slug: \"lacadona\",\r\n    sector: \"Food\",\r\n    _id: \"5eeb39af568ce3cbc3b26fc5\",\r\n    email: \"info@lacandona.gr\",\r\n    name: \"Lacadona\",\r\n    description: \"Παντωπολείο\",\r\n    subtitle: \"Συνεργατικό Παντωπολείο\",\r\n    imageURL: \"https://api.synergatika.gr/assets/profile/5e111575eb6f66426d8794b6_1592474031553\",\r\n    address: {\r\n      coordinates: [\"37.9742903\", \"23.7317143\"],\r\n      street: \"Ιπίττου 4\",\r\n      city: \"Αθήνα\",\r\n      postCode: \"10557\"\r\n    },\r\n    timetable: \"09:00-21:00\",\r\n    contact: {\r\n      phone: \"2110125653\",\r\n      websiteURL: \"\"\r\n    },\r\n    payments: [\r\n      {\r\n        bic: \"ETHNGRAA\",\r\n        name: \"NationalBankofGreece\",\r\n        value: \"GR41213213131\"\r\n      }\r\n    ],\r\n    createdAt: \"2020-06-18T09:53:51.647Z\"\r\n  },\r\n  code: 200\r\n}"
+                }
+            ],
+            "stories/services/dependency.helper.ts": [
+                {
+                    "name": "provider",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "stories/services/dependency.helper.ts",
+                    "type": "[]",
+                    "defaultValue": "[\r\n  { provide: IMenuService, useClass: MenuService },\r\n  { provide: IPartnersService, useClass: PartnersService },\r\n  { provide: IStaticDataService, useClass: StaticDataService },\r\n  { provide: ITranslationService, useClass: TranslationService },\r\n  { provide: IAuthenticationService, useClass: AuthenticationService },\r\n  { provide: IEnvironmentService, useValue: environment }\r\n]"
+                }
+            ],
             "stories/5-widgets/52-Share.stories.ts": [
                 {
                     "name": "ShareIconComponentStory",
@@ -10923,6 +11247,16 @@
                     "type": "",
                     "defaultValue": "() => ({\r\n  template: `<sng-share-icon></sng-share-icon>`,\r\n  styleUrls: ['../styles/variables.css']\r\n})"
                 }
+            ],
+            "stories/services/translation.service.ts": [
+                {
+                    "name": "translations",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "stories/services/translation.service.ts",
+                    "type": "Locale",
+                    "defaultValue": "{\r\n  lang: 'en',\r\n  data: {\r\n    MENU: {\r\n      OFFERS: 'Offers',\r\n      WALLET: 'Wallet',\r\n      SUPPORT: 'Suppport',\r\n      DISCOVER: 'Discover',\r\n    }\r\n  },\r\n}"
+                }
             ]
         },
         "groupedFunctions": {},
@@ -10931,7 +11265,7 @@
     },
     "routes": [],
     "coverage": {
-        "count": 13,
+        "count": 12,
         "status": "low",
         "files": [
             {
@@ -11626,7 +11960,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "MapComponentStory",
+                "name": "FooterComponentStory",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -11652,6 +11986,25 @@
                 "status": "low"
             },
             {
+                "filePath": "stories/services/authentication.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "AuthenticationService",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "stories/services/dependency.helper.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "provider",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "stories/services/environment.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
@@ -11659,6 +12012,15 @@
                 "name": "environment",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "stories/services/menu.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "MenuService",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
                 "status": "low"
             },
             {
@@ -11671,10 +12033,39 @@
                 "status": "low"
             },
             {
+                "filePath": "stories/services/partners.service.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "partner",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "stories/services/static-data.service.ts",
                 "type": "injectable",
                 "linktype": "injectable",
                 "name": "StaticDataService",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "stories/services/translation.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "TranslationService",
+                "coveragePercent": 0,
+                "coverageCount": "0/8",
+                "status": "low"
+            },
+            {
+                "filePath": "stories/services/translation.service.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "translations",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

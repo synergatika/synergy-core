@@ -1,31 +1,38 @@
-import { AgmCoreModule } from '@agm/core';
+import { Observable, of } from 'rxjs';
+import { RouterTestingModule } from '@angular/router/testing';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
 import { moduleMetadata } from '@storybook/angular';
 
 import {
   SngCoreModule,
-  IStaticDataService,
-  IPartnersService,
-  IEnvironmentService,
+  ITranslationService,
 } from 'sng-core';
 
-import { environment } from '../services/environment';
-import { PartnersService } from '../services/partners.service';
-import { StaticDataService } from '../services/static-data.service';
+import { provider } from '../services/dependency.helper';
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'sng-footer-test',
+  template: `<sng-footer></sng-footer>`
+})
+class FooterTestComponent {
+  constructor(public translateService: ITranslationService) { }
+}
 
 export default {
-  title: 'Widgets/Map',
+  title: 'Layout/Footer',
 
   decorators: [
     moduleMetadata({
       imports: [
+        RouterTestingModule,
+        TranslateModule.forRoot(),
         SngCoreModule
       ],
-      declarations: [],
+      declarations: [FooterTestComponent],
       providers: [
-        { provide: IStaticDataService, useClass: StaticDataService },
-        { provide: IPartnersService, useClass: PartnersService },
-        { provide: IEnvironmentService, useValue: environment },
+        ...provider,
       ],
     }),
   ],
@@ -35,10 +42,10 @@ export default {
   },
 };
 
-export const MapComponentStory = () => ({
-  template: `<sng-footer></sng-footer>`,
+export const FooterComponentStory = () => ({
+  template: `<sng-footer-test></sng-footer-test>`,
 });
 
-MapComponentStory.story = {
+FooterComponentStory.story = {
   name: 'default',
 };
