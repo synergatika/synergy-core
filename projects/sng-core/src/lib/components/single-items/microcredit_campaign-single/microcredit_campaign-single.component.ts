@@ -5,6 +5,7 @@ import { Component, OnInit, OnDestroy, Input, TemplateRef } from '@angular/core'
 import { Subject } from 'rxjs';
 
 import { MicrocreditCampaign } from '../../../model';
+import { IStepperService } from '../../../services';
 
 @Component({
   selector: 'sng-microcredit_campaign-single',
@@ -29,9 +30,11 @@ export class MicrocreditCampaignSingleComponent implements OnInit, OnDestroy {
    * Component Constructor
    */
   constructor(
-    public matDialog: MatDialog
+    public matDialog: MatDialog,
+    private stepperService: IStepperService,
   ) {
     this.unsubscribe = new Subject();
+    this.componentOrTemplateRef = this.stepperService.pledgeComponent();
   }
 
   /**
