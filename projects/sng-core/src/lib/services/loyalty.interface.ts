@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { Points, Activity, Message, LoyaltyTransaction } from '../model';
+import { Points, Activity, Message, LoyaltyTransaction, Statistics } from '../model';
 
 export abstract class ILoyaltyService {
 
@@ -25,4 +25,7 @@ export abstract class ILoyaltyService {
 
   abstract redeemOffer(partnerId: string, offerId: string, to: string, password: string, points: number, quantity: number):
     Observable<Message>;
+
+  abstract readStatistics():
+    Observable<Statistics>;
 }

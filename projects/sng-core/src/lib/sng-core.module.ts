@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
 import { AgmCoreModule } from '@agm/core';
 
 import { TranslateModule } from '@ngx-translate/core';
@@ -8,6 +10,10 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -50,6 +56,11 @@ import {
   PartnerSingleComponent,
   PostEventSingleComponent,
 
+  // Statistics Components
+  OfferStatisticsComponent,
+  LoyaltyStatisticsComponent,
+  MicrocreditCampaignStatisticsComponent,
+
   // Widgets Components
   MapComponent,
   ShareIconComponent,
@@ -91,6 +102,11 @@ const COMPONENTS = [
   PartnerSingleComponent,
   PostEventSingleComponent,
 
+  // Statistics Components
+  OfferStatisticsComponent,
+  LoyaltyStatisticsComponent,
+  MicrocreditCampaignStatisticsComponent,
+
   // Widgets Components
   ShareIconComponent,
   MapComponent,
@@ -103,10 +119,15 @@ const COMPONENTS = [
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
     AgmCoreModule,
     CarouselModule,
     MatCardModule,
     MatTooltipModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatDatepickerModule,
     NgxPaginationModule,
     NgbDropdownModule,
     QRCodeModule,

@@ -1,0 +1,121 @@
+<div *ngIf="statisticsEarn||statisticsRedeem" class="row">
+  <br>
+  <hr><br>
+  <div class="col-md-3">
+    <mat-form-field>
+      <mat-label>{{'SUPPORT.FILTER.DATE.TITLE' | translate}}</mat-label>
+      <input matInput [(ngModel)]="dateFilter" [matDatepickerFilter]="activeDates.bind(this)" [matDatepicker]="startDateFilterPicker" [max]="maxDate" (dateChange)="applyFilterDate($event)">
+      <mat-datepicker-toggle matSuffix [for]="startDateFilterPicker"></mat-datepicker-toggle>
+      <mat-datepicker #startDateFilterPicker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div class="col-md-2">
+    <button mat-raised-button class="clear-button" (click)="clearFilterDate()">
+      Clear Filter
+    </button>
+  </div>
+</div>
+
+<div *ngIf="statisticsEarn">
+  <h3 class="section-heading">
+  Earn
+  <span *ngIf="dateFilter">
+    ({{dateFilter | date}})
+  </span>
+  <span *ngIf="!dateFilter">
+    (Total)
+  </span>
+</h3>
+
+  <div class="row">
+    <div class="col-md-4">
+      <mat-card>
+        <mat-card-title>
+          Amount
+        </mat-card-title>
+        <mat-card-content>
+          {{statisticsEarn.amount | currency: 'EUR'}}
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-md-4">
+      <mat-card>
+        <mat-card-title>
+          Unique Users
+        </mat-card-title>
+        <mat-card-content>
+          {{statisticsEarn.users}}
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-md-4">
+      <mat-card>
+        <mat-card-title>
+          Total Transactions
+        </mat-card-title>
+        <mat-card-content>
+          {{statisticsEarn.count}}
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <br>
+  <div>
+    <button mat-raised-button class="export-button" (click)="exportToCSV(statisticsEarn, 'Earn')">
+    Export
+  </button>
+  </div>
+</div>
+
+<div *ngIf="statisticsRedeem">
+  <br>
+  <hr><br>
+  <h3 class="section-heading">
+  Redeem
+  <span *ngIf="dateFilter">
+    ({{dateFilter | date}})
+  </span>
+  <span *ngIf="!dateFilter">
+    (Total)
+  </span>
+</h3>
+
+  <div class="row">
+    <div class="col-md-4">
+      <mat-card>
+        <mat-card-title>
+          Amount
+        </mat-card-title>
+        <mat-card-content>
+          {{statisticsRedeem.amount | currency: 'EUR'}}
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-md-4">
+      <mat-card>
+        <mat-card-title>
+          Unique Users
+        </mat-card-title>
+        <mat-card-content>
+          {{statisticsRedeem.users}}
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-md-4">
+      <mat-card>
+        <mat-card-title>
+          Total Transactions
+        </mat-card-title>
+        <mat-card-content>
+          {{statisticsRedeem.count}}
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <br>
+  <div>
+    <button mat-raised-button class="export-button" (click)="exportToCSV(statisticsRedeem, 'Redeem')">
+    Export
+  </button>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 import { PartnerAddress } from './partner/address.model';
+import { Statistics } from './statistics.model';
 
 export interface Offer {
   partner_id: string;
@@ -14,6 +15,9 @@ export interface Offer {
   subtitle: string;
   description: string;
   cost: number;
+
+  statistics?: Statistics;
+
   expiresAt: number;
   createdAt: string;
 }

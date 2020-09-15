@@ -7,6 +7,7 @@ export interface Statistics {
   tokens?: number;
   amount?: number;
   points?: number;
+  quantity?: number;
 
   byDate?: Statistics[];
   date?: string;
