@@ -1,5 +1,5 @@
 {
-  "name": "synergy-core",
+  "name": "@synergatika/synergy-core",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
