@@ -1,5 +1,6 @@
 import { PartnerAddress } from './address.model';
 import { PartnerContact } from './contact.model';
+import { PartnerContacts } from './contacts.model';
 import { PartnerPayment } from './payment.model';
 
 export interface Partner {
@@ -15,6 +16,7 @@ export interface Partner {
   sector: string;
 
   contact: PartnerContact;
+  contacts?: PartnerContacts[];
   address: PartnerAddress;
   payments?: PartnerPayment[];
 

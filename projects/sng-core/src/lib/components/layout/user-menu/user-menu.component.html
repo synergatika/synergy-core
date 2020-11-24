@@ -5,12 +5,11 @@
       <div class="header-topbar-avatar" [ngStyle]="{'background-image':'url(' + userAvatar + ')'}">
       </div>
     </div>
-    <div ngbDropdownMenu
-      class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl">
-      <div class="header-topbar-name">{{user.name}}</div>
+    <div ngbDropdownMenu class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl">
+      <!-- <div class="header-topbar-name">{{user.name}}</div> -->
       <!--begin: Navigation -->
-      <div class="navigation" style="padding-top: 10px;">
-        <a *ngFor="let item of menu" ngbDropdownItem [routerLink]="['/'+item.link]" href="javascript:;"
+      <!-- <div class="navigation" style="padding-top: 10px;"> -->
+      <!-- <a *ngFor="let item of menu" ngbDropdownItem [routerLink]="['/'+item.link]" href="javascript:;"
           class="navigation-item">
           <div class="navigation-item-icon">
             <i class="flaticon2-calendar-3 font-success"></i>
@@ -20,12 +19,11 @@
               {{item.title | translate}}
             </div>
           </div>
-        </a>
-        <div class="navigation-custom">
-          <a href="javascript:;" (click)="logout()"
-            class="btn btn-primary btn-upper btn-sm btn-bold">{{'AUTH.LOGOUT.BUTTON' | translate}}</a>
-        </div>
+        </a> -->
+      <div class="navigation-custom">
+        <a href="javascript:;" (click)="logout()" class="btn btn-primary btn-upper btn-sm btn-bold">{{'AUTH.LOGOUT.BUTTON' | translate}}</a>
       </div>
+      <!-- </div> -->
       <!--end: Navigation -->
     </div>
   </div>
