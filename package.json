@@ -1,5 +1,5 @@
 {
-  "name": "synergy-core",
+  "name": "@synergatika/synergy-core",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -12,7 +12,6 @@
     "storybook": "npm run docs:json && start-storybook -p 6006",
     "build-storybook": "npm run docs:json && build-storybook"
   },
-  "private": true,
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   },
