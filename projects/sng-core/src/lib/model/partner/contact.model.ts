@@ -1,4 +1,7 @@
 export interface PartnerContact {
-  phone: string;
-  websiteURL: string;
+  slug: string;
+  name: string;
+  value: string;
+  //   phone: string;
+  // websiteURL: string;
 }

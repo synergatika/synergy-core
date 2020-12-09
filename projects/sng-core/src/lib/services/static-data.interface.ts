@@ -12,4 +12,8 @@ export abstract class IStaticDataService {
   abstract get getPaymentsList(): PaymentList[];
 
   abstract get getBadgesImages(): any;
+
+  abstract get getSectorList(): any;
+
+  abstract get getContactsList(): any;
 }

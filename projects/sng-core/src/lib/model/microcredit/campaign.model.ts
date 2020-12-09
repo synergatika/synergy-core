@@ -8,7 +8,7 @@ import { Statistics } from '../statistics.model';
 
 interface Tokens {
   _id: string;
-  initialTokens: number;
+  earnedTokens: number;
   redeemedTokens: number;
 }
 
@@ -22,7 +22,8 @@ export interface MicrocreditCampaign {
 
   partner_payments: PartnerPayment[];
   partner_address: PartnerAddress;
-  partner_contact: PartnerContact;
+  partner_contacts: PartnerContact[];
+  partner_phone: string;
 
   _id?: string;
   campaign_id: string;
@@ -47,11 +48,16 @@ export interface MicrocreditCampaign {
   startsAt: number;
   expiresAt: number;
 
-  confirmationTokens: Tokens;
-  orderedTokens: Tokens;
+  tokens: Tokens;
+  // confirmationTokens: Tokens;
+  // orderedTokens: Tokens;
 
-  statisticsPromise?: Statistics;
-  statisticsRedeem?: Statistics;
+  statistics?: {
+    earned: Statistics;
+    redeemed: Statistics;
+  }
+  // statisticsPromise?: Statistics;
+  // statisticsRedeem?: Statistics;
 
   createdAt: Date;
 }

@@ -38,11 +38,11 @@ export class MicrocreditCampaignStatisticsComponent implements OnInit, OnDestroy
   ngOnInit() {
     this.maxDate = new Date();
 
-    const datesRedeem = (this.campaign.statisticsRedeem) ? this.campaign.statisticsRedeem.byDate.map(obj => { return obj.date }) : [];
-    const datesPromise = (this.campaign.statisticsPromise) ? this.campaign.statisticsPromise.byDate.map(obj => { return obj.date }) : [];
+    const datesRedeem = (this.campaign.statistics.redeemed) ? this.campaign.statistics.redeemed.byDate.map(obj => { return obj.date }) : [];
+    const datesPromise = (this.campaign.statistics.earned) ? this.campaign.statistics.earned.byDate.map(obj => { return obj.date }) : [];
     this.validatedDates = datesRedeem.concat(datesPromise);
-    this.statisticsPromise = (this.campaign.statisticsPromise) ? this.campaign["statisticsPromise"] : { _id: "-1", count: 0, tokens: 0, users: 0 };
-    this.statisticsRedeem = (this.campaign.statisticsPromise) ? this.campaign["statisticsRedeem"] : { _id: "-1", count: 0, tokens: 0, users: 0 };
+    this.statisticsPromise = (this.campaign.statistics.earned) ? this.campaign["statistics"].earned : { _id: "-1", count: 0, tokens: 0, users: 0 };
+    this.statisticsRedeem = (this.campaign.statistics.redeemed) ? this.campaign["statistics"].redeemed : { _id: "-1", count: 0, tokens: 0, users: 0 };
   }
 
   /**
@@ -73,16 +73,16 @@ export class MicrocreditCampaignStatisticsComponent implements OnInit, OnDestroy
   }
 
   applyFilterDate(event) {
-    this.statisticsPromise = this.campaign.statisticsPromise.byDate.filter(obj =>
+    this.statisticsPromise = this.campaign.statistics.earned.byDate.filter(obj =>
       obj.date === this.dateformat(event.value))[0];
-    this.statisticsRedeem = this.campaign.statisticsRedeem.byDate.filter(obj =>
+    this.statisticsRedeem = this.campaign.statistics.redeemed.byDate.filter(obj =>
       obj.date === this.dateformat(event.value))[0];
   }
 
   clearFilterDate() {
     this.dateFilter = null;
-    this.statisticsPromise = this.campaign.statisticsPromise;
-    this.statisticsRedeem = this.campaign.statisticsRedeem;
+    this.statisticsPromise = this.campaign.statistics.earned;
+    this.statisticsRedeem = this.campaign.statistics.redeemed;
   }
 
   applyFilterText(event: Event) {

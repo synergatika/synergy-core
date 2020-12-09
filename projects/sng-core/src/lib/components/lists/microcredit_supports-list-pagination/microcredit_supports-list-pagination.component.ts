@@ -108,19 +108,19 @@ export class MicrocreditSupportsListPaginationComponent implements OnInit, OnDes
   fetchMicrocreditSupportsData(): void {
     this.microcreditService.readAllBackerSupports('0-0-1')
       .pipe(
-        tap(
-          data => {
-            this.supports = data;
-            console.log('On Microcredit Support List Pagination', this.supports)
-          },
-          error => {
-            console.log(error);
-          }),
-        takeUntil(this.unsubscribe),
-        finalize(() => {
-          this.loading = false;
-          this.cdRef.markForCheck();
-        })
+      tap(
+        data => {
+          this.supports = data;
+          console.log('On Microcredit Support List Pagination', this.supports)
+        },
+        error => {
+          console.log(error);
+        }),
+      takeUntil(this.unsubscribe),
+      finalize(() => {
+        this.loading = false;
+        this.cdRef.markForCheck();
+      })
       )
       .subscribe();
   }
@@ -132,12 +132,11 @@ export class MicrocreditSupportsListPaginationComponent implements OnInit, OnDes
   openSupport(support: MicrocreditSupport): void {
     this.support = {
       ...support,
-      status: (support.initialTokens == support.redeemedTokens) ? 'completed' : support.status,
       how: (support.method == 'store') ? { title: '', value: null } : {
         title: this.paymentsList.filter((el) => {
           return el.bic == support.method
         })[0].title,
-        value: support.partner_payments.filter((el) => {
+        value: support.campaign.partner_payments.filter((el) => {
           return el.bic == support.method
         })[0].value
       }
@@ -146,7 +145,7 @@ export class MicrocreditSupportsListPaginationComponent implements OnInit, OnDes
     this.controlModalState(true);
     this.modalService.open(this.supportModal)
       .result.then(
-        (result) => { this.controlModalState(false); console.log('closed'); },
-        (reason) => { this.controlModalState(false); console.log('dismissed'); });
+      (result) => { this.controlModalState(false); console.log('closed'); },
+      (reason) => { this.controlModalState(false); console.log('dismissed'); });
   }
 }

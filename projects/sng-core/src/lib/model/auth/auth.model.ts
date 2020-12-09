@@ -4,6 +4,7 @@ export interface User {
   name: string;
   imageURL: string;
   access: 'admin' | 'partner' | 'member';
+  activated: boolean;
 }
 
 export interface Token {

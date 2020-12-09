@@ -19,8 +19,7 @@
       <div class="col-md-12">
         <div class="row s_single-info-container">
           <div class="col-md-6 s_single-info">
-            <div *ngIf="!post_event.dateTime" class="info-row"><span
-                class="mdi mdi-clock"></span>{{ post_event.createdAt | date: 'd.M.y' }}
+            <div *ngIf="!post_event.dateTime" class="info-row"><span class="mdi mdi-clock"></span>{{ post_event.createdAt | date: 'd.M.y' }}
             </div>
             <div *ngIf="post_event.location" class="info-row"><span class="mdi mdi-map"></span>{{post_event.location}}
             </div>
@@ -33,7 +32,7 @@
         </div>
         <div class="row s_single-description">
           <div class="col-md-12">
-            <p [innerHTML]="post_event.content"></p>
+            <div class="editor-content" [innerHTML]="post_event.content"></div>
           </div>
         </div>
       </div>
