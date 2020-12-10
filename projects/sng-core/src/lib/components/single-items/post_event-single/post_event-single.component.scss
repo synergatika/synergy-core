@@ -5,3 +5,44 @@
 //     background-color: $secondary;
 //   }
 // }
+::ng-deep .editor-content {
+  .image-style-side {
+    float: right;
+    margin-left: var(--ck-image-style-spacing);
+    max-width: 50%;
+  }
+
+  .image img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    min-width: 50px;
+  }
+
+  img {
+    vertical-align: middle;
+    border-style: none;
+  }
+
+  .image > figcaption {
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    color: #333;
+    background-color: #f7f7f7;
+    padding: 0.6em;
+    font-size: 0.75em;
+    outline-offset: -1px;
+  }
+
+  table {
+    margin: 1em auto;
+    display: table;
+    margin: auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 99%;
+    height: 100%;
+    border: 1px double #b3b3b3;
+  }
+}

@@ -142,15 +142,17 @@ export class LoyaltyStatisticsComponent implements OnInit, OnDestroy {
 
     if (this.dateFilter) {
       const oneDate = [{ date: data["date"], amount: data['amount'], count: data['count'], users: data['users'] }];
+      console.log(oneDate);
       const csvExporter = new ExportToCsv(this.setOptionCSV(data.date + " - Total Loyalty (" + type + ")"));
       csvExporter.generateCsv(oneDate);
     } else {
-      const byDate = data['byDate'].map(obj => ({ date: (obj.date).toString(), amount: obj.tokens, count: obj.count, users: obj.users }))
+      const byDate = data['byDate'].map(obj => ({ date: (obj.date).toString(), amount: obj.amount, count: obj.count, users: obj.users }))
       const total =
         [
           { date: 'total', amount: data['amount'], count: data['count'], users: data['users'] },
-          { date: '', amount: '', users: '', count: '' },
+          { date: '', amount: '', count: '', users: '', },
         ];
+      console.log(total);
 
       const csvExporter = new ExportToCsv(this.setOptionCSV("Total Loyalty (" + type + ")"));
       csvExporter.generateCsv(total.concat(byDate));

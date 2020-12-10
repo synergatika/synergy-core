@@ -17,3 +17,4 @@ export * from './event.model';
 export * from './member.model';
 export * from './statistics.model';
 export * from './general-list.model';
+export * from './contact-list.model';

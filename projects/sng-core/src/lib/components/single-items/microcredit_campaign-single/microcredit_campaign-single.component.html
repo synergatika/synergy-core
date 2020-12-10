@@ -12,8 +12,7 @@
           <img src={{campaign.campaign_imageURL}} alt={{campaign.title}} />
         </div>
         <div *ngIf="campaign.expiresAt>seconds||seconds>campaign.startsAt" class="s_archive-date">
-          {{'GENERAL.TO' | translate}}
-          {{campaign.expiresAt | date: 'd.M'}}</div>
+          {{'GENERAL.TO' | translate}} {{campaign.expiresAt | date: 'd.M'}}</div>
         <div *ngIf="seconds>campaign.expiresAt" class="s_archive-date">
           {{'CAMPAIGN.STATUS.EXPIRED' | translate}}</div>
         <div *ngIf="campaign.startsAt>seconds" class="s_archive-date">
@@ -29,9 +28,7 @@
               <p [innerHTML]="campaign.terms"></p>
             </div>
             <div class="info-row">
-              <span class="tag">{{'CAMPAIGN.REDEEM_PERIOD' | translate}}:</span>
-              {{campaign.redeemStarts | date: 'd.M.y'}} -
-              {{campaign.redeemEnds | date: 'd.M.y'}}<br>
+              <span class="tag">{{'CAMPAIGN.REDEEM_PERIOD' | translate}}:</span> {{campaign.redeemStarts | date: 'd.M.y'}} - {{campaign.redeemEnds | date: 'd.M.y'}}<br>
               <span class="desc">{{'CAMPAIGN.REDEEM_PERIOD_SUB' | translate}}</span>
             </div>
           </div>
@@ -46,15 +43,12 @@
             </div>
             <div class="price-item">
               <span class="hypertitle" *ngIf="campaign.quantitative!=true">{{'CAMPAIGN.PRICE' | translate}}</span>
-              <span class="hypertitle"
-                *ngIf="campaign.quantitative==true&&campaign.stepAmount>0">{{'CAMPAIGN.PRICE_PER_ITEM' | translate}}</span>
-              <span
-                *ngIf="campaign.quantitative==true&&campaign.stepAmount>0">{{campaign.stepAmount | currency:'EUR' }}</span>
+              <span class="hypertitle" *ngIf="campaign.quantitative==true&&campaign.stepAmount>0">{{'CAMPAIGN.PRICE_PER_ITEM' | translate}}</span>
+              <span *ngIf="campaign.quantitative==true&&campaign.stepAmount>0">{{campaign.stepAmount | currency:'EUR' }}</span>
               <span *ngIf="campaign.quantitative!=true">{{campaign.minAllowed | currency:'EUR' }}</span>
             </div>
             <div>
-              <button mat-raised-button class="plegde-button" (click)="pledgeModal(campaign)"
-                [disabled]="!canSupportCampaign">
+              <button mat-raised-button class="plegde-button" (click)="pledgeModal(campaign)" [disabled]="!canSupportCampaign">
                 <span matTooltip="{{'CAMPAIGN.PLEDGE_DISABLE' | translate}}" [matTooltipPosition]="'left'"
                   [matTooltipDisabled]="canSupportCampaign">{{'CAMPAIGN.PLEDGE' | translate}}</span>
               </button>
@@ -66,13 +60,10 @@
             <h6>{{'CAMPAIGN.PARTNER' | translate}}</h6>
             <h5>{{campaign.partner_name}}</h5>
             <img src="{{campaign.partner_imageURL}}" alt="{{campaign.partner_name}}">
-            <div *ngIf="campaign.partner_address" class="info-row info-addess"
-              (click)="scrollTo('map-widget-campaign')">
-              <span class="mdi mdi-pin"></span>
-              {{campaign.partner_address.street}}, {{campaign.partner_address.city}}
+            <div *ngIf="campaign.partner_address" class="info-row info-addess" (click)="scrollTo('map-widget-campaign')">
+              <span class="mdi mdi-pin"></span> {{campaign.partner_address.street}}, {{campaign.partner_address.city}}
             </div>
-            <div *ngIf="campaign.partner_contact" class="info-row"><span
-                class="mdi mdi-phone"></span>{{campaign.partner_contact.phone}}</div>
+            <div *ngIf="campaign.partner_phone" class="info-row"><span class="mdi mdi-phone"></span>{{campaign.partner_phone}}</div>
             <div class="info-row"><span class="mdi mdi-email"></span>{{campaign.partner_email}}</div>
           </div>
           <div class="col-md-8">
