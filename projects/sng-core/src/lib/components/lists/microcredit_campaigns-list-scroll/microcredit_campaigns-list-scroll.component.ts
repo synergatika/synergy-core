@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild, HostListener, Input } from '@angular/core';
 import { Subject } from 'rxjs';
-import { tap, takeUntil, finalize } from 'rxjs/operators'; import { MatDialog } from '@angular/material/dialog';
+import { tap, takeUntil, finalize } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 /**
@@ -19,6 +20,11 @@ import { MicrocreditCampaign } from '../../../model';
   styleUrls: ['./microcredit_campaigns-list-scroll.component.scss']
 })
 export class MicrocreditCampaignsListScrollComponent implements OnInit, OnDestroy {
+
+  /**
+   * Imported Variables
+   */
+  @Input() type: string; // single (one partner), all (many partners), internal (belongs to partenr)
 
   /**
    * Children Modals
@@ -105,17 +111,19 @@ export class MicrocreditCampaignsListScrollComponent implements OnInit, OnDestro
   fetchMicrocreditCampaignsData(counter: number): void {
     this.itemsService.readAllPrivateMicrocreditCampaigns(`${this.scroll.toString()}-${counter.toString()}-1`)
       .pipe(
-        tap(
-          data => {
-            this.campaigns = this.campaigns.concat(data);
-          },
-          () => {
-          }),
-        takeUntil(this.unsubscribe),
-        finalize(() => {
-          this.loading = false;
-          this.cdRef.markForCheck();
-        })
+      tap(
+        data => {
+          this.campaigns = this.campaigns.concat(data);
+
+          console.log("Microcredit Campaigns in List-Scroll", this.campaigns);
+        },
+        () => {
+        }),
+      takeUntil(this.unsubscribe),
+      finalize(() => {
+        this.loading = false;
+        this.cdRef.markForCheck();
+      })
       )
       .subscribe();
   }
@@ -134,7 +142,6 @@ export class MicrocreditCampaignsListScrollComponent implements OnInit, OnDestro
    * Open Microcredit Campaign Modal
    */
   openMicrocredit(campaign: MicrocreditCampaign): void {
-    console.log('Microcredit Campaign on Open Modal in Scroll', campaign);
     this.campaign = campaign;
     this.controlModalState(true);
     this.modalService.open(

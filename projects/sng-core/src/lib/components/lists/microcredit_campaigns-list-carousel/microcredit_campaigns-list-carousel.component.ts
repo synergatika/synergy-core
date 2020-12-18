@@ -1,4 +1,4 @@
-import { Input, Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild, HostListener, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { tap, finalize } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -25,7 +25,7 @@ export class MicrocreditCampaignsListCarouselComponent implements OnInit, OnDest
    * Imported Variables
    */
   @Input() partner: Partner;
-  @Input() type: string; // 'single' Or 'all'
+  @Input() type: string; // single (one partner), all (many partners), internal (belongs to partenr)
 
   /**
    * Children Modals
@@ -113,23 +113,25 @@ export class MicrocreditCampaignsListCarouselComponent implements OnInit, OnDest
     this.campaign = null;
     this.itemsService.readPrivateMicrocreditCampaignsByStore(partnerId, '0-0-1')
       .pipe(
-        tap(
-          data => {
-            this.campaigns = this.shuffle(data);
+      tap(
+        data => {
+          this.campaigns = this.shuffle(data);
 
-            //TEMP FOR DEMO
-            if (this.campaigns.length && this.campaigns.length < 3) {
-              this.campaigns.push(this.campaigns[0]);
-              this.campaigns.push(this.campaigns[0]);
-            }
-          },
-          error => {
-            console.log(error);
-          }),
-        finalize(() => {
-          this.loading = false;
-          this.cdRef.markForCheck();
-        })
+          console.log("Microcredit Campaigns in List-Carousel", this.campaigns);
+
+          //TEMP FOR DEMO
+          if (this.campaigns.length && this.campaigns.length < 3) {
+            this.campaigns.push(this.campaigns[0]);
+            this.campaigns.push(this.campaigns[0]);
+          }
+        },
+        error => {
+          console.log(error);
+        }),
+      finalize(() => {
+        this.loading = false;
+        this.cdRef.markForCheck();
+      })
       )
       .subscribe();
   }

@@ -4,12 +4,12 @@ export interface MicrocreditTransaction {
   member_id: string;
   partner_id: string;
 
-  data: {
-    campaign_id: string;
-    campaign_title: string;
-    support_id: string,
-    tokens: number,
-  };
+  campaign_id: string;
+  campaign_title: string;
+
+  support_id: string,
+  initialTokens: number,
+  currentTokens: number,
 
   tx: string;
   type: string;

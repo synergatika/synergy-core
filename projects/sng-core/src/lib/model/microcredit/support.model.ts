@@ -25,10 +25,10 @@ export interface MicrocreditSupport {
   campaign: MicrocreditCampaign;
   support_id: string;
   payment_id: string;
-  backer_id: string;
+
   initialTokens: number;
-  // redeemedTokens: number;
   currentTokens: number;
+
   status: string;
   type: string;
   amount: number;

@@ -30,7 +30,7 @@ export class PostsEventsListCarouselComponent implements OnInit, OnDestroy {
    * Imported Variables
    */
   @Input() partner: Partner;
-  @Input() type: string; // 'single' Or 'all'
+  @Input() type: string; // single (one partner), all (many partners), internal (belongs to partenr)
 
   /**
    * Children Modals
@@ -84,10 +84,8 @@ export class PostsEventsListCarouselComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (this.type == 'single') {
       this.fetchStorePostsEventsData(this.partner._id);
-      console.log('a');
     } else if (this.type == 'all') {
       this.fetchPostsEventsData();
-      console.log('b');
     }
   }
 
@@ -132,24 +130,26 @@ export class PostsEventsListCarouselComponent implements OnInit, OnDestroy {
   fetchPostsEventsData(): void {
     this.itemsService.readAllPrivatePostsEvents('0-0-0')
       .pipe(
-        tap(
-          data => {
-            this.posts_events = data;
-            // Temp for DEMO
-            if (this.posts_events.length < 3) {
-              this.posts_events.push(this.posts_events[0]);
-              this.posts_events.push(this.posts_events[0]);
-            }
-            console.log(this.posts_events)
-          },
-          error => {
-            console.log(error);
-          }),
-        takeUntil(this.unsubscribe),
-        finalize(() => {
-          this.loading = false;
-          this.cdRef.markForCheck();
-        })
+      tap(
+        data => {
+          this.posts_events = data;
+
+          console.log("Posts/Events in List-Carousel", this.posts_events);
+
+          // Temp for DEMO
+          if (this.posts_events.length < 3) {
+            this.posts_events.push(this.posts_events[0]);
+            this.posts_events.push(this.posts_events[0]);
+          }
+        },
+        error => {
+          console.log(error);
+        }),
+      takeUntil(this.unsubscribe),
+      finalize(() => {
+        this.loading = false;
+        this.cdRef.markForCheck();
+      })
       )
       .subscribe();
   }
@@ -160,22 +160,22 @@ export class PostsEventsListCarouselComponent implements OnInit, OnDestroy {
   fetchStorePostsEventsData(partnerId: string): void {
     this.itemsService.readPrivatePostsEventsByStore(partnerId, '0-0-0')
       .pipe(
-        tap(
-          data => {
-            this.posts_events = data;
-            // TEMP FOR DEMO
-            if (this.posts_events.length && this.posts_events.length < 3) {
-              this.posts_events.push(this.posts_events[0]);
-              this.posts_events.push(this.posts_events[0]);
-            }
-          },
-          error => {
-            console.log(error);
-          }),
-        finalize(() => {
-          this.loading = false;
-          this.cdRef.markForCheck();
-        })
+      tap(
+        data => {
+          this.posts_events = data;
+          // TEMP FOR DEMO
+          if (this.posts_events.length && this.posts_events.length < 3) {
+            this.posts_events.push(this.posts_events[0]);
+            this.posts_events.push(this.posts_events[0]);
+          }
+        },
+        error => {
+          console.log(error);
+        }),
+      finalize(() => {
+        this.loading = false;
+        this.cdRef.markForCheck();
+      })
       )
       .subscribe();
   }
@@ -197,8 +197,8 @@ export class PostsEventsListCarouselComponent implements OnInit, OnDestroy {
       }
     )
       .result.then(
-        () => { this.controlModalState(false); console.log('closed'); },
-        () => { this.controlModalState(false); console.log('dismissed'); });
+      () => { this.controlModalState(false); console.log('closed'); },
+      () => { this.controlModalState(false); console.log('dismissed'); });
   }
 
 

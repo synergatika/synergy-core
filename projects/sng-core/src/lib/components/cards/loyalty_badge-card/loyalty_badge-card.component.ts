@@ -70,20 +70,20 @@ export class LoyaltyBadgeCardComponent implements OnInit, OnDestroy {
   fetchLoyaltyBadgeData(): void {
     this.loyaltyService.readBadge()
       .pipe(
-        tap(
-          data => {
-            this.loyalty_badge = data;
-            console.log('On Fetch Loyalty Badge', data);
-            this.fetchBadgeContent();
-          },
-          error => {
-            console.log(error);
-          }),
-        takeUntil(this.unsubscribe),
-        finalize(() => {
-          this.loading = false;
-          this.cdRef.markForCheck();
-        })
+      tap(
+        data => {
+          this.loyalty_badge = data;
+          console.log('Loyalty Badge Card', this.loyalty_badge);
+          this.fetchBadgeContent();
+        },
+        error => {
+          console.log(error);
+        }),
+      takeUntil(this.unsubscribe),
+      finalize(() => {
+        this.loading = false;
+        this.cdRef.markForCheck();
+      })
       )
       .subscribe();
   }
@@ -112,20 +112,19 @@ export class LoyaltyBadgeCardComponent implements OnInit, OnDestroy {
     this.contentService.readContentById(this.loyalty_badge.text_id)
       // this.staticContentService.readText(this.badge.text_id)
       .pipe(
-        tap(
-          data => {
-            this.loyalty_badge.text = data;
-            console.log(this.translate.currentLang)
-          },
-          error => {
-            console.log(error);
-          }
-        ),
-        takeUntil(this.unsubscribe),
-        finalize(() => {
-          this.loading = false;
-          this.cdRef.markForCheck();
-        })
+      tap(
+        data => {
+          this.loyalty_badge.text = data;
+        },
+        error => {
+          console.log(error);
+        }
+      ),
+      takeUntil(this.unsubscribe),
+      finalize(() => {
+        this.loading = false;
+        this.cdRef.markForCheck();
+      })
       ).subscribe();
   }
 }

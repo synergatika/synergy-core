@@ -11,7 +11,7 @@
         <div class="s_single-img">
           <img src={{campaign.campaign_imageURL}} alt={{campaign.title}} />
         </div>
-        <div *ngIf="campaign.expiresAt>seconds||seconds>campaign.startsAt" class="s_archive-date">
+        <div *ngIf="campaign.expiresAt>seconds||seconds>campaign.startsAt" class="s_single-date">
           {{'GENERAL.TO' | translate}} {{campaign.expiresAt | date: 'd.M'}}</div>
         <div *ngIf="seconds>campaign.expiresAt" class="s_archive-date">
           {{'CAMPAIGN.STATUS.EXPIRED' | translate}}</div>
@@ -47,7 +47,7 @@
               <span *ngIf="campaign.quantitative==true&&campaign.stepAmount>0">{{campaign.stepAmount | currency:'EUR' }}</span>
               <span *ngIf="campaign.quantitative!=true">{{campaign.minAllowed | currency:'EUR' }}</span>
             </div>
-            <div>
+            <div *ngIf="viewSupportButton">
               <button mat-raised-button class="plegde-button" (click)="pledgeModal(campaign)" [disabled]="!canSupportCampaign">
                 <span matTooltip="{{'CAMPAIGN.PLEDGE_DISABLE' | translate}}" [matTooltipPosition]="'left'"
                   [matTooltipDisabled]="canSupportCampaign">{{'CAMPAIGN.PLEDGE' | translate}}</span>
@@ -65,6 +65,12 @@
             </div>
             <div *ngIf="campaign.partner_phone" class="info-row"><span class="mdi mdi-phone"></span>{{campaign.partner_phone}}</div>
             <div class="info-row"><span class="mdi mdi-email"></span>{{campaign.partner_email}}</div>
+            <div *ngIf="contactsList">
+              <div class="contacts" *ngFor="let contact of contactsList">
+                <a *ngIf="contact.value" href="{{contact.prefix}}{{contact.value}}" target="_blank"><span
+        class="mdi mdi-{{contact.icon}}"></span> </a>
+              </div>
+            </div>
           </div>
           <div class="col-md-8">
             <p [innerHTML]="campaign.description"></p>

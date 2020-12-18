@@ -22,7 +22,6 @@ export class UserMenuComponent implements OnInit {
     private authenticationService: IAuthenticationService
   ) {
     this.menu = this.menuService.getUserMenu;
-    console.log(this.menu)
   }
 
   ngOnInit(): void {

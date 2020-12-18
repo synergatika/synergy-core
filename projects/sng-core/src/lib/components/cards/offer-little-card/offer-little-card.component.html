@@ -1,0 +1,20 @@
+<div class="synergy-card" *ngIf="offer">
+
+  <mat-card class="item-card offer-card" style="background-size: cover; background-image: url({{offer.offer_imageURL}});">
+
+    <mat-card-content>
+
+      <div class="s_archive-content container-fluid">
+        <div class="s_archive-heading row">
+          <h4 class="s_archive-title col-12">{{offer.title}}</h4>
+        </div>
+        <div class="s_archive-offer">
+          {{'HISTORY.OFFER' | translate}}
+        </div>
+      </div>
+
+    </mat-card-content>
+
+  </mat-card>
+
+</div>

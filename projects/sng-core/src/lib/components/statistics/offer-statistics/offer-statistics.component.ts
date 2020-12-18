@@ -37,6 +37,8 @@ export class OfferStatisticsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.maxDate = new Date();
 
+    console.log("Statistics in Loyalty Offer Statistics", this.offer.statistics);
+
     this.validatedDates = (this.offer.statistics) ? this.offer.statistics.byDate.map(obj => { return obj.date }) : [];
     this.statistics = (this.offer.statistics) ? this.offer["statistics"] : { _id: "-1", count: 0, tokens: 0, users: 0 };
   }

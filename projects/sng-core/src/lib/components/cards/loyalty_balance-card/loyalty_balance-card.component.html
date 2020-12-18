@@ -6,16 +6,9 @@
       <span class="wallet-img">
         <img src="../../../assets/media/images/Synergy-Icon.png" alt="Synergy" />
       </span>
-      <div class="" *ngIf="translate.currentLang == 'en'">
-        <div class="single-title">{{balance.text.en_title}}</div>
-        <div class="single-subtitle"><span
-            class="mdi mdi-shopping"></span>{{'MEMBER.DASHBOARD.WALLET_SUBTITLE' | translate}}
-        </div>
-      </div>
-      <div class="" *ngIf="translate.currentLang == 'el'">
-        <div class="single-title">{{balance.text.el_title}}</div>
-        <div class="single-subtitle"><span
-            class="mdi mdi-shopping"></span>{{'MEMBER.DASHBOARD.WALLET_SUBTITLE' | translate}}
+      <div>
+        <div class="single-title">{{balance.text | content_translate: 'title'}}</div>
+        <div class="single-subtitle"><span class="mdi mdi-shopping"></span>{{'MEMBER.DASHBOARD.WALLET_SUBTITLE' | translate}}
         </div>
       </div>
     </div>
@@ -41,18 +34,16 @@
         </span>
       </div>
       <div *ngIf="balance.text" class="">
-        <h3 *ngIf="translate.currentLang == 'en'" class="balance-title">{{balance.text.en_title}}</h3>
-        <h3 *ngIf="translate.currentLang == 'el'" class="balance-title">{{balance.text.el_title}}</h3>
+        <h3 class="balance-title">{{balance.text | content_translate: 'title'}}</h3>
       </div>
-      <div *ngIf="balance.points" class="balance-amount">
+      <div *ngIf="balance" class="balance-amount">
         <div>
           <span class="points">{{balance.points}}</span>
         </div>
       </div>
     </div>
     <div *ngIf="balance.text" class="balance-text mt-3">
-      <p *ngIf="translate.currentLang == 'en'" [innerHTML]="balance.text.en_content"></p>
-      <p *ngIf="translate.currentLang == 'el'" [innerHTML]="balance.text.el_content"></p>
+      <p [innerHTML]="balance.text | content_translate: 'content'"></p>
     </div>
   </div>
 </ng-template>

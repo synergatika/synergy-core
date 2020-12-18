@@ -9,14 +9,8 @@
       <img *ngIf="microcredit_badge.image" [src]="microcredit_badge.image">
     </div>
     <div *ngIf="microcredit_badge.text" class="bagde-text">
-      <div *ngIf="translate.currentLang == 'en'">
-        <h2>{{microcredit_badge.text.en_title}}</h2>
-        <p [innerHTML]="microcredit_badge.text.en_content"></p>
-      </div>
-      <div *ngIf="translate.currentLang == 'el'">
-        <h2>{{microcredit_badge.text.el_title}}</h2>
-        <p [innerHTML]="microcredit_badge.text.el_content"></p>
-      </div>
+      <h2>{{microcredit_badge.text | content_translate: 'title'}}</h2>
+      <p [innerHTML]="microcredit_badge.text | content_translate: 'content'"></p>
     </div>
   </div>
 </div>

@@ -22,9 +22,8 @@ export class MicrocreditCampaignCardComponent implements OnInit {
    * Imported Variables
    */
   @Input() campaign: MicrocreditCampaign;
-  @Input() type: any;
+  @Input() type: string; // single (one partner), all (many partners), internal (belongs to partenr)
 
-  seconds = 0;
   public flag: string = '';
   public canSupport = false;
   public canRedeem = false;
@@ -35,27 +34,23 @@ export class MicrocreditCampaignCardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('Campaign in Card', this.campaign)
-    console.log('Single or All', this.type);
-
     const now = new Date();
-    this.seconds = parseInt(now.getTime().toString());
-    // console.log('Campaign')
-    // console.log(this.microcredit);
+    const seconds = parseInt(now.getTime().toString());
+
     const currentUser = this.authenticationService.currentUserValue;
     const access = currentUser.user.access;
 
     if (this.campaign.status === 'draft') {
       this.canSupport = false;
       this.flag = this.translate.instant('CAMPAIGN.STATUS.DRAFT');
-    } else if (this.campaign.startsAt > this.seconds) {
+    } else if (this.campaign.startsAt > seconds) {
       this.canSupport = false;
       this.canRedeem = false;
       this.flag = this.translate.instant('CAMPAIGN.STATUS.EXPECTED');
-    } else if ((this.campaign.expiresAt > this.seconds) && (this.seconds > this.campaign.startsAt)) {
+    } else if ((this.campaign.expiresAt > seconds) && (seconds > this.campaign.startsAt)) {
       this.canSupport = true;
       this.flag = this.translate.instant('GENERAL.TO');
-    } else if (this.seconds > this.campaign.expiresAt) {
+    } else if (seconds > this.campaign.expiresAt) {
       this.canSupport = false;
       this.flag = this.translate.instant('CAMPAIGN.STATUS.REDEEM_TO');
       this.canRedeem = (access == 'partner') ? true : false;

@@ -9,6 +9,7 @@ import { Statistics } from '../statistics.model';
 interface Tokens {
   _id: string;
   earnedTokens: number;
+  paidTokens: number;
   redeemedTokens: number;
 }
 

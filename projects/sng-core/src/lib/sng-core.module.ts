@@ -27,7 +27,9 @@ import {
   MicrocreditBadgeCardComponent,
   MicrocreditSupportCardComponent,
   MicrocreditCampaignCardComponent,
+  MicrocreditCampaignLittleCardComponent,
   OfferCardComponent,
+  OfferLittleCardComponent,
   PartnerCardComponent,
   PostEventCardComponent,
   QRCodeCardComponent,
@@ -53,6 +55,7 @@ import {
 
   // Single Items Components
   MicrocreditCampaignSingleComponent,
+  LoyaltyOfferSingleComponent,
   PartnerSingleComponent,
   PostEventSingleComponent,
 
@@ -66,14 +69,18 @@ import {
   ShareIconComponent,
 } from './components';
 
+import { ContentTranslatePipe } from './pipes';
+
 const COMPONENTS = [
   // Card Components
   LoyaltyBadgeCardComponent,
   LoyaltyBalanceCardComponent,
   MicrocreditBadgeCardComponent,
   MicrocreditCampaignCardComponent,
+  MicrocreditCampaignLittleCardComponent,
   MicrocreditSupportCardComponent,
   OfferCardComponent,
+  OfferLittleCardComponent,
   PartnerCardComponent,
   PostEventCardComponent,
   QRCodeCardComponent,
@@ -99,6 +106,7 @@ const COMPONENTS = [
 
   // Single Items Components
   MicrocreditCampaignSingleComponent,
+  LoyaltyOfferSingleComponent,
   PartnerSingleComponent,
   PostEventSingleComponent,
 
@@ -114,7 +122,7 @@ const COMPONENTS = [
 
 @NgModule({
   declarations: [
-    ...COMPONENTS,
+    ContentTranslatePipe, ...COMPONENTS,
   ],
   imports: [
     CommonModule,
@@ -135,7 +143,7 @@ const COMPONENTS = [
     InfiniteScrollModule,
   ],
   exports: [
-    ...COMPONENTS,
+    ContentTranslatePipe, ...COMPONENTS,
   ]
 })
 export class SngCoreModule { }

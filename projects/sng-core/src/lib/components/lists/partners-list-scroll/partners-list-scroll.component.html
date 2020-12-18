@@ -1,9 +1,7 @@
 <!--begin::Partners List-->
-<div *ngIf="partners && partners.length" class="row" infiniteScroll [infiniteScrollDistance]="2"
-  [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+<div *ngIf="partners && partners.length" class="row" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
   <div class="col-md-4 item-wrapper" *ngFor="let partner of (partners)">
-    <sng-partner-card [partner]="partner" (mousedown)="mousedown()" (mousemove)="mousemove()"
-      (mouseup)="mouseup(partner)">
+    <sng-partner-card [partner]="partner" (mousedown)="mousedown()" (mousemove)="mousemove()" (mouseup)="mouseup(partner)">
     </sng-partner-card>
   </div>
 </div>

@@ -1,7 +1,7 @@
 <div *ngIf="offer">
 
-  <div class="row">
-    <div class="col-md-3">
+  <div class="row section-filter">
+    <div class="col-md-3 offset-md-6">
       <mat-form-field>
         <mat-label>{{'SUPPORT.FILTER.DATE.TITLE' | translate}}</mat-label>
         <input matInput [(ngModel)]="dateFilter" [matDatepickerFilter]="activeDates.bind(this)" [matDatepicker]="startDateFilterPicker" [max]="maxDate" (dateChange)="applyFilterDate($event)">
@@ -9,21 +9,21 @@
         <mat-datepicker #startDateFilterPicker></mat-datepicker>
       </mat-form-field>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-3" *ngIf="dateFilter">
       <button mat-raised-button class="clear-button" (click)="clearFilterDate()">
-      Clear Filter
+        {{'STATISTICS.CLEAR_FILTER' | translate}}
     </button>
     </div>
   </div>
 
   <div *ngIf="statistics">
     <h3 class="section-heading">
-  Transactions
+      {{'STATISTICS.OFFER_REDEEM' | translate}}
   <span *ngIf="dateFilter">
     ({{dateFilter | date}})
   </span>
   <span *ngIf="!dateFilter">
-    (Total)
+    ({{'STATISTICS.TOTAL' | translate}})
   </span>
 </h3>
 
@@ -31,7 +31,7 @@
       <div class="col-md-4">
         <mat-card>
           <mat-card-title>
-            Quantity
+            {{'STATISTICS.QUANTITY' | translate}}
           </mat-card-title>
           <mat-card-content>
             {{statistics.quantity}}
@@ -41,7 +41,7 @@
       <div class="col-md-4">
         <mat-card>
           <mat-card-title>
-            Unique Users
+            {{'STATISTICS.USERS' | translate}}
           </mat-card-title>
           <mat-card-content>
             {{statistics.users}}
@@ -51,7 +51,7 @@
       <div class="col-md-4">
         <mat-card>
           <mat-card-title>
-            Total Transactions
+            {{'STATISTICS.TRANSACTIONS' | translate}}
           </mat-card-title>
           <mat-card-content>
             {{statistics.count}}
@@ -61,7 +61,9 @@
     </div>
     <br>
     <div>
-      <button mat-raised-button class="export-button" (click)="exportToCSV(statistics)">    Export  </button>
+      <button mat-raised-button class="export-button" (click)="exportToCSV(statistics)">
+        {{'STATISTICS.EXPORT' | translate}}
+      </button>
     </div>
   </div>
 </div>

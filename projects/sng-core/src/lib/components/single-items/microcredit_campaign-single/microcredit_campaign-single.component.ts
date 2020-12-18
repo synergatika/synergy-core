@@ -4,8 +4,8 @@ import { Component, OnInit, OnDestroy, Input, TemplateRef } from '@angular/core'
 
 import { Subject } from 'rxjs';
 
-import { MicrocreditCampaign } from '../../../model';
-import { IStepperService } from '../../../services';
+import { MicrocreditCampaign, ContactList } from '../../../model';
+import { IStepperService, IAuthenticationService, IStaticDataService } from '../../../services';
 
 @Component({
   selector: 'sng-microcredit_campaign-single',
@@ -19,9 +19,13 @@ export class MicrocreditCampaignSingleComponent implements OnInit, OnDestroy {
    * Imported Variables
    */
   @Input() campaign: MicrocreditCampaign;
+  public contactsList: ContactList[] = [];
 
   seconds = 0;
-  public canSupportCampaign = false;
+  public canSupportCampaign: boolean = false;
+  public viewSupportButton: boolean = false;
+
+  access: string = '';
 
   private unsubscribe: Subject<any>;
   loading = false;
@@ -31,10 +35,14 @@ export class MicrocreditCampaignSingleComponent implements OnInit, OnDestroy {
    */
   constructor(
     public matDialog: MatDialog,
+    private authenticationService: IAuthenticationService,
     private stepperService: IStepperService,
+    private staticDataService: IStaticDataService
   ) {
     this.unsubscribe = new Subject();
+    this.contactsList = this.staticDataService.getContactsList;
     this.componentOrTemplateRef = this.stepperService.pledgeComponent();
+    this.viewSupportButton = (this.authenticationService.currentUserValue.user["access"] == 'member');
   }
 
   /**
@@ -43,10 +51,18 @@ export class MicrocreditCampaignSingleComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     console.log('Campaign in SingleMicrocredit', this.campaign);
 
+    /**begin:Social Media*/
+    const currentContactsArray = (this.campaign.partner_contacts).map(a => a.slug);
+    const validateContactsList = this.contactsList.filter(function(el) {
+      return currentContactsArray.includes(el.slug);
+    });
+    this.contactsList = validateContactsList.map(o => { return { ...o, value: (this.campaign.partner_contacts).filter(ob => { return ob.slug === o.slug })[0].value } });
+    /**end:Social Media*/
+
     const now = new Date();
     this.seconds = parseInt(now.getTime().toString());
 
-    this.canSupportCampaign = ((this.campaign.startsAt < this.seconds) && (this.campaign.expiresAt > this.seconds)) ? true : false;
+    this.canSupportCampaign = ((this.viewSupportButton) && (this.campaign.startsAt < this.seconds) && (this.campaign.expiresAt > this.seconds)) ? true : false;
   }
 
 	/**
@@ -75,7 +91,7 @@ export class MicrocreditCampaignSingleComponent implements OnInit, OnDestroy {
     const modalDialog = this.matDialog.open(this.componentOrTemplateRef, dialogConfig);
   }
 
-  setComponent <T> (componentOrTemplateRef: ComponentType<T> | TemplateRef<T>): void {
+  setComponent<T>(componentOrTemplateRef: ComponentType<T> | TemplateRef<T>): void {
     this.componentOrTemplateRef = componentOrTemplateRef;
   }
 }
