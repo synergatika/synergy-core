@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
-import Content from '../models/content.model';
+import { Content } from '../model';
 
 @Pipe({
   name: 'content_translate',
