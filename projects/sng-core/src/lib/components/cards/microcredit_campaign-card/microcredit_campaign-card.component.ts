@@ -24,9 +24,10 @@ export class MicrocreditCampaignCardComponent implements OnInit {
   @Input() campaign: MicrocreditCampaign;
   @Input() type: string; // single (one partner), all (many partners), internal (belongs to partenr)
 
-  public flag: string = '';
-  public canSupport = false;
-  public canRedeem = false;
+  public _text: string = '';
+  public _date: number = 0;
+  //public canSupport = false;
+  //public canRedeem = false;
 
   constructor(
     private translate: TranslateService,
@@ -41,19 +42,31 @@ export class MicrocreditCampaignCardComponent implements OnInit {
     const access = currentUser.user.access;
 
     if (this.campaign.status === 'draft') {
-      this.canSupport = false;
-      this.flag = this.translate.instant('CAMPAIGN.STATUS.DRAFT');
+      this._text = this.translate.instant('CAMPAIGN.STATUS.DRAFT');
     } else if (this.campaign.startsAt > seconds) {
-      this.canSupport = false;
-      this.canRedeem = false;
-      this.flag = this.translate.instant('CAMPAIGN.STATUS.EXPECTED');
+      this._text = this.translate.instant('CAMPAIGN.STATUS.EXPECTED');
+      this._date = this.campaign.startsAt;
     } else if ((this.campaign.expiresAt > seconds) && (seconds > this.campaign.startsAt)) {
-      this.canSupport = true;
-      this.flag = this.translate.instant('GENERAL.TO');
+      this._date = this.campaign.expiresAt;
+      this._text = this.translate.instant('GENERAL.TO');
     } else if (seconds > this.campaign.expiresAt) {
-      this.canSupport = false;
-      this.flag = this.translate.instant('CAMPAIGN.STATUS.REDEEM_TO');
-      this.canRedeem = (access == 'partner') ? true : false;
+      this._text = this.translate.instant('CAMPAIGN.STATUS.REDEEM_TO');
+      this._date = this.campaign.redeemEnds;
     }
+    // if (this.campaign.status === 'draft') {
+    //   this.canSupport = false;
+    //   this.flag = this.translate.instant('CAMPAIGN.STATUS.DRAFT');
+    // } else if (this.campaign.startsAt > seconds) {
+    //   this.canSupport = false;
+    //   this.canRedeem = false;
+    //   this.flag = this.translate.instant('CAMPAIGN.STATUS.EXPECTED');
+    // } else if ((this.campaign.expiresAt > seconds) && (seconds > this.campaign.startsAt)) {
+    //   this.canSupport = true;
+    //   this.flag = this.translate.instant('GENERAL.TO');
+    // } else if (seconds > this.campaign.expiresAt) {
+    //   this.canSupport = false;
+    //   this.flag = this.translate.instant('CAMPAIGN.STATUS.REDEEM_TO');
+    //   this.canRedeem = (access == 'partner') ? true : false;
+    // }
   }
 }

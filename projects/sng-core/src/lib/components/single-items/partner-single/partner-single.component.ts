@@ -20,7 +20,7 @@ export class PartnerSingleComponent implements OnInit, OnDestroy {
   @Input() partner: Partner;
   public contactsList: ContactList[] = [];
   public sectorsList: GeneralList[];
-  public sector: string;
+  public sector: string = '';
 
   private unsubscribe: Subject<any>;
   loading = false;
@@ -32,7 +32,7 @@ export class PartnerSingleComponent implements OnInit, OnDestroy {
     private staticDataService: IStaticDataService
   ) {
     this.contactsList = this.staticDataService.getContactsList;
-    this.sectorsList = this.staticDataService.getSectorList;
+    this.sectorsList = this.staticDataService.getSectorsList;
     this.unsubscribe = new Subject();
   }
 
@@ -41,18 +41,8 @@ export class PartnerSingleComponent implements OnInit, OnDestroy {
    */
   ngOnInit(): void {
     console.log('Partner in SinglePartner', this.partner);
-
-    this.sector = this.sectorsList.filter((el) => {
-      return el.value == this.partner.sector
-    })[0].title;
-
-    /**begin:Social Media*/
-    const currentContactsArray = (this.partner.contacts).map(a => a.slug);
-    const validateContactsList = this.contactsList.filter(function(el) {
-      return currentContactsArray.includes(el.slug);
-    });
-    this.contactsList = validateContactsList.map(o => { return { ...o, value: (this.partner.contacts).filter(ob => { return ob.slug === o.slug })[0].value } });
-    /**end:Social Media*/
+    this.sector = this.transformSector(this.partner);
+    this.contactsList = this.transformContacts(this.partner);
   }
 
   /**
@@ -62,6 +52,23 @@ export class PartnerSingleComponent implements OnInit, OnDestroy {
     this.unsubscribe.next();
     this.unsubscribe.complete();
     this.loading = false;
+  }
+
+  transformSector(partner: Partner) {
+    const sector: string = this.sectorsList.filter((el) => {
+      return el.value == partner.sector
+    })[0].title;
+
+    return sector;
+  }
+
+  transformContacts(partner: Partner) {
+    const currentContactsArray = (this.partner.contacts).map(a => a.slug);
+    const validateContactsList = this.contactsList.filter(function(el) {
+      return currentContactsArray.includes(el.slug);
+    });
+
+    return validateContactsList.map(o => { return { ...o, value: (this.partner.contacts).filter(ob => { return ob.slug === o.slug })[0].value } });
   }
 
   scrollTo(selectorName: string): void {

@@ -12,9 +12,8 @@
                 <div class="s_archive-img">
                   <img src={{campaign.campaign_imageURL}} alt={{campaign.title}} />
                   <div class="s_archive-date">
-                    {{flag}}
-                    <span *ngIf="canSupport"> {{campaign.expiresAt | date: 'd.M'}}</span>
-                    <span *ngIf="canRedeem"> {{campaign.redeemEnds | date: 'd.M'}}</span>
+                    {{_text}}
+                    <span *ngIf="_date"> {{_date | date: 'd.M'}}</span>
                   </div>
                 </div>
               </div>

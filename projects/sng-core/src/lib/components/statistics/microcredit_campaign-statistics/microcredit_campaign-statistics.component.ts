@@ -43,8 +43,8 @@ export class MicrocreditCampaignStatisticsComponent implements OnInit, OnDestroy
     const datesRedeem = (this.campaign.statistics.redeemed) ? this.campaign.statistics.redeemed.byDate.map(obj => { return obj.date }) : [];
     const datesPromise = (this.campaign.statistics.earned) ? this.campaign.statistics.earned.byDate.map(obj => { return obj.date }) : [];
     this.validatedDates = datesRedeem.concat(datesPromise);
-    this.statisticsPromise = (this.campaign.statistics.earned) ? this.campaign["statistics"].earned : { _id: "-1", count: 0, tokens: 0, users: 0 };
-    this.statisticsRedeem = (this.campaign.statistics.redeemed) ? this.campaign["statistics"].redeemed : { _id: "-1", count: 0, tokens: 0, users: 0 };
+    this.statisticsPromise = (this.campaign.statistics.earned) ? this.campaign["statistics"].earned : { _id: "-1", tokens: 0, users: 0, count: 0 };
+    this.statisticsRedeem = (this.campaign.statistics.redeemed) ? this.campaign["statistics"].redeemed : { _id: "-1", tokens: 0, users: 0, count: 0 };
   }
 
   /**
@@ -109,6 +109,8 @@ export class MicrocreditCampaignStatisticsComponent implements OnInit, OnDestroy
 
 
   exportToCSV(data: Statistics, type: string) {
+
+    if (!data.count) return;
 
     if (this.dateFilter) {
       const oneDate = [{ date: data["date"], amount: data['tokens'], count: data['count'], users: data['users'] }];

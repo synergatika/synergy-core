@@ -40,7 +40,7 @@ export class OfferStatisticsComponent implements OnInit, OnDestroy {
     console.log("Statistics in Loyalty Offer Statistics", this.offer.statistics);
 
     this.validatedDates = (this.offer.statistics) ? this.offer.statistics.byDate.map(obj => { return obj.date }) : [];
-    this.statistics = (this.offer.statistics) ? this.offer["statistics"] : { _id: "-1", count: 0, tokens: 0, users: 0 };
+    this.statistics = (this.offer.statistics) ? this.offer["statistics"] : { _id: "-1", quantity: 0, users: 0, count: 0 };
   }
 
   /**
@@ -99,6 +99,9 @@ export class OfferStatisticsComponent implements OnInit, OnDestroy {
   }
 
   exportToCSV(data: Statistics) {
+
+    if (!data.count) return;
+
     if (this.dateFilter) {
       const oneDate = [{ date: data["date"], quantity: data['quantity'], count: data['count'], users: data['users'] }];
       const csvExporter = new ExportToCsv(this.setOptionCSV(data.date + " - Loyalty Offer: " + this.offer.title));

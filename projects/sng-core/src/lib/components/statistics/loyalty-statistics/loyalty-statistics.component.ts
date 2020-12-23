@@ -108,8 +108,8 @@ export class LoyaltyStatisticsComponent implements OnInit, OnDestroy {
           const datesRedeem = (this.statistics.statisticsRedeem) ? this.statistics.statisticsRedeem.byDate.map(obj => { return obj.date }) : [];
           const datesEarn = (this.statistics.statisticsEarn) ? this.statistics.statisticsEarn.byDate.map(obj => { return obj.date }) : [];
           this.validatedDates = datesRedeem.concat(datesEarn);
-          this.statisticsEarn = { ...this.statistics.statisticsEarn }
-          this.statisticsRedeem = { ...this.statistics.statisticsRedeem }
+          this.statisticsEarn = (this.statistics.statisticsEarn) ? this.statistics.statisticsEarn : { amount: 0, users: 0, count: 0 };
+          this.statisticsRedeem = (this.statistics.statisticsRedeem) ? this.statistics.statisticsRedeem : { amount: 0, users: 0, count: 0 };
         },
         error => {
         }),
@@ -139,6 +139,8 @@ export class LoyaltyStatisticsComponent implements OnInit, OnDestroy {
   }
 
   exportToCSV(data: Statistics, type: string) {
+
+    if (!data.count) return;
 
     if (this.dateFilter) {
       const oneDate = [{ date: data["date"], amount: data['amount'], count: data['count'], users: data['users'] }];

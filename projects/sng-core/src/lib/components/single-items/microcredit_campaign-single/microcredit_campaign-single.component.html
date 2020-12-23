@@ -11,12 +11,13 @@
         <div class="s_single-img">
           <img src={{campaign.campaign_imageURL}} alt={{campaign.title}} />
         </div>
-        <div *ngIf="campaign.expiresAt>seconds||seconds>campaign.startsAt" class="s_single-date">
+        <div class="s_single-date"> {{_text | translate}} <span>{{_date | date: 'd.M'}}</span></div>
+        <!-- <div *ngIf="campaign.expiresAt>seconds||seconds>campaign.startsAt" class="s_single-date">
           {{'GENERAL.TO' | translate}} {{campaign.expiresAt | date: 'd.M'}}</div>
         <div *ngIf="seconds>campaign.expiresAt" class="s_archive-date">
           {{'CAMPAIGN.STATUS.EXPIRED' | translate}}</div>
         <div *ngIf="campaign.startsAt>seconds" class="s_archive-date">
-          {{'CAMPAIGN.STATUS.EXPECTED' | translate}}</div>
+          {{'CAMPAIGN.STATUS.EXPECTED' | translate}}</div> -->
       </div>
     </div>
     <div class="row s_single-details">
@@ -27,6 +28,11 @@
               <h4>{{'CAMPAIGN.TERMS' | translate}}</h4>
               <p [innerHTML]="campaign.terms"></p>
             </div>
+            <div class="info-row">
+              <span class="tag">{{'CAMPAIGN.SUPPORT_PERIOD' | translate}}:</span> {{campaign.startsAt | date: 'd.M.y'}} - {{campaign.expiresAt | date: 'd.M.y'}}<br>
+              <span class="desc">{{'CAMPAIGN.SUPPORT_PERIOD_SUB' | translate}}</span>
+            </div>
+            <br>
             <div class="info-row">
               <span class="tag">{{'CAMPAIGN.REDEEM_PERIOD' | translate}}:</span> {{campaign.redeemStarts | date: 'd.M.y'}} - {{campaign.redeemEnds | date: 'd.M.y'}}<br>
               <span class="desc">{{'CAMPAIGN.REDEEM_PERIOD_SUB' | translate}}</span>

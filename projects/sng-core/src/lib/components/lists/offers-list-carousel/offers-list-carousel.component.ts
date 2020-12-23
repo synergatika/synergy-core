@@ -116,7 +116,6 @@ export class OffersListCarouselComponent implements OnInit, OnDestroy {
       tap(
         data => {
           this.offers = this.shuffle(data);
-
           console.log("Loyalty Offers in List-Carousel", this.offers);
 
           //TEMP FOR DEMO

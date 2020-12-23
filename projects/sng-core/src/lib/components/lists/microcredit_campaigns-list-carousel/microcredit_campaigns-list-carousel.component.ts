@@ -116,7 +116,6 @@ export class MicrocreditCampaignsListCarouselComponent implements OnInit, OnDest
       tap(
         data => {
           this.campaigns = this.shuffle(data);
-
           console.log("Microcredit Campaigns in List-Carousel", this.campaigns);
 
           //TEMP FOR DEMO
