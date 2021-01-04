@@ -21,6 +21,7 @@ export class MicrocreditCampaignSingleComponent implements OnInit, OnDestroy {
    */
   @Input() campaign: MicrocreditCampaign;
   public contactsList: ContactList[] = [];
+public avatar: string = '';
 
   public viewSupportButton: boolean = false;
   public canSupportCampaign: boolean = false;
@@ -79,6 +80,8 @@ export class MicrocreditCampaignSingleComponent implements OnInit, OnDestroy {
     });
     this.contactsList = validateContactsList.map(o => { return { ...o, value: (this.campaign.partner_contacts).filter(ob => { return ob.slug === o.slug })[0].value } });
     /**end:Social Media*/
+
+    this.avatar = this.campaign.partner_imageURL || '../../../../assets/media/users/default.jpg';
   }
 
 	/**

@@ -24,7 +24,7 @@
           {{'STATISTICS.REDEEMED_TO_PAID' | translate}}
         </mat-card-title>
         <mat-card-content>
-          {{campaign.tokens.redeemedTokens | currency:'EUR'}} / {{campaign.tokens.paidTokens | currency:'EUR'}}
+          {{((-1) * campaign.tokens.redeemedTokens) | currency:'EUR'}} / {{campaign.tokens.paidTokens | currency:'EUR'}}
         </mat-card-content>
       </mat-card>
     </div>
@@ -34,7 +34,7 @@
           {{'STATISTICS.REMAINING_TO_PAID' | translate}}
         </mat-card-title>
         <mat-card-content>
-          {{campaign.tokens.paidTokens - campaign.tokens.redeemedTokens | currency:'EUR'}} / {{campaign.tokens.paidTokens | currency:'EUR'}}
+          {{campaign.tokens.paidTokens - ((-1) * campaign.tokens.redeemedTokens) | currency:'EUR'}} / {{campaign.tokens.paidTokens | currency:'EUR'}}
         </mat-card-content>
       </mat-card>
     </div>

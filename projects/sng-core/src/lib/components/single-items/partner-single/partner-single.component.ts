@@ -21,6 +21,7 @@ export class PartnerSingleComponent implements OnInit, OnDestroy {
   public contactsList: ContactList[] = [];
   public sectorsList: GeneralList[];
   public sector: string = '';
+public avatar: string = '';
 
   private unsubscribe: Subject<any>;
   loading = false;
@@ -42,8 +43,11 @@ export class PartnerSingleComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     console.log('Partner in SinglePartner', this.partner);
     this.sector = this.transformSector(this.partner);
+    console.log(this.sector);
     this.contactsList = this.transformContacts(this.partner);
+    this.avatar = this.partner.imageURL || '../../../../assets/media/users/default.jpg';
   }
+
 
   /**
    * On destroy

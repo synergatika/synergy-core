@@ -20,6 +20,7 @@ export class LoyaltyOfferSingleComponent implements OnInit, OnDestroy {
    */
   @Input() offer: Offer;
   public contactsList: ContactList[] = [];
+  public avatar: string = '';
 
   seconds = 0;
   public canSupportCampaign: boolean = false;
@@ -58,6 +59,7 @@ export class LoyaltyOfferSingleComponent implements OnInit, OnDestroy {
     });
     this.contactsList = validateContactsList.map(o => { return { ...o, value: (this.offer.partner_contacts).filter(ob => { return ob.slug === o.slug })[0].value } });
     /**end:Social Media*/
+    this.avatar = this.offer.partner_imageURL || '../../../../assets/media/users/default.jpg';
 
     const now = new Date();
     this.seconds = parseInt(now.getTime().toString());

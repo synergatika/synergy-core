@@ -23,6 +23,7 @@ export class PartnerCardComponent implements OnInit {
   @Input() partner: Partner;
   public sectorsList: GeneralList[];
   public sector: string = '';
+public avatar: string = '';
 
   constructor(
     private staticDataService: IStaticDataService
@@ -40,6 +41,7 @@ export class PartnerCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.sector = this.transformSector(this.partner);
+    this.avatar = this.partner.imageURL || '../../../../assets/media/users/default.jpg';
   }
 
 }

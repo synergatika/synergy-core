@@ -38,7 +38,8 @@
           <div class="col-md-4 partner-info s_single-info-container ">
             <h6>{{'CAMPAIGN.PARTNER' | translate}}</h6>
             <h5>{{offer.partner_name}}</h5>
-            <img src="{{offer.partner_imageURL}}" alt="{{offer.partner_name}}">
+            <img src="{{avatar}}" alt="{{offer.partner_name}}">
+            <!-- <img src="{{offer.partner_imageURL}}" alt="{{offer.partner_name}}"> -->
             <div *ngIf="offer.partner_address" class="info-row info-addess" (click)="scrollTo('map-widget-campaign')">
               <span class="mdi mdi-pin"></span> {{offer.partner_address.street}}, {{offer.partner_address.city}}
             </div>
