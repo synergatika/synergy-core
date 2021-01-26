@@ -1,14 +1,19 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 /**
- * Models & Interfaces
- */
-import { Partner } from '../../../model';
+  * Services
+  */
+import { IStaticDataService } from '../../../services';
+
+/**
+  * Models & Interfaces
+  */
+import { Partner, GeneralList } from '../../../model';
 
 @Component({
-	selector: 'sng-partner-card',
-	templateUrl: './partner-card.component.html',
-	styleUrls: ['./partner-card.component.scss']
+  selector: 'sng-partner-card',
+  templateUrl: './partner-card.component.html',
+  styleUrls: ['./partner-card.component.scss']
 })
 export class PartnerCardComponent implements OnInit {
 
@@ -16,13 +21,27 @@ export class PartnerCardComponent implements OnInit {
    * Imported Variables
    */
   @Input() partner: Partner;
+  public sectorsList: GeneralList[];
+  public sector: string = '';
+public avatar: string = '';
 
-  constructor() {
+  constructor(
+    private staticDataService: IStaticDataService
+  ) {
+    this.sectorsList = this.staticDataService.getSectorsList;
+  }
 
+  transformSector(partner: Partner) {
+    const sector: string = this.sectorsList.filter((el) => {
+      return el.value == partner.sector
+    })[0].title;
+
+    return sector;
   }
 
   ngOnInit(): void {
-
+    this.sector = this.transformSector(this.partner);
+    this.avatar = this.partner.imageURL || '../../../../assets/media/users/default.jpg';
   }
 
 }

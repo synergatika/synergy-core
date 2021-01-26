@@ -20,7 +20,8 @@ export class PartnerSingleComponent implements OnInit, OnDestroy {
   @Input() partner: Partner;
   public contactsList: ContactList[] = [];
   public sectorsList: GeneralList[];
-  public sector: string;
+  public sector: string = '';
+public avatar: string = '';
 
   private unsubscribe: Subject<any>;
   loading = false;
@@ -32,7 +33,7 @@ export class PartnerSingleComponent implements OnInit, OnDestroy {
     private staticDataService: IStaticDataService
   ) {
     this.contactsList = this.staticDataService.getContactsList;
-    this.sectorsList = this.staticDataService.getSectorList;
+    this.sectorsList = this.staticDataService.getSectorsList;
     this.unsubscribe = new Subject();
   }
 
@@ -41,17 +42,12 @@ export class PartnerSingleComponent implements OnInit, OnDestroy {
    */
   ngOnInit(): void {
     console.log('Partner in SinglePartner', this.partner);
-    this.sector = this.sectorsList.filter((el) => {
-      return el.value == this.partner.sector
-    })[0].title;
-    /**begin:Social Media*/
-    const currentContactsArray = (this.partner.contacts).map(a => a.slug);
-    const validateContactsList = this.contactsList.filter(function(el) {
-      return currentContactsArray.includes(el.slug);
-    });
-    this.contactsList = validateContactsList.map(o => { return { ...o, value: (this.partner.contacts).filter(ob => { return ob.slug === o.slug })[0].value } });
-    /**end:Social Media*/
+    this.sector = this.transformSector(this.partner);
+    console.log(this.sector);
+    this.contactsList = this.transformContacts(this.partner);
+    this.avatar = this.partner.imageURL || '../../../../assets/media/users/default.jpg';
   }
+
 
   /**
    * On destroy
@@ -62,184 +58,24 @@ export class PartnerSingleComponent implements OnInit, OnDestroy {
     this.loading = false;
   }
 
+  transformSector(partner: Partner) {
+    const sector: string = this.sectorsList.filter((el) => {
+      return el.value == partner.sector
+    })[0].title;
+
+    return sector;
+  }
+
+  transformContacts(partner: Partner) {
+    const currentContactsArray = (this.partner.contacts).map(a => a.slug);
+    const validateContactsList = this.contactsList.filter(function(el) {
+      return currentContactsArray.includes(el.slug);
+    });
+
+    return validateContactsList.map(o => { return { ...o, value: (this.partner.contacts).filter(ob => { return ob.slug === o.slug })[0].value } });
+  }
+
   scrollTo(selectorName: string): void {
     document.getElementById(selectorName).scrollIntoView();
   }
-
-  /**
-   * Children Modals
-   */
-  // @ViewChild('campaignModal', { static: false }) campaignModal: NgbModal;
-  // @ViewChild('postModal', { static: false }) postModal: NgbModal;
-
-  /**
-   * Content Variables
-   */
-  // public singleOffers: Offer[];
-  // public singlePosts: PostEvent[]; //Used to store posts
-  // public singlePost: PostEvent; //Used for the post to open in modal
-  // public singleMicrocredits: MicrocreditCampaign[]; //Used to store microcredits
-  // public singleMicrocredit: MicrocreditCampaign; //Used for the Microcreit to open in modal
-
-  /**
-   * Carousel Variables
-   */
-  // customOptions: OwlOptions;
-  // moved: boolean;
-
-  /**
-   * Close Modal on Browser Back Button
-	 */
-  // controlModalState(state: boolean) {
-  // 	if (state) {
-  // 		const modalState = {
-  // 			extra_modal: true,
-  // 			desc: 'SinglePartnerModals'
-  // 		};
-  // 		history.pushState(modalState, null);
-  // 	} else {
-  // 		if (window.history.state.extra_modal) {
-  // 			history.back();
-  // 		}
-  // 	}
-  // }
-
-  /**
-	 * Fetch Microcredit Campaigns List (for One Partner)
-	 */
-  // fetchSingleMicrocreditsData(partner_id: string) {
-  // 	this.singleMicrocredits = null;
-  // 	this.itemsService.readPrivateMicrocreditCampaignsByStore(partner_id, '0-0-1')
-  // 		.pipe(
-  // 			tap(
-  // 				data => {
-  // 					this.singleMicrocredits = data;
-  // 					//TEMP FOR DEMO
-  // 					if (this.singleMicrocredits.length && this.singleMicrocredits.length < 3) {
-  // 						this.singleMicrocredits.push(this.singleMicrocredits[0]);
-  // 						this.singleMicrocredits.push(this.singleMicrocredits[0]);
-  // 					}
-  // 				},
-  // 				error => {
-  // 					console.log(error);
-  // 				}),
-  // 			finalize(() => {
-  // 				this.loading = false;
-  // 				this.cdRef.markForCheck();
-  // 			})
-  // 		)
-  // 		.subscribe();
-  // }
-
-  /**
-   * Fetch Offers List (for One Partner)
-   */
-  // fetchSingleOffersData(partner_id: string) {
-  // 	this.singleOffers = null;
-  // 	this.itemsService.readOffersByStore(partner_id, '0-0-1')
-  // 		.pipe(
-  // 			tap(
-  // 				data => {
-  // 					this.singleOffers = data;
-  // 					//TEMP FOR DEMO
-  // 					if (this.singleOffers.length && this.singleOffers.length < 3) {
-  // 						this.singleOffers.push(this.singleOffers[0]);
-  // 						this.singleOffers.push(this.singleOffers[0]);
-  // 					}
-  // 				},
-  // 				error => {
-  // 					console.log(error);
-  // 				}),
-  // 			finalize(() => {
-  // 				this.loading = false;
-  // 				this.cdRef.markForCheck();
-  // 			})
-  // 		)
-  // 		.subscribe();
-  // }
-
-  // /**
-  //  * Fetch Post & Events List (for One Partner)
-  //  */
-  // fetchSinglePostEventsData(partner_id: string) {
-  // 	this.singlePosts = null;
-  // 	this.itemsService.readPrivatePostsEventsByStore(partner_id, '0-0-0')
-  // 		.pipe(
-  // 			tap(
-  // 				data => {
-  // 					this.singlePosts = data;
-  // 					//TEMP FOR DEMO
-  // 					if (this.singlePosts.length && this.singlePosts.length < 3) {
-  // 						this.singlePosts.push(this.singlePosts[0]);
-  // 						this.singlePosts.push(this.singlePosts[0]);
-  // 					}
-  // 				},
-  // 				error => {
-  // 					console.log(error);
-  // 				}),
-  // 			finalize(() => {
-  // 				this.loading = false;
-  // 				this.cdRef.markForCheck();
-  // 			})
-  // 		)
-  // 		.subscribe();
-  // }
-
-
-	/**
-	 * Open Microcredit Campaign Modal
-	 */
-  // openMicrocredit(campaign: MicrocreditCampaign) {
-  // 	this.singleMicrocredit = campaign;
-  // 	this.modalService.open(
-  // 		this.campaignModal,
-  // 		{
-  // 			ariaLabelledBy: 'modal-basic-title',
-  // 			size: 'lg',
-  // 			backdropClass: 'fullscrenn-backdrop',
-  // 			//backdrop: 'static',
-  // 			windowClass: 'fullscreen-modal',
-  // 		}
-  // 	).result.then(
-  // 		(result) => { console.log('closed'); },
-  // 		(reason) => { console.log('dismissed'); });
-  // }
-
-
-  /**
-	 * Open PostEvent Modal
-	 */
-  // openPost(post: PostEvent) {
-  // 	this.singlePost = post;
-  // 	this.modalService.open(
-  // 		this.postModal,
-  // 		{
-  // 			ariaLabelledBy: 'modal-basic-title',
-  // 			size: 'lg',
-  // 			backdropClass: 'fullscrenn-backdrop',
-  // 			//backdrop: 'static',
-  // 			windowClass: 'fullscreen-modal',
-  // 		}
-  // 	).result.then(
-  // 		(result) => { console.log('closed'); },
-  // 		(reason) => { console.log('dismissed'); });
-  // }
-
-
-  /**
-   * Actions to Open Modals from Carousel
-   */
-  // mousedown() { this.moved = false; }
-  // mousemove() { this.moved = true; }
-  // mouseup(data: any, type: string) {
-  // 	if (this.moved) { }
-  // 	else {
-  // 		if (type == 'microcredit') {
-  // 			// this.openMicrocredit(data);
-  // 		} else if (type == 'post') {
-  // 			this.openPost(data);
-  // 		} else { }
-  // 	}
-  // 	this.moved = false;
-  // }
 }

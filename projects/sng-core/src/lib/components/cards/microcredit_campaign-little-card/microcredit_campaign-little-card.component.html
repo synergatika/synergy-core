@@ -1,0 +1,20 @@
+<div class="synergy-card" *ngIf="campaign">
+
+  <mat-card class="item-card" style="background-size: cover; background-image: url({{campaign.campaign_imageURL}});">
+
+    <mat-card-content>
+
+      <div class="s_archive-content container-fluid">
+        <div class="s_archive-heading row">
+          <h4 class="s_archive-title col-12">{{campaign.title}}</h4>
+        </div>
+        <div class="s_archive-campaign">
+          {{'HISTORY.CAMPAIGN' | translate}}
+        </div>
+      </div>
+
+    </mat-card-content>
+
+  </mat-card>
+
+</div>

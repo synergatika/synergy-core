@@ -1,11 +1,17 @@
-// Import Basic Services
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { tap, finalize, takeUntil } from 'rxjs/operators';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild, HostListener, Input } from '@angular/core';
 import { Subject } from 'rxjs';
-import { TranslateService } from '@ngx-translate/core';
+import { tap, finalize, takeUntil } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
+/**
+ * Services
+ */
 import { IItemsService } from '../../../services';
 
+/**
+ * Models & Interfaces
+ */
 import { Offer } from '../../../model';
 
 @Component({
@@ -16,15 +22,27 @@ import { Offer } from '../../../model';
 export class OffersListScrollComponent implements OnInit, OnDestroy {
 
   /**
+   * Imported Variables
+   */
+  @Input() type: string; // single (one partner), all (many partners), internal (belongs to partenr)
+
+  /**
+   * Children Modals
+   */
+  @ViewChild('offerModal') offerModal: NgbModalRef;
+
+  /**
    * Content Variables
    */
   public offers: Offer[] = [];
+  public offer: Offer;
 
   /**
    * Scroll & Modal Variables
    */
   counter = 0;
   scroll = 6;
+  moved: boolean;
 
   loading = false;
   private unsubscribe: Subject<any>;
@@ -33,13 +51,15 @@ export class OffersListScrollComponent implements OnInit, OnDestroy {
    * Component Constructor
    *
    * @param cdRef: ChangeDetectorRef
-   * @param translate: TranslateService
+   * @param modalService: NgbModal
+   * @param matDialog: MatDialog
    * @param itemsService: ItemsService
    */
   constructor(
     private cdRef: ChangeDetectorRef,
-    public translate: TranslateService,
-    private itemsService: IItemsService,
+    private modalService: NgbModal,
+    public matDialog: MatDialog,
+    private itemsService: IItemsService
   ) {
     this.unsubscribe = new Subject();
   }
@@ -61,24 +81,50 @@ export class OffersListScrollComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Close Modal on Browser Back Button
+   */
+  controlModalState(state: boolean): void {
+    if (state) {
+      const modalState = {
+        modal: true,
+        desc: 'MemberDashboardModals'
+      };
+      history.pushState(modalState, null);
+    } else {
+      if (window.history.state.modal) {
+        history.back();
+      }
+    }
+  }
+
+  @HostListener('window:popstate')
+  dismissModal(): void {
+    if (this.modalService.hasOpenModals()) {
+      this.modalService.dismissAll();
+      this.controlModalState(false);
+    }
+  }
+
+
+  /**
    * Fetch Loyalty Offers List
    */
   fetchLoyaltyOffersData(counter: number): void {
     this.itemsService.readAllOffers(`${this.scroll.toString()}-${counter.toString()}-1`)
       .pipe(
-        tap(
-          data => {
-            this.offers = this.offers.concat(data);
-            if (true) console.log('Offers Data on \'Offers List Scroll\'', this.offers)
-          },
-          error => {
-            console.log(error);
-          }),
-        takeUntil(this.unsubscribe),
-        finalize(() => {
-          this.loading = false;
-          this.cdRef.markForCheck();
-        })
+      tap(
+        data => {
+          this.offers = this.offers.concat(data);
+          console.log("Loyalty Offers in List-Scroll", this.offers);
+        },
+        error => {
+          console.log(error);
+        }),
+      takeUntil(this.unsubscribe),
+      finalize(() => {
+        this.loading = false;
+        this.cdRef.markForCheck();
+      })
       )
       .subscribe();
   }
@@ -92,5 +138,38 @@ export class OffersListScrollComponent implements OnInit, OnDestroy {
     console.log('scrolled!!');
     //	this.offers = this.offers.concat(this.offers);
     this.cdRef.markForCheck();
+  }
+
+  /**
+   * Open Loaylty Offer Modal
+   */
+  openLoaylty(offer: Offer): void {
+    this.offer = offer;
+    this.controlModalState(true);
+    this.modalService.open(
+      this.offerModal,
+      {
+        ariaLabelledBy: 'modal-basic-title',
+        size: 'lg',
+        backdropClass: 'fullscrenn-backdrop',
+        backdrop: 'static',
+        windowClass: 'fullscreen-modal',
+      }
+    ).result.then(
+      () => { console.log('closed'); },
+      () => { console.log('dismissed'); });
+  }
+
+
+  /**
+   * Actions to Open Modals from Carousel
+   */
+  mousedown(): void { this.moved = false; }
+  mousemove(): void { this.moved = true; }
+  mouseup(data: Offer): void {
+    if (!this.moved) {
+      this.openLoaylty(data);
+    }
+    this.moved = false;
   }
 }

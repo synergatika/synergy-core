@@ -52,7 +52,6 @@ export class QRCodeCardComponent implements OnInit, OnDestroy {
 	 */
   ngOnInit(): void {
     this.myAngularxQrCode = this.authenticationService.currentUserValue.user['email'];
-    console.log('I am on QR Card', this.myAngularxQrCode)
     this.fetchQRCodeContent();
   }
 
@@ -96,20 +95,19 @@ export class QRCodeCardComponent implements OnInit, OnDestroy {
   fetchQRCodeContent(): void {
     this.contentService.readContentById('QR Code')
       .pipe(
-        tap(
-          data => {
-            this.qrcode = { text: data };
-            console.log('QR Code Text', this.qrcode);
-          },
-          error => {
-            console.log(error);
-          }
-        ),
-        takeUntil(this.unsubscribe),
-        finalize(() => {
-          this.loading = false;
-          this.cdRef.markForCheck();
-        })
+      tap(
+        data => {
+          this.qrcode = { text: data };
+        },
+        error => {
+          console.log(error);
+        }
+      ),
+      takeUntil(this.unsubscribe),
+      finalize(() => {
+        this.loading = false;
+        this.cdRef.markForCheck();
+      })
       ).subscribe();
   }
 
@@ -121,7 +119,7 @@ export class QRCodeCardComponent implements OnInit, OnDestroy {
     this.controlModalState(true);
     this.modalService.open(this.qrcodeModal)
       .result.then(
-        (result) => { this.controlModalState(false); console.log('closed'); },
-        (reason) => { this.controlModalState(false); console.log('dismissed'); });
+      (result) => { this.controlModalState(false); console.log('closed'); },
+      (reason) => { this.controlModalState(false); console.log('dismissed'); });
   }
 }

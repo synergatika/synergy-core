@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild, HostListener, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { tap, takeUntil, finalize } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -107,17 +107,18 @@ export class PartnersListScrollComponent implements OnInit, OnDestroy {
   fetchPartnersData(counter: number): void {
     this.partnersService.readPartners(`${this.scroll.toString()}-${counter.toString()}-0`)
       .pipe(
-        tap(
-          data => {
-            this.partners = this.partners.concat(data);
-          },
-          () => {
-          }),
-        takeUntil(this.unsubscribe),
-        finalize(() => {
-          this.loading = false;
-          this.cdRef.markForCheck();
-        })
+      tap(
+        data => {
+          this.partners = this.partners.concat(data);
+          console.log("Partners in List-Scroll", this.partners);
+        },
+        () => {
+        }),
+      takeUntil(this.unsubscribe),
+      finalize(() => {
+        this.loading = false;
+        this.cdRef.markForCheck();
+      })
       )
       .subscribe();
   }
@@ -149,8 +150,8 @@ export class PartnersListScrollComponent implements OnInit, OnDestroy {
       }
     )
       .result.then(
-        () => { this.controlModalState(false); console.log('closed'); },
-        () => { this.controlModalState(false); console.log('dismissed'); });
+      () => { this.controlModalState(false); console.log('closed'); },
+      () => { this.controlModalState(false); console.log('dismissed'); });
   }
 
 

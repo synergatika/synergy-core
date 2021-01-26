@@ -19,7 +19,7 @@ export class LoyaltyStatisticsComponent implements OnInit, OnDestroy {
   /**
    * Content Variables
    */
-  public dateFilter: Date;
+  public dateFilter: Date = null;
   public maxDate: Date;
   public statistics: any;//{ statisticsRedeem: Statistics, statisticsEarn: Statistics };
   public statisticsEarn: Statistics;
@@ -104,12 +104,12 @@ export class LoyaltyStatisticsComponent implements OnInit, OnDestroy {
       tap(
         data => {
           this.statistics = data;
-          console.log(data);
+          console.log("Statistics in Loyalty Statistics", this.statistics);
           const datesRedeem = (this.statistics.statisticsRedeem) ? this.statistics.statisticsRedeem.byDate.map(obj => { return obj.date }) : [];
           const datesEarn = (this.statistics.statisticsEarn) ? this.statistics.statisticsEarn.byDate.map(obj => { return obj.date }) : [];
           this.validatedDates = datesRedeem.concat(datesEarn);
-          this.statisticsEarn = { ...this.statistics.statisticsEarn }
-          this.statisticsRedeem = { ...this.statistics.statisticsRedeem }
+          this.statisticsEarn = (this.statistics.statisticsEarn) ? this.statistics.statisticsEarn : { amount: 0, users: 0, count: 0 };
+          this.statisticsRedeem = (this.statistics.statisticsRedeem) ? this.statistics.statisticsRedeem : { amount: 0, users: 0, count: 0 };
         },
         error => {
         }),
@@ -140,9 +140,10 @@ export class LoyaltyStatisticsComponent implements OnInit, OnDestroy {
 
   exportToCSV(data: Statistics, type: string) {
 
+    if (!data.count) return;
+
     if (this.dateFilter) {
       const oneDate = [{ date: data["date"], amount: data['amount'], count: data['count'], users: data['users'] }];
-      console.log(oneDate);
       const csvExporter = new ExportToCsv(this.setOptionCSV(data.date + " - Total Loyalty (" + type + ")"));
       csvExporter.generateCsv(oneDate);
     } else {
@@ -152,7 +153,6 @@ export class LoyaltyStatisticsComponent implements OnInit, OnDestroy {
           { date: 'total', amount: data['amount'], count: data['count'], users: data['users'] },
           { date: '', amount: '', count: '', users: '', },
         ];
-      console.log(total);
 
       const csvExporter = new ExportToCsv(this.setOptionCSV("Total Loyalty (" + type + ")"));
       csvExporter.generateCsv(total.concat(byDate));

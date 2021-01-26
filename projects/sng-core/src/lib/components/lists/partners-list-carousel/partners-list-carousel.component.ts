@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild, ElementRef, HostListener, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { tap, takeUntil, finalize } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -26,6 +26,7 @@ export class PartnersListCarouselComponent implements OnInit, OnDestroy {
    * Children Modals
    */
   @ViewChild('partnerModal') partnerModal: NgbModal;
+  @Input() interactive: boolean;
 
   /**
    * Configuration and Static Data
@@ -123,18 +124,19 @@ export class PartnersListCarouselComponent implements OnInit, OnDestroy {
   fetchPartnersData(): void {
     this.partnersService.readPartners('0-0-0')
       .pipe(
-        tap(
-          data => {
-            this.partners = this.shuffle(data);
-          },
-          error => {
-            console.log(error);
-          }),
-        takeUntil(this.unsubscribe),
-        finalize(() => {
-          this.loading = false;
-          this.cdRef.markForCheck();
-        })
+      tap(
+        data => {
+          this.partners = this.shuffle(data);
+          console.log("Partners in List-Carousel", this.partners);
+        },
+        error => {
+          console.log(error);
+        }),
+      takeUntil(this.unsubscribe),
+      finalize(() => {
+        this.loading = false;
+        this.cdRef.markForCheck();
+      })
       )
       .subscribe();
   }
@@ -163,8 +165,8 @@ export class PartnersListCarouselComponent implements OnInit, OnDestroy {
       }
     )
       .result.then(
-        (result) => { this.controlModalState(false); console.log('closed'); },
-        (reason) => { this.controlModalState(false); console.log('dismissed'); });
+      (result) => { this.controlModalState(false); console.log('closed'); },
+      (reason) => { this.controlModalState(false); console.log('dismissed'); });
   }
 
   /**

@@ -47,10 +47,10 @@
 									<p [innerHTML]="post_event.subtitle"></p>
 								</div>
 							</div>
-							<div class="row">
+							<div class="row" *ngIf="type=='all'">
 								<div class="col-md-12 s_archive-info">
 									<div class="s_archive-partner">
-										<div *ngIf="type=='all'" class="s_archive-merch-name">
+										<div class="s_archive-merch-name">
 											<span class="mdi mdi-shopping"></span> {{post_event.partner_name}}
 										</div>
 										<div class="s_archive-merch-adress" *ngIf="post_event.location">

@@ -1,9 +1,7 @@
 <!--begin::Posts/Events List-->
-<div *ngIf="posts_events && posts_events.length" class="row" infiniteScroll [infiniteScrollDistance]="2"
-  [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+<div *ngIf="posts_events && posts_events.length" class="row" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
   <div class="col-md-4 item-wrapper" *ngFor="let post_event of (posts_events)">
-    <sng-post_event-card [post_event]="post_event" (mousedown)="mousedown()" (mousemove)="mousemove()"
-      (mouseup)="mouseup(post_event)"></sng-post_event-card>
+    <sng-post_event-card [post_event]="post_event" type="{{type}}" (mousedown)="mousedown()" (mousemove)="mousemove()" (mouseup)="mouseup(post_event)"></sng-post_event-card>
   </div>
 </div>
 <!--end::Posts/Events List-->

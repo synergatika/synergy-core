@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild, HostListener, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { tap, takeUntil, finalize } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -20,6 +20,11 @@ import { PostEvent } from '../../../model';
   styleUrls: ['./posts_events-list-scroll.component.scss']
 })
 export class PostsEventsListScrollComponent implements OnInit, OnDestroy {
+
+  /**
+   * Imported Variables
+   */
+  @Input() type: string; // single (one partner), all (many partners), internal (belongs to partenr)
 
   /**
    * Children Modals
@@ -102,19 +107,19 @@ export class PostsEventsListScrollComponent implements OnInit, OnDestroy {
   fetchPostsEventsData(counter: number): void {
     this.itemsService.readAllPrivatePostsEvents(`${this.scroll.toString()}-${counter.toString()}-0`)
       .pipe(
-        tap(
-          data => {
-            this.posts_events = this.posts_events.concat(data);
-            console.log('all posts');
-            console.log(this.posts_events)
-          },
-          () => {
-          }),
-        takeUntil(this.unsubscribe),
-        finalize(() => {
-          this.loading = false;
-          this.cdRef.markForCheck();
-        })
+      tap(
+        data => {
+          this.posts_events = this.posts_events.concat(data);
+
+          console.log("Posts/Events in List-Scroll", this.posts_events);
+        },
+        () => {
+        }),
+      takeUntil(this.unsubscribe),
+      finalize(() => {
+        this.loading = false;
+        this.cdRef.markForCheck();
+      })
       )
       .subscribe();
   }
@@ -146,8 +151,8 @@ export class PostsEventsListScrollComponent implements OnInit, OnDestroy {
       }
     )
       .result.then(
-        () => { this.controlModalState(false); console.log('closed'); },
-        () => { this.controlModalState(false); console.log('dismissed'); });
+      () => { this.controlModalState(false); console.log('closed'); },
+      () => { this.controlModalState(false); console.log('dismissed'); });
   }
 
 

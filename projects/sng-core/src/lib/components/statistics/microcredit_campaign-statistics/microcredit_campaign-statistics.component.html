@@ -1,8 +1,49 @@
 <div *ngIf="campaign">
-  <br>
-  <hr> <br>
-  <div class="row" *ngIf="statisticsPromise||statisticsRedeem">
-    <div class="col-md-3">
+
+  <h3 class="section-heading">
+      {{'STATISTICS.MICROCREDIT_GENERAL' | translate}}
+    <span>
+      ({{'STATISTICS.TOTAL' | translate}})
+    </span>
+  </h3>
+
+  <div class="row">
+    <div class="col-md-4">
+      <mat-card>
+        <mat-card-title>
+          {{'STATISTICS.PAID_TO_EARNED' | translate}}
+        </mat-card-title>
+        <mat-card-content>
+          {{campaign.tokens.paidTokens | currency:'EUR'}} / {{campaign.tokens.earnedTokens | currency:'EUR'}}
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-md-4">
+      <mat-card>
+        <mat-card-title>
+          {{'STATISTICS.REDEEMED_TO_PAID' | translate}}
+        </mat-card-title>
+        <mat-card-content>
+          {{((-1) * campaign.tokens.redeemedTokens) | currency:'EUR'}} / {{campaign.tokens.paidTokens | currency:'EUR'}}
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-md-4">
+      <mat-card>
+        <mat-card-title>
+          {{'STATISTICS.REMAINING_TO_PAID' | translate}}
+        </mat-card-title>
+        <mat-card-content>
+          {{campaign.tokens.paidTokens - ((-1) * campaign.tokens.redeemedTokens) | currency:'EUR'}} / {{campaign.tokens.paidTokens | currency:'EUR'}}
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row section-filter">
+    <div class="col-md-3 offset-md-6">
       <mat-form-field>
         <mat-label>{{'SUPPORT.FILTER.DATE.TITLE' | translate}}</mat-label>
         <input matInput [(ngModel)]="dateFilter" [matDatepickerFilter]="activeDates.bind(this)" [matDatepicker]="startDateFilterPicker" [max]="maxDate" (dateChange)="applyFilterDate($event)">
@@ -10,21 +51,21 @@
         <mat-datepicker #startDateFilterPicker></mat-datepicker>
       </mat-form-field>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-3" *ngIf="dateFilter">
       <button mat-raised-button class="clear-button" (click)="clearFilterDate()">
-        Clear Filter
-      </button>
+        {{'STATISTICS.CLEAR_FILTER' | translate}}
+    </button>
     </div>
   </div>
 
   <div *ngIf="statisticsPromise">
     <h3 class="section-heading">
-    Promises
+      {{'STATISTICS.MICROCREDIT_EARN' | translate}}
     <span *ngIf="dateFilter">
       ({{dateFilter | date}})
     </span>
     <span *ngIf="!dateFilter">
-      (Total)
+      ({{'STATISTICS.TOTAL' | translate}})
     </span>
   </h3>
 
@@ -32,7 +73,7 @@
       <div class="col-md-4">
         <mat-card>
           <mat-card-title>
-            Total Amount
+            {{'STATISTICS.AMOUNT' | translate}}
           </mat-card-title>
           <mat-card-content>
             {{statisticsPromise.tokens | currency:'EUR'}}
@@ -42,7 +83,7 @@
       <div class="col-md-4">
         <mat-card>
           <mat-card-title>
-            Unique Users
+            {{'STATISTICS.USERS' | translate}}
           </mat-card-title>
           <mat-card-content>
             {{statisticsPromise.users}}
@@ -52,7 +93,7 @@
       <div class="col-md-4">
         <mat-card>
           <mat-card-title>
-            Total Transactions
+            {{'STATISTICS.TRANSACTIONS' | translate}}
           </mat-card-title>
           <mat-card-content>
             {{statisticsPromise.count}}
@@ -63,7 +104,7 @@
     <br>
     <div>
       <button mat-raised-button class="export-button" (click)="exportToCSV(statisticsPromise, 'Promise')">
-      Export Promise
+        {{'STATISTICS.EXPORT' | translate}}
     </button>
     </div>
   </div>
@@ -72,19 +113,19 @@
     <br>
     <hr> <br>
     <h3 class="section-heading">
-    Redeems
+      {{'STATISTICS.MICROCREDIT_REDEEM' | translate}}
     <span *ngIf="dateFilter">
       ({{dateFilter | date}})
     </span>
     <span *ngIf="!dateFilter">
-      (Total)
+      ({{'STATISTICS.TOTAL' | translate}})
     </span>
   </h3>
     <div class="row">
       <div class="col-md-4">
         <mat-card>
           <mat-card-title>
-            Total Amount
+            {{'STATISTICS.AMOUNT' | translate}}
           </mat-card-title>
           <mat-card-content>
             {{statisticsRedeem.tokens | currency:'EUR'}}
@@ -94,20 +135,20 @@
       <div class="col-md-4">
         <mat-card>
           <mat-card-title>
-            Total Transactions
+            {{'STATISTICS.USERS' | translate}}
           </mat-card-title>
           <mat-card-content>
-            {{statisticsRedeem.count}}
+            {{statisticsRedeem.users}}
           </mat-card-content>
         </mat-card>
       </div>
       <div class="col-md-4">
         <mat-card>
           <mat-card-title>
-            Unique Users
+            {{'STATISTICS.TRANSACTIONS' | translate}}
           </mat-card-title>
           <mat-card-content>
-            {{statisticsRedeem.users}}
+            {{statisticsRedeem.count}}
           </mat-card-content>
         </mat-card>
       </div>
@@ -115,7 +156,7 @@
     <br>
     <div>
       <button mat-raised-button class="export-button" (click)="exportToCSV(statisticsRedeem, 'Redeem')">
-      Export Redeem
+        {{'STATISTICS.EXPORT' | translate}}
     </button>
     </div>
   </div>

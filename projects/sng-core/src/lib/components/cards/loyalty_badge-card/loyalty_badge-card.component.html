@@ -9,14 +9,8 @@
       <img *ngIf="loyalty_badge.image" [src]="loyalty_badge.image">
     </div>
     <div *ngIf="loyalty_badge.text" class="bagde-text">
-      <div *ngIf="translate.currentLang == 'en'">
-        <h2>{{loyalty_badge.text.en_title}}</h2>
-        <p [innerHTML]="loyalty_badge.text.en_content"></p>
-      </div>
-      <div *ngIf="translate.currentLang == 'el'">
-        <h2>{{loyalty_badge.text.el_title}}</h2>
-        <p [innerHTML]="loyalty_badge.text.el_content"></p>
-      </div>
+      <h2>{{ loyalty_badge.text | content_translate: 'title' }}</h2>
+      <p [innerHTML]="loyalty_badge.text | content_translate: 'content'"></p>
     </div>
   </div>
 </div>

@@ -12,9 +12,8 @@
                 <div class="s_archive-img">
                   <img src={{campaign.campaign_imageURL}} alt={{campaign.title}} />
                   <div class="s_archive-date">
-                    {{flag}}
-                    <span *ngIf="canSupport"> {{campaign.expiresAt | date: 'd.M'}}</span>
-                    <span *ngIf="canRedeem"> {{campaign.redeemEnds | date: 'd.M'}}</span>
+                    {{_text}}
+                    <span *ngIf="_date"> {{_date | date: 'd.M'}}</span>
                   </div>
                 </div>
               </div>
@@ -36,15 +35,14 @@
                   <p [innerHTML]="campaign.subtitle"></p>
                 </div>
               </div>
-              <div class="row">
+              <div class="row" *ngIf="type=='all'">
                 <div class="col-md-12 s_archive-info">
-                  <div class="s_archive-partner" *ngIf="type!='single'">
+                  <div class="s_archive-partner">
                     <div class="s_archive-merch-name">
                       <span class="mdi mdi-shopping"></span> {{campaign.partner_name}}
                     </div>
                     <div class="s_archive-merch-adress" *ngIf="campaign.partner_address">
-                      <span class="mdi mdi-pin"></span> {{campaign.partner_address.street}} ,
-                      {{campaign.partner_address.city}}
+                      <span class="mdi mdi-pin"></span> {{campaign.partner_address.street}} , {{campaign.partner_address.city}}
                     </div>
                   </div>
                 </div>

@@ -1,0 +1,72 @@
+// @import "../../../../../variables.scss";
+
+
+.item-card {
+  width:100%;
+  height: 300px;
+  position: relative;
+}
+
+.item-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+}
+
+
+mat-card-content {
+
+  // -khtml-opacity:.50;
+  // -moz-opacity:.50;
+  // -ms-filter:"alpha(opacity=50)";
+  //  filter:alpha(opacity=50);
+  //  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0.5);
+  //  opacity:.50;
+
+  .s_archive-content{
+     opacity:1;
+  }
+}
+
+.s_archive-heading {
+  margin-top: 15px;
+  position:relative;
+}
+.container-fluid {
+  width:100%;
+  height: 100%;
+}
+.s_archive-title {
+  color:white;
+}
+// .s_archive-type {
+//   position: absolute;
+//   z-index: 1;
+//   right: 0;
+//   bottom: 0;
+//   background-color: blue;
+//   color: #fff;
+//   padding: 10px;
+//   padding-right: 20px;
+//   font-size: 1.25rem;
+// }
+// .synergy-card {
+// 	height: calc(100% - 20px);
+// 	padding-top: 0;
+
+// 	.offer-card {
+// 		height: 100%;
+// 		padding-top: 0;
+
+// 		.amount {
+// 			img {
+// 				width: 24px;
+// 				display: inline;
+// 			}
+// 		}
+// 	}
+// }

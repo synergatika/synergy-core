@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ITranslationService, LanguageFlag, Locale } from 'sng-core';
 
 const translations: Locale = {
-  lang: 'en',
+  lang: 'el',
   data: {
     MENU: {
       OFFERS: 'Offers',
@@ -24,12 +24,12 @@ export class TranslationService extends ITranslationService {
 
   constructor(private translate: TranslateService) {
     super();
-    console.log('test');
+
     // add new langIds to the list
-    this.translate.addLangs(['en']);
+    this.translate.addLangs(['el']);
 
     // this language will be used as a fallback when a translation isn't found in the current language
-    this.translate.setDefaultLang('en');
+    this.translate.setDefaultLang('el');
     this.loadTranslations(translations);
   }
 

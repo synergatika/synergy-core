@@ -73,20 +73,20 @@ export class MicrocreditBadgeCardComponent implements OnInit, OnDestroy {
   fetchMicrocreditBadgeData(): void {
     this.microcreditService.readBadge()
       .pipe(
-        tap(
-          data => {
-            this.microcredit_badge = data;
-            console.log('On Fetch Microcredit Badge', data);
-            this.fetchBadgeContent();
-          },
-          error => {
-            console.log(error);
-          }),
-        takeUntil(this.unsubscribe),
-        finalize(() => {
-          this.loading = false;
-          this.cdRef.markForCheck();
-        })
+      tap(
+        data => {
+          this.microcredit_badge = data;
+          console.log('Microcredit Badge Card', this.microcredit_badge);
+          this.fetchBadgeContent();
+        },
+        error => {
+          console.log(error);
+        }),
+      takeUntil(this.unsubscribe),
+      finalize(() => {
+        this.loading = false;
+        this.cdRef.markForCheck();
+      })
       )
       .subscribe();
   }
@@ -114,20 +114,19 @@ export class MicrocreditBadgeCardComponent implements OnInit, OnDestroy {
     this.contentService.readContentById(this.microcredit_badge.text_id)
       // this.staticContentService.readText(this.badge.text_id)
       .pipe(
-        tap(
-          data => {
-            this.microcredit_badge.text = data;
-            console.log(this.translate.currentLang)
-          },
-          error => {
-            console.log(error);
-          }
-        ),
-        takeUntil(this.unsubscribe),
-        finalize(() => {
-          this.loading = false;
-          this.cdRef.markForCheck();
-        })
+      tap(
+        data => {
+          this.microcredit_badge.text = data;
+        },
+        error => {
+          console.log(error);
+        }
+      ),
+      takeUntil(this.unsubscribe),
+      finalize(() => {
+        this.loading = false;
+        this.cdRef.markForCheck();
+      })
       ).subscribe();
   }
 }

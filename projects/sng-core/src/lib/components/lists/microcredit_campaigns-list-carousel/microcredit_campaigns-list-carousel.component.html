@@ -4,8 +4,7 @@
     <h3 class="list-tiltle">{{'CAMPAIGN.PLURAL' | translate }}</h3>
     <owl-carousel-o [options]="customOptions">
       <ng-template carouselSlide *ngFor="let campaign of (campaigns)">
-        <sng-microcredit_campaign-card [campaign]="campaign" type='single' (mousedown)="mousedown()"
-          (mousemove)="mousemove()" (mouseup)="mouseup(campaign)">
+        <sng-microcredit_campaign-card [campaign]="campaign" type="{{type}}" (mousedown)="mousedown()" (mousemove)="mousemove()" (mouseup)="mouseup(campaign)">
         </sng-microcredit_campaign-card>
       </ng-template>
     </owl-carousel-o>

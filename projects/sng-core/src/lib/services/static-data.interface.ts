@@ -1,4 +1,4 @@
-import { PaymentList } from '../model';
+import { PaymentList, ContactList, GeneralList } from '../model';
 
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
@@ -13,7 +13,7 @@ export abstract class IStaticDataService {
 
   abstract get getBadgesImages(): any;
 
-  abstract get getSectorList(): any;
+  abstract get getSectorsList(): GeneralList[];
 
-  abstract get getContactsList(): any;
+  abstract get getContactsList(): ContactList[];
 }

@@ -16,8 +16,7 @@
       </div>
     </div>
     <div *ngIf="qrcode.text" class="qr-text">
-      <p *ngIf="translate.currentLang == 'en'" class="qr-code-text" [innerHTML]="qrcode.text.en_content"></p>
-      <p *ngIf="translate.currentLang == 'el'" class="qr-code-text" [innerHTML]="qrcode.text.el_content"></p>
+      <p class="qr-code-text" [innerHTML]="qrcode.text | content_translate: 'content'"></p>
     </div>
   </div>
 </ng-template>

@@ -4,9 +4,18 @@
     <h3 class="list-tiltle">{{ 'OFFER.PLURAL' | translate }}</h3>
     <div class="row" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
       <div class="col-md-4 item-wrapper" *ngFor="let offer of (offers)">
-        <sng-offer-card [offer]="offer"></sng-offer-card>
+        <sng-offer-card [offer]="offer" type="{{type}}" (mousedown)="mousedown()" (mousemove)="mousemove()" (mouseup)="mouseup(offer)"></sng-offer-card>
       </div>
     </div>
   </div>
 </div>
 <!--end::Loaylty Offers List-->
+
+<!--begin::Microcredit Campaign Modal-->
+<ng-template #offerModal let-c="close" let-d="dismiss">
+  <button type="button" class="close-btn" aria-label="Close" (click)="d('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <sng-loyalty_offer-single [offer]="offer"></sng-loyalty_offer-single>
+</ng-template>
+<!--end::Microcredit Campaign Modal-->

@@ -8,15 +8,17 @@ import { Offer } from '../../../model';
 })
 export class OfferCardComponent implements OnInit {
   @Input() offer: Offer;
-  @Input() type: string;
+  @Input() type: string; // single (one partner), all (many partners), internal (belongs to partenr)
 
-  seconds = 0;
+  public hasExpired: boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
     const now = new Date();
-    this.seconds = parseInt(now.getTime().toString());
+    const seconds = parseInt(now.getTime().toString());
+
+    this.hasExpired = this.offer.expiresAt < seconds;
   }
 
 }
