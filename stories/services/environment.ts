@@ -1,12 +1,11 @@
+import secrets from './secrets.environment';
+
 export const environment = {
   production: false,
 
-  apiUrl: 'https://api.synergatika.gr',
-  openUrl: 'https://open.synergatika.gr',
-  staticUrl: 'https://wp.synergatika.gr/wp-json/wp/v2',
-  authTimeOuter: 5000,
+  ...secrets,
 
-  mapApiKey: 'AIzaSyC8tI34nghyWlMaQhGluC9f6jG7E8swyVQ',
+  authTimeOuter: 5000,
   mapOptions: { "latitude": 37.9709831, "longitude": 23.7224135, "zoom": 12 },
 
   access: [
@@ -23,7 +22,7 @@ export const environment = {
     false // partner_fixed_campaign
   ],
 
-  version: '0.5.0',
+  version: 'demo',
 
   fixedMicrocreditCampaign: {
     'title': 'One Click Microcredit Campaign',
