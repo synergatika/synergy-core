@@ -23,6 +23,7 @@ export class MicrocreditCampaignLittleCardComponent implements OnInit {
    */
   @Input() campaign: MicrocreditCampaign;
   @Input() type: any;
+  @Input() action: any;
 
   seconds = 0;
   public flag: string = '';
