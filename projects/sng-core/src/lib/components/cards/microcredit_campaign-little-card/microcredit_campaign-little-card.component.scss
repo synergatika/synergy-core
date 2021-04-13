@@ -23,6 +23,15 @@ mat-card-content {
 .s_archive-heading {
   margin-top: 15px;
   position:relative;
+  .desc{
+    color: #000;
+    background: #fff;
+    padding: 20px 35px 20px 35px;
+    font-size: 20px;
+    margin: auto;
+    margin-top: 30%;
+    border-radius: 6px;
+  }
 }
 .container-fluid {
   width:100%;
@@ -31,6 +40,9 @@ mat-card-content {
 .s_archive-title {
   color:white;
 }
+
+
+
 // .s_archive-type {
 //   position: absolute;
 //   z-index: 1;
