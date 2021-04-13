@@ -4,9 +4,15 @@ import { Observable } from 'rxjs';
 /**
  * Models & Interfaces
  */
-import { Content, Message } from '../model';
+import { Content, Sector, Message } from '../model';
 
 export abstract class IContentService {
+
+  abstract readSectors():
+    Observable<Sector[]>;
+
+  abstract updateSectors(sectors: Sector[]):
+    Observable<Message>
 
   abstract readContent():
     Observable<Content[]>;

@@ -70,6 +70,7 @@ import {
 } from './components';
 
 import { ContentTranslatePipe } from './pipes';
+import { SectorFilterPipe } from './pipes';
 
 const COMPONENTS = [
   // Card Components
@@ -122,7 +123,7 @@ const COMPONENTS = [
 
 @NgModule({
   declarations: [
-    ContentTranslatePipe, ...COMPONENTS,
+    ContentTranslatePipe, SectorFilterPipe, ...COMPONENTS,
   ],
   imports: [
     CommonModule,
@@ -143,7 +144,7 @@ const COMPONENTS = [
     InfiniteScrollModule,
   ],
   exports: [
-    ContentTranslatePipe, ...COMPONENTS,
+    ContentTranslatePipe, SectorFilterPipe, ...COMPONENTS,
   ]
 })
 export class SngCoreModule { }
