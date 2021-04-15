@@ -21,8 +21,8 @@ export class PartnerSingleComponent implements OnInit, OnDestroy {
   public contactsList: ContactList[] = [];
   public sectorsList: GeneralList[];
   public sector: string = '';
-public avatar: string = '';
-public sectorList$: Observable<Sector[]>;
+  public avatar: string = '';
+  public sectorList$: Observable<Sector[]>;
 
   private unsubscribe: Subject<any>;
   loading = false;
@@ -33,7 +33,7 @@ public sectorList$: Observable<Sector[]>;
   constructor(
     private staticDataService: IStaticDataService,
     private contentService: IContentService
-    ) {
+  ) {
     this.contactsList = this.staticDataService.getContactsList;
     this.sectorsList = this.staticDataService.getSectorsList;
     this.unsubscribe = new Subject();
@@ -44,9 +44,8 @@ public sectorList$: Observable<Sector[]>;
    */
   ngOnInit(): void {
     console.log('Partner in SinglePartner', this.partner);
-    this.sectorList$ = this.contentService.readSectors();
-//    this.sector = this.transformSector(this.partner);
-    console.log(this.sector);
+    // this.sectorList$ = this.contentService.readSectors();
+
     this.contactsList = this.transformContacts(this.partner);
     this.avatar = this.partner.imageURL || '../../../../assets/media/users/default.jpg';
   }
@@ -61,17 +60,9 @@ public sectorList$: Observable<Sector[]>;
     this.loading = false;
   }
 
-  transformSector(partner: Partner) {
-    const sector: string = this.sectorsList.filter((el) => {
-      return el.value == partner.sector
-    })[0].title;
-
-    return sector;
-  }
-
   transformContacts(partner: Partner) {
     const currentContactsArray = (this.partner.contacts).map(a => a.slug);
-    const validateContactsList = this.contactsList.filter(function(el) {
+    const validateContactsList = this.contactsList.filter(function (el) {
       return currentContactsArray.includes(el.slug);
     });
 

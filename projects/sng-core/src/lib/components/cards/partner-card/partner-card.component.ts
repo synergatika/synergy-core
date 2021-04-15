@@ -35,18 +35,18 @@ export class PartnerCardComponent implements OnInit {
     // this.sectorsList = this.staticDataService.getSectorsList;
   }
 
-  transformSector(partner: Partner) {
-    this.sectorList$ = this.contentService.readSectors();
+  // transformSector(partner: Partner) {
+  //   this.sectorList$ = this.contentService.readSectors();
 
-    // const sector: string = this.sectorsList.filter((el) => {
-    //   return el.value == partner.sector
-    // })[0].title;
+  //   // const sector: string = this.sectorsList.filter((el) => {
+  //   //   return el.value == partner.sector
+  //   // })[0].title;
 
-    // return sector;
-  }
+  //   // return sector;
+  // }
 
   ngOnInit(): void {
-    this.sectorList$ = this.contentService.readSectors();
+  //  this.sectorList$ = this.contentService.readSectors();
     // this.sector = this.transformSector(this.partner);
     this.avatar = this.partner.imageURL || '../../../../assets/media/users/default.jpg';
   }

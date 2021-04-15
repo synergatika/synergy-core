@@ -25,7 +25,7 @@
               <p [innerHTML]="offer.description"></p>
             </div>
           </div>
-          <div class="col-md-4 s_single-credit">
+          <div *ngIf="offer.cost > 0" class="col-md-4 s_single-credit">
             <div class="price-item">
               <span class="amount">
                   <img src="../../../assets/media/images/Synergy-Icon.png" alt="Synergy" />
