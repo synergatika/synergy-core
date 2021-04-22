@@ -12,7 +12,8 @@
                 <div class="s_archive-img partner-img">
                   <img src={{avatar}} alt={{partner.name}} />
                   <!-- <img src={{partner.imageURL}} alt={{partner.name}} /> -->
-                  <div class="s_archive-category">{{sector | translate}}</div>
+                  <div class="s_archive-category">{{partner.sector | sector_filter}}</div>
+                  <!-- <div class="s_archive-category">{{partner.sector | sector_filter: (sectorList$ | async)}}</div> -->
                 </div>
               </div>
             </div>

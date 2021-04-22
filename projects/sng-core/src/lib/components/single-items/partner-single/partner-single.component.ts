@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 /**
  * Models & Interfaces
  */
-import { Partner, ContactList, GeneralList } from '../../../model';
-import { IStaticDataService } from '../../../services';
+import { Partner, ContactList, GeneralList, Sector } from '../../../model';
+import { IContentService, IStaticDataService } from '../../../services';
 
 @Component({
   selector: 'sng-partner-single',
@@ -21,7 +21,8 @@ export class PartnerSingleComponent implements OnInit, OnDestroy {
   public contactsList: ContactList[] = [];
   public sectorsList: GeneralList[];
   public sector: string = '';
-public avatar: string = '';
+  public avatar: string = '';
+  public sectorList$: Observable<Sector[]>;
 
   private unsubscribe: Subject<any>;
   loading = false;
@@ -30,7 +31,8 @@ public avatar: string = '';
    * Component Constructor
    */
   constructor(
-    private staticDataService: IStaticDataService
+    private staticDataService: IStaticDataService,
+    private contentService: IContentService
   ) {
     this.contactsList = this.staticDataService.getContactsList;
     this.sectorsList = this.staticDataService.getSectorsList;
@@ -42,8 +44,8 @@ public avatar: string = '';
    */
   ngOnInit(): void {
     console.log('Partner in SinglePartner', this.partner);
-    this.sector = this.transformSector(this.partner);
-    console.log(this.sector);
+    // this.sectorList$ = this.contentService.readSectors();
+
     this.contactsList = this.transformContacts(this.partner);
     this.avatar = this.partner.imageURL || '../../../../assets/media/users/default.jpg';
   }
@@ -58,17 +60,9 @@ public avatar: string = '';
     this.loading = false;
   }
 
-  transformSector(partner: Partner) {
-    const sector: string = this.sectorsList.filter((el) => {
-      return el.value == partner.sector
-    })[0].title;
-
-    return sector;
-  }
-
   transformContacts(partner: Partner) {
     const currentContactsArray = (this.partner.contacts).map(a => a.slug);
-    const validateContactsList = this.contactsList.filter(function(el) {
+    const validateContactsList = this.contactsList.filter(function (el) {
       return currentContactsArray.includes(el.slug);
     });
 

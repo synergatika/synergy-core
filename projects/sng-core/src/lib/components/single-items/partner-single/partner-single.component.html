@@ -13,7 +13,8 @@
           <!-- <img src={{partner.imageURL}} alt={{partner.name}} /> -->
         </div>
       </div>
-      <div class="s_single-category">{{sector | translate}}</div>
+      <div class="s_single-category">{{partner.sector | sector_filter}}</div>
+      <!-- <div class="s_single-category">{{partner.sector | sector_filter: (sectorList$ | async)}}</div> -->
     </div>
     <div class="row s_single-details">
       <div class="col-md-12">

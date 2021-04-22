@@ -3,12 +3,13 @@ import { Component, OnInit, Input } from '@angular/core';
 /**
   * Services
   */
-import { IStaticDataService } from '../../../services';
+import { IContentService, IStaticDataService } from '../../../services';
 
 /**
   * Models & Interfaces
   */
-import { Partner, GeneralList } from '../../../model';
+import { Partner, GeneralList, Sector } from '../../../model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'sng-partner-card',
@@ -23,24 +24,30 @@ export class PartnerCardComponent implements OnInit {
   @Input() partner: Partner;
   public sectorsList: GeneralList[];
   public sector: string = '';
-public avatar: string = '';
+  public avatar: string = '';
+
+  public sectorList$: Observable<Sector[]>;
 
   constructor(
-    private staticDataService: IStaticDataService
+    private staticDataService: IStaticDataService,
+    private contentService: IContentService
   ) {
-    this.sectorsList = this.staticDataService.getSectorsList;
+    // this.sectorsList = this.staticDataService.getSectorsList;
   }
 
-  transformSector(partner: Partner) {
-    const sector: string = this.sectorsList.filter((el) => {
-      return el.value == partner.sector
-    })[0].title;
+  // transformSector(partner: Partner) {
+  //   this.sectorList$ = this.contentService.readSectors();
 
-    return sector;
-  }
+  //   // const sector: string = this.sectorsList.filter((el) => {
+  //   //   return el.value == partner.sector
+  //   // })[0].title;
+
+  //   // return sector;
+  // }
 
   ngOnInit(): void {
-    this.sector = this.transformSector(this.partner);
+  //  this.sectorList$ = this.contentService.readSectors();
+    // this.sector = this.transformSector(this.partner);
     this.avatar = this.partner.imageURL || '../../../../assets/media/users/default.jpg';
   }
 
