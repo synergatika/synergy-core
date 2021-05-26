@@ -1,3 +1,6 @@
+.statistics{
+  min-height: 600px;
+}
 .export-button {
   background-color: var(--primary-color);
   font-size: 16px;
@@ -21,6 +24,10 @@
   font-size: 23px;
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.statistics-redeem{
+  margin-top:25px;
 }
 
 .date-filter{

@@ -23,14 +23,21 @@ mat-card-content {
 .s_archive-heading {
   margin-top: 15px;
   position:relative;
-  .desc{
-    color: #000;
-    background: #fff;
-    padding: 20px 35px 20px 35px;
-    font-size: 20px;
-    margin: auto;
-    margin-top: 30%;
-    border-radius: 6px;
+}
+.card-btn{
+  color: var(--primary);
+  background: #fff;
+  padding: 20px 35px 20px 35px;
+  font-size: 20px;
+  border-radius: 6px;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  &.support{
+    background: var(--primary);
+    color:#fff;
   }
 }
 .container-fluid {

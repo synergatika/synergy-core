@@ -7,9 +7,9 @@
       <div class="s_archive-content container-fluid">
         <div class="s_archive-heading row">
           <h4 class="s_archive-title col-12">{{campaign.title}}</h4>
-            <div *ngIf="action=='redeem'" class="desc">{{'PARTNER.DASHBOARD.REDEEM' | translate}}</div>
-            <div *ngIf="action=='support'" class="desc">{{'PARTNER.DASHBOARD.SUPPORT' | translate}}</div>
         </div>
+        <div *ngIf="action=='redeem'" class="card-btn redeem">{{'PARTNER.DASHBOARD.REDEEM' | translate}}</div>
+        <div *ngIf="action=='support'" class="card-btn support">{{'PARTNER.DASHBOARD.SUPPORT' | translate}}</div>
         <div class="s_archive-campaign">
           {{'HISTORY.CAMPAIGN' | translate}}
         </div>
