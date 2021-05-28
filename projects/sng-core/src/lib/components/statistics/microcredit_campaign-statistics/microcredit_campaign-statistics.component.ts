@@ -38,8 +38,6 @@ export class MicrocreditCampaignStatisticsComponent implements OnInit, OnDestroy
   ngOnInit() {
     this.maxDate = new Date();
 
-    console.log("Statistics in Microcredit Campaign Statistics", this.campaign.statistics);
-
     const datesRedeem = (this.campaign.statistics.redeemed) ? this.campaign.statistics.redeemed.byDate.map(obj => { return obj.date }) : [];
     const datesPromise = (this.campaign.statistics.earned) ? this.campaign.statistics.earned.byDate.map(obj => { return obj.date }) : [];
     this.validatedDates = datesRedeem.concat(datesPromise);
