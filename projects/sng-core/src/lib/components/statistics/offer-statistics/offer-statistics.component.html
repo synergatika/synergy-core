@@ -1,32 +1,28 @@
-<div *ngIf="offer">
-
+<div class="statistics statistics-offer" *ngIf="offer">
   <div class="row section-filter">
-    <div class="col-md-3 offset-md-6">
+    <div class="col-md-12">
+      <!-- Date Filter -->
       <mat-form-field>
         <mat-label>{{'SUPPORT.FILTER.DATE.TITLE' | translate}}</mat-label>
         <input matInput [(ngModel)]="dateFilter" [matDatepickerFilter]="activeDates.bind(this)" [matDatepicker]="startDateFilterPicker" [max]="maxDate" (dateChange)="applyFilterDate($event)">
         <mat-datepicker-toggle matSuffix [for]="startDateFilterPicker"></mat-datepicker-toggle>
         <mat-datepicker #startDateFilterPicker></mat-datepicker>
       </mat-form-field>
-    </div>
-    <div class="col-md-3" *ngIf="dateFilter">
-      <button mat-raised-button class="clear-button" (click)="clearFilterDate()">
+      <button *ngIf="dateFilter" class="clear-button" (click)="clearFilterDate()">
         {{'STATISTICS.CLEAR_FILTER' | translate}}
-    </button>
+      </button>
     </div>
   </div>
-
   <div *ngIf="statistics">
-    <h3 class="section-heading">
+    <h3 class="stat-heading">
       {{'STATISTICS.OFFER_REDEEM' | translate}}
-  <span *ngIf="dateFilter">
-    ({{dateFilter | date}})
-  </span>
-  <span *ngIf="!dateFilter">
-    ({{'STATISTICS.TOTAL' | translate}})
-  </span>
-</h3>
-
+      <span class="date-filter" *ngIf="dateFilter">
+        [{{dateFilter | date: 'dd/MM/yyyy'}}]
+      </span>
+      <span class="date-filter" *ngIf="!dateFilter">
+        [{{'STATISTICS.TOTAL' | translate}}]
+      </span>
+    </h3>
     <div class="row">
       <div class="col-md-4">
         <mat-card>
@@ -59,10 +55,9 @@
         </mat-card>
       </div>
     </div>
-    <br>
     <div>
       <button mat-raised-button class="export-button" (click)="exportToCSV(statistics)">
-        {{'STATISTICS.EXPORT' | translate}}
+        <span class="mdi mdi-export-variant"></span>
       </button>
     </div>
   </div>

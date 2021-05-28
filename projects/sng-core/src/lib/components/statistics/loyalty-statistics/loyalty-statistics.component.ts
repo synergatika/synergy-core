@@ -97,14 +97,13 @@ export class LoyaltyStatisticsComponent implements OnInit, OnDestroy {
 
   /**
    * Fetch Loyalty Statistics
-   */
+   */ 
   fetchLoyaltyStatistics() {
     this.loyaltyService.readStatistics()
       .pipe(
       tap(
         data => {
           this.statistics = data;
-          console.log("Statistics in Loyalty Statistics", this.statistics);
           const datesRedeem = (this.statistics.statisticsRedeem) ? this.statistics.statisticsRedeem.byDate.map(obj => { return obj.date }) : [];
           const datesEarn = (this.statistics.statisticsEarn) ? this.statistics.statisticsEarn.byDate.map(obj => { return obj.date }) : [];
           this.validatedDates = datesRedeem.concat(datesEarn);
