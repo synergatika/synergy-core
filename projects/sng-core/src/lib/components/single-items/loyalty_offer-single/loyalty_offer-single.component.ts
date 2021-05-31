@@ -4,7 +4,7 @@ import { Component, OnInit, OnDestroy, Input, TemplateRef } from '@angular/core'
 
 import { Subject } from 'rxjs';
 
-import { Offer, ContactList } from '../../../model';
+import { LoyaltyOffer, ContactList } from '../../../model';
 import { IStepperService, IAuthenticationService, IStaticDataService } from '../../../services';
 
 @Component({
@@ -18,7 +18,7 @@ export class LoyaltyOfferSingleComponent implements OnInit, OnDestroy {
   /**
    * Imported Variables
    */
-  @Input() offer: Offer;
+  @Input() offer: LoyaltyOffer;
   public contactsList: ContactList[] = [];
   public avatar: string = '';
 
@@ -53,13 +53,13 @@ export class LoyaltyOfferSingleComponent implements OnInit, OnDestroy {
     console.log('Offer in SingleLoalty', this.offer);
 
     /**begin:Social Media*/
-    const currentContactsArray = (this.offer.partner_contacts).map(a => a.slug);
+    const currentContactsArray = (this.offer.partner.contacts).map(a => a.slug);
     const validateContactsList = this.contactsList.filter(function(el) {
       return currentContactsArray.includes(el.slug);
     });
-    this.contactsList = validateContactsList.map(o => { return { ...o, value: (this.offer.partner_contacts).filter(ob => { return ob.slug === o.slug })[0].value } });
+    this.contactsList = validateContactsList.map(o => { return { ...o, value: (this.offer.partner.contacts).filter(ob => { return ob.slug === o.slug })[0].value } });
     /**end:Social Media*/
-    this.avatar = this.offer.partner_imageURL || '../../../../assets/media/users/default.jpg';
+    this.avatar = this.offer.partner.imageURL || '../../../../assets/media/users/default.jpg';
 
     const now = new Date();
     this.seconds = parseInt(now.getTime().toString());

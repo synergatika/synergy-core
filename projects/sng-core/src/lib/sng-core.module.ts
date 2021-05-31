@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AgmCoreModule } from '@agm/core';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
@@ -67,10 +68,19 @@ import {
   // Widgets Components
   MapComponent,
   ShareIconComponent,
+  RichEditorCreateComponent,
+  RichEditorViewComponent,
+  ImageUploadComponent,
 } from './components';
 
-import { ContentTranslatePipe } from './pipes';
-import { SectorFilterPipe } from './pipes';
+import { ContentTranslatePipe, SectorFilterPipe, SupportPaymentPipe, CampaignStatusPipe } from './pipes';
+
+const PIPES = [
+  ContentTranslatePipe,
+  SectorFilterPipe,
+  SupportPaymentPipe,
+  CampaignStatusPipe
+];
 
 const COMPONENTS = [
   // Card Components
@@ -119,17 +129,21 @@ const COMPONENTS = [
   // Widgets Components
   ShareIconComponent,
   MapComponent,
+  RichEditorCreateComponent,
+  RichEditorViewComponent,
+  ImageUploadComponent
 ];
 
 @NgModule({
   declarations: [
-    ContentTranslatePipe, SectorFilterPipe, ...COMPONENTS,
+    ...COMPONENTS,
+    ...PIPES
   ],
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule,
     AgmCoreModule,
+    CKEditorModule,
     CarouselModule,
     MatCardModule,
     MatTooltipModule,
@@ -142,9 +156,11 @@ const COMPONENTS = [
     QRCodeModule,
     TranslateModule,
     InfiniteScrollModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
-    ContentTranslatePipe, SectorFilterPipe, ...COMPONENTS,
+    ...PIPES, ...COMPONENTS,
   ]
 })
 export class SngCoreModule { }

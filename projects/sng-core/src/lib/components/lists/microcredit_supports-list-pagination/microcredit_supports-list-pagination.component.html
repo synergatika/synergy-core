@@ -2,10 +2,10 @@
 <div class="single row wallet-coop" *ngFor="let support of (supports) | paginate: { id: 'tr_paginator', itemsPerPage: 3, currentPage: p }" (click)="openSupport(support)">
   <div class="col-sm-9 single-content">
     <div *ngIf="support.status=='unpaid'" class="wallet-img">
-      <img src={{support.campaign.campaign_imageURL}} alt={{support.campaign.title}} style="opacity:0.5;" matTooltip="{{'SUPPORT.STATUS.PENDING_TOOLTIP' | translate}}" [matTooltipPosition]="'right'" />
+      <img src={{support.campaign.imageURL}} alt={{support.campaign.title}} style="opacity:0.5;" matTooltip="{{'SUPPORT.STATUS.PENDING_TOOLTIP' | translate}}" [matTooltipPosition]="'right'" />
     </div>
     <div *ngIf="support.status!='unpaid'" class="wallet-img">
-      <img src={{support.campaign.campaign_imageURL}} alt={{support.campaign.title}} style="opacity:1.0;" matTooltip="{{'SUPPORT.STATUS.CONFIRMED_TOOLTIP' | translate}}" [matTooltipPosition]="'right'" />
+      <img src={{support.campaign.imageURL}} alt={{support.campaign.title}} style="opacity:1.0;" matTooltip="{{'SUPPORT.STATUS.CONFIRMED_TOOLTIP' | translate}}" [matTooltipPosition]="'right'" />
     </div>
     <div class="">
       <!-- <div class="single-title">{{support.title}}
@@ -16,7 +16,7 @@
           matTooltip="{{'SUPPORT.STATUS.CONFIRMED_TOOLTIP' | translate}}" [matTooltipPosition]="'right'">
         </button>
       </div> -->
-      <div class="single-subtitle"><span class="mdi mdi-shopping"></span>{{support.campaign.partner_name}}</div>
+      <div class="single-subtitle"><span class="mdi mdi-shopping"></span>{{support.campaign.partner.name}}</div>
       <div class="single-subtitle">
         {{'GENERAL.FROM' | translate}} {{support.campaign.redeemStarts | date: 'd.M.y' }} {{'GENERAL.TO' | translate}} {{support.campaign.redeemEnds | date: 'd.M.y' }}</div>
     </div>

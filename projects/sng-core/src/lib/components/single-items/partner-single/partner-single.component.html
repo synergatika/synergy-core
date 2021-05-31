@@ -13,15 +13,16 @@
           <!-- <img src={{partner.imageURL}} alt={{partner.name}} /> -->
         </div>
       </div>
-      <div class="s_single-category">{{partner.sector | sector_filter}}</div>
-      <!-- <div class="s_single-category">{{partner.sector | sector_filter: (sectorList$ | async)}}</div> -->
+      <!-- <div class="s_single-category">{{partner.sector | sector_filter}}</div> -->
+      <div class="s_single-category">{{partner.sector | sector_filter: (sectorList$ | async)}}</div>
     </div>
     <div class="row s_single-details">
       <div class="col-md-12">
         <div class="row s_single-info-container">
           <div class="col-md-6 s_single-info">
             <div *ngIf="partner.address" class="info-row info-addess" (click)="scrollTo('map-widget-partner')">
-              <span class="mdi mdi-pin"> </span> {{partner.address.street}}, {{partner.address.city}}
+              <span class="mdi mdi-pin"></span> 
+              {{partner.address.street}}, {{partner.address.city}}
             </div>
             <div *ngIf="partner.phone" class="info-row"><span class="mdi mdi-phone"></span>{{partner.phone}}
             </div>
@@ -29,7 +30,7 @@
             <div *ngIf="contactsList">
               <div class="contacts" *ngFor="let contact of contactsList">
                 <a *ngIf="contact.value" href="{{contact.prefix}}{{contact.value}}" target="_blank"><span
-        class="mdi mdi-{{contact.icon}}"></span> </a>
+                    class="mdi mdi-{{contact.icon}}"></span> </a>
               </div>
             </div>
             <!-- <div *ngIf="partner.contact" class="info-row"><span class="mdi mdi-web"></span><a target="_blank"

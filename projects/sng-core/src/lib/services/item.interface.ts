@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 
 import {
-  Offer,
+  LoyaltyOffer,
   Event,
   Message,
   Post,
@@ -11,17 +11,17 @@ import {
 
 export abstract class IItemsService {
 
-  abstract readAllOffers(offset: string): Observable<Offer[]>;
+  abstract readAllOffers(offset: string): Observable<LoyaltyOffer[]>;
 
-  abstract readOffersByStore(partnerId: string, offset: string): Observable<Offer[]>;
+  abstract readOffersByStore(partnerId: string, offset: string): Observable<LoyaltyOffer[]>;
 
   abstract createOffer(formData: FormData): Observable<Message>;
 
   abstract editOffer(partnerId: string, offerId: string, formData: FormData): Observable<Message>;
 
-  abstract readOffer(partnerId: string, offerId: string): Observable<Offer>;
+  abstract readOffer(partnerId: string, offerId: string): Observable<LoyaltyOffer>;
 
-  abstract deleteOffer(partnerId: string, offerId: string): Observable<Offer>;
+  abstract deleteOffer(partnerId: string, offerId: string): Observable<LoyaltyOffer>;
 
   /**
    * Events
@@ -36,7 +36,7 @@ export abstract class IItemsService {
 
   abstract editEvent(partnerId: string, eventId: string, formData: FormData): Observable<Message>;
 
-  abstract deleteEvent(partnerId: string, eventId: string): Observable<Offer>;
+  abstract deleteEvent(partnerId: string, eventId: string): Observable<LoyaltyOffer>;
 
   /**
    * Posts
@@ -51,7 +51,7 @@ export abstract class IItemsService {
 
   abstract editPost(partnerId: string, postId: string, formData: FormData): Observable<Message>;
 
-  abstract deletePost(partnerId: string, postId: string): Observable<Offer>;
+  abstract deletePost(partnerId: string, postId: string): Observable<LoyaltyOffer>;
 
   /**
    * Posts & Events

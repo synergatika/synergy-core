@@ -11,7 +11,7 @@ import {
 
 import {
   Partner,
-  Offer
+  LoyaltyOffer
 } from '../../../model';
 
 @Component({
@@ -36,8 +36,8 @@ export class OffersListCarouselComponent implements OnInit, OnDestroy {
   /**
    * Content Variables
    */
-  public offers: Offer[]; // Used to store offers
-  public offer: Offer; //Used for the Loyalty to open in modal
+  public offers: LoyaltyOffer[]; // Used to store offers
+  public offer: LoyaltyOffer; //Used for the Loyalty to open in modal
 
   /**
    * Carousel & Modal Variables
@@ -136,14 +136,14 @@ export class OffersListCarouselComponent implements OnInit, OnDestroy {
   /**
    * Randomize Data
    */
-  shuffle(array: Offer[]): Array<any> {
+  shuffle(array: LoyaltyOffer[]): Array<any> {
     return array.sort(() => Math.random() - 0.5);
   }
 
   /**
    * Open Loyalty Offer Modal
    */
-  openLoyalty(offer: Offer): void {
+  openLoyalty(offer: LoyaltyOffer): void {
     this.offer = offer;
     this.controlModalState(true);
     this.modalService.open(
@@ -166,7 +166,7 @@ export class OffersListCarouselComponent implements OnInit, OnDestroy {
    */
   mousedown() { this.moved = false; }
   mousemove() { this.moved = true; }
-  mouseup(data: Offer) {
+  mouseup(data: LoyaltyOffer) {
     if (!this.moved) {
       this.openLoyalty(data);
     }

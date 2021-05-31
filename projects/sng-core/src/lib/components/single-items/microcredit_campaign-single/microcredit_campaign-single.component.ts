@@ -57,31 +57,19 @@ public avatar: string = '';
     const now = new Date();
     const seconds: number = parseInt(now.getTime().toString());
 
-    if (this.campaign.status === 'draft') {
-      this._text = this.translate.instant('CAMPAIGN.STATUS.DRAFT');
-    } else if (this.campaign.startsAt > seconds) {
-      this._text = this.translate.instant('CAMPAIGN.STATUS.EXPECTED');
-    } else if ((this.campaign.startsAt < seconds) && (this.campaign.expiresAt > seconds)) {
-      this._text = this.translate.instant('GENERAL.TO');
-      this._date = this.campaign.expiresAt;
-    } else if (this.campaign.expiresAt < seconds) {
-      this._text = this.translate.instant('CAMPAIGN.STATUS.REDEEM_TO');
-      this._date = this.campaign.redeemEnds;
-    }
-
     this.viewSupportButton = (this.authenticationService.currentUserValue.user["access"] == 'member');
     this.canSupportCampaign = ((this.campaign.startsAt < seconds) && (this.campaign.expiresAt > seconds));
     this.canRedeemCampaign = ((this.campaign.redeemStarts < seconds) && (this.campaign.redeemEnds > seconds));
 
     /**begin:Social Media*/
-    const currentContactsArray = (this.campaign.partner_contacts).map(a => a.slug);
+    const currentContactsArray = (this.campaign.partner.contacts).map(a => a.slug);
     const validateContactsList = this.contactsList.filter(function(el) {
       return currentContactsArray.includes(el.slug);
     });
-    this.contactsList = validateContactsList.map(o => { return { ...o, value: (this.campaign.partner_contacts).filter(ob => { return ob.slug === o.slug })[0].value } });
+    this.contactsList = validateContactsList.map(o => { return { ...o, value: (this.campaign.partner.contacts).filter(ob => { return ob.slug === o.slug })[0].value } });
     /**end:Social Media*/
 
-    this.avatar = this.campaign.partner_imageURL || '../../../../assets/media/users/default.jpg';
+    this.avatar = this.campaign.partner.imageURL || '../../../../assets/media/users/default.jpg';
   }
 
 	/**

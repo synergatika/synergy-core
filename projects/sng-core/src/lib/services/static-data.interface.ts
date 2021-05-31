@@ -16,4 +16,6 @@ export abstract class IStaticDataService {
   abstract get getSectorsList(): GeneralList[];
 
   abstract get getContactsList(): ContactList[];
+
+  abstract get getValidators(): any;
 }

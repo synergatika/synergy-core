@@ -8,7 +8,8 @@
             <div class="row">
               <div class="col-sm-12 s_archive-img-container">
                 <div class="s_archive-img">
-                  <img src={{support.campaign.campaign_imageURL}} alt={{support.campaign.title}} />
+                  <img src={{support.campaign.imageURL}} alt={{support.campaign.title}} />
+            
                   <div class="s_archive-date" *ngIf="support.status=='completed'">
                     <span matTooltip="{{'SUPPORT.STATUS.COMPLETED_TOOLTIP' | translate}}">
                       {{'SUPPORT.STATUS.COMPLETED' | translate}}</span>
@@ -21,6 +22,7 @@
                     <span matTooltip="{{'SUPPORT.STATUS.CONFIRMED_TOOLTIP' | translate}}">
                       {{'SUPPORT.STATUS.CONFIRMED' | translate}}</span>
                   </div>
+            
                 </div>
               </div>
             </div>
@@ -63,19 +65,21 @@
                       <span class="mdi mdi-handshake"></span> {{'SUPPORT.ARRAY.PAYMENT_ID' | translate}}: {{support.payment_id}}
                       <br>
                     </div>
+    
                     <div class="s_archive-merch-name" *ngIf="support.method!='store'">
                       <span class="mdi mdi-cash"></span> {{'SUPPORT.PAYMENT_METHOD' | translate}}: {{'SUPPORT.PAYMENT.BANK' | translate}}
                       <br>
-                      <span class="mdi mdi-cash"></span> {{'SUPPORT.PAYMENT_DETAILS' | translate}}: {{support.how.title | translate}}, {{support.how.value}}
+                      <span class="mdi mdi-cash"></span> {{'SUPPORT.PAYMENT_DETAILS' | translate}}: {{support | support_payment}}
                     </div>
                     <div class="s_archive-merch-name" *ngIf="support.method=='store'">
                       <span class="mdi mdi-cash"></span> {{'SUPPORT.PAYMENT_METHOD' | translate}}: {{'SUPPORT.PAYMENT.STORE' | translate}}
                     </div>
+         
                     <div class="s_archive-merch-name">
-                      <span class="mdi mdi-shopping"></span> {{support.campaign.partner_name}}
+                      <span class="mdi mdi-shopping"></span> {{support.campaign.partner.name}}
                     </div>
-                    <div class="s_archive-merch-adress" *ngIf="support.campaign.partner_address">
-                      <span class="mdi mdi-pin"></span> {{support.campaign.partner_address.street}}, {{support.campaign.partner_address.city}}
+                    <div class="s_archive-merch-adress" *ngIf="support.campaign.partner.address">
+                      <span class="mdi mdi-pin"></span> {{support.campaign.partner.address.street}}, {{support.campaign.partner.address.city}}
                     </div>
                   </div>
                 </div>

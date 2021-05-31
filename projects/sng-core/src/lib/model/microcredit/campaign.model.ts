@@ -1,8 +1,4 @@
-import {
-  PartnerAddress,
-  PartnerContact,
-  PartnerPayment
-} from '../partner';
+import { Partner } from '../user';
 
 import { Statistics } from '../statistics.model';
 
@@ -14,22 +10,9 @@ interface Tokens {
 }
 
 export interface MicrocreditCampaign {
-
-  partner_id: string;
-  partner_name: string;
-  partner_email: string;
-  partner_slug: string;
-  partner_imageURL: string;
-
-  partner_payments: PartnerPayment[];
-  partner_address: PartnerAddress;
-  partner_contacts: PartnerContact[];
-  partner_phone: string;
-
-  _id?: string;
-  campaign_id: string;
-  campaign_slug: string;
-  campaign_imageURL: string;
+  _id: string;
+  slug: string;
+  imageURL: string;
   title: string;
   subtitle: string;
   terms: string;
@@ -39,6 +22,7 @@ export interface MicrocreditCampaign {
   status: string;
 
   quantitative: boolean;
+  redeemable: boolean;
   stepAmount: number;
   minAllowed: number;
   maxAllowed: number;
@@ -50,15 +34,14 @@ export interface MicrocreditCampaign {
   expiresAt: number;
 
   tokens: Tokens;
-  // confirmationTokens: Tokens;
-  // orderedTokens: Tokens;
 
   statistics?: {
     earned: Statistics;
     redeemed: Statistics;
   }
-  // statisticsPromise?: Statistics;
-  // statisticsRedeem?: Statistics;
 
   createdAt: Date;
+  updatedAt: Date;
+
+  partner: Partner;
 }

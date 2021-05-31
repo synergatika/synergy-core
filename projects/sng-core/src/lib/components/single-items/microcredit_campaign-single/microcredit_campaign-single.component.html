@@ -9,9 +9,10 @@
     <div class="row s_single-img-area">
       <div class="col-md-12 s_single-img-container">
         <div class="s_single-img">
-          <img src={{campaign.campaign_imageURL}} alt={{campaign.title}} />
+          <img src={{campaign.imageURL}} alt={{campaign.title}} />
         </div>
-        <div class="s_single-date"> {{_text | translate}} <span>{{_date | date: 'd.M'}}</span></div>
+        <!-- <div class="s_single-date"> {{_text | translate}} <span>{{_date | date: 'd.M'}}</span></div> -->
+        <div class="s_single-date"> <span>{{campaign | campaign_status}}</span></div>
         <!-- <div *ngIf="campaign.expiresAt>seconds||seconds>campaign.startsAt" class="s_single-date">
           {{'GENERAL.TO' | translate}} {{campaign.expiresAt | date: 'd.M'}}</div>
         <div *ngIf="seconds>campaign.expiresAt" class="s_archive-date">
@@ -29,12 +30,14 @@
               <p [innerHTML]="campaign.terms"></p>
             </div>
             <div class="info-row">
-              <span class="tag">{{'CAMPAIGN.SUPPORT_PERIOD' | translate}}:</span> {{campaign.startsAt | date: 'd.M.y'}} - {{campaign.expiresAt | date: 'd.M.y'}}<br>
+              <span class="tag">{{'CAMPAIGN.SUPPORT_PERIOD' | translate}}:</span>
+              {{campaign.startsAt | date: 'd.M.y'}} - {{campaign.expiresAt | date: 'd.M.y'}}<br>
               <span class="desc">{{'CAMPAIGN.SUPPORT_PERIOD_SUB' | translate}}</span>
             </div>
             <br>
-            <div class="info-row">
-              <span class="tag">{{'CAMPAIGN.REDEEM_PERIOD' | translate}}:</span> {{campaign.redeemStarts | date: 'd.M.y'}} - {{campaign.redeemEnds | date: 'd.M.y'}}<br>
+            <div class="info-row" *ngIf="campaign.redeemable">
+              <span class="tag">{{'CAMPAIGN.REDEEM_PERIOD' | translate}}:</span>
+              {{campaign.redeemStarts | date: 'd.M.y'}} - {{campaign.redeemEnds | date: 'd.M.y'}}<br>
               <span class="desc">{{'CAMPAIGN.REDEEM_PERIOD_SUB' | translate}}</span>
             </div>
           </div>
@@ -47,47 +50,68 @@
                 {{campaign.minAllowed | currency:'EUR' }}
               </span>
             </div>
-            <div class="price-item">
+            <div class="price-item" *ngIf="campaign.redeemable">
               <span class="hypertitle" *ngIf="campaign.quantitative!=true">{{'CAMPAIGN.PRICE' | translate}}</span>
-              <span class="hypertitle" *ngIf="campaign.quantitative==true&&campaign.stepAmount>0">{{'CAMPAIGN.PRICE_PER_ITEM' | translate}}</span>
-              <span *ngIf="campaign.quantitative==true&&campaign.stepAmount>0">{{campaign.stepAmount | currency:'EUR' }}</span>
+              <span class="hypertitle"
+                *ngIf="campaign.quantitative==true&&campaign.stepAmount>0">{{'CAMPAIGN.PRICE_PER_ITEM' |
+                translate}}</span>
+              <span *ngIf="campaign.quantitative==true&&campaign.stepAmount>0">{{campaign.stepAmount | currency:'EUR'
+                }}</span>
               <span *ngIf="campaign.quantitative!=true">{{campaign.minAllowed | currency:'EUR' }}</span>
             </div>
             <div *ngIf="viewSupportButton">
-              <button mat-raised-button class="plegde-button" (click)="pledgeModal(campaign)" [disabled]="!canSupportCampaign">
+              <button mat-raised-button class="plegde-button" (click)="pledgeModal(campaign)"
+                [disabled]="!canSupportCampaign">
                 <span matTooltip="{{'CAMPAIGN.PLEDGE_DISABLE' | translate}}" [matTooltipPosition]="'left'"
                   [matTooltipDisabled]="canSupportCampaign">{{'CAMPAIGN.PLEDGE' | translate}}</span>
               </button>
             </div>
           </div>
         </div>
+
         <div class="row s_single-description">
+
           <div class="col-md-4 partner-info s_single-info-container ">
             <h6>{{'CAMPAIGN.PARTNER' | translate}}</h6>
-            <h5>{{campaign.partner_name}}</h5>
-            <img src="{{avatar}}" alt="{{campaign.partner_name}}">
-            <!-- <img src="{{campaign.partner_imageURL}}" alt="{{campaign.partner_name}}"> -->
-            <div *ngIf="campaign.partner_address" class="info-row info-addess" (click)="scrollTo('map-widget-campaign')">
-              <span class="mdi mdi-pin"></span> {{campaign.partner_address.street}}, {{campaign.partner_address.city}}
+            <h5>{{campaign.partner.name}}</h5>
+            <img src="{{avatar}}" alt="{{campaign.partner.name}}">
+
+            <div *ngIf="campaign.partner.address" class="info-row info-addess"
+              (click)="scrollTo('map-widget-campaign')">
+              <span class="mdi mdi-pin"></span>
+              {{campaign.partner.address.street}}, {{campaign.partner.address.city}}
             </div>
-            <div *ngIf="campaign.partner_phone" class="info-row"><span class="mdi mdi-phone"></span>{{campaign.partner_phone}}</div>
-            <div class="info-row"><span class="mdi mdi-email"></span>{{campaign.partner_email}}</div>
+
+            <div *ngIf="campaign.partner.phone" class="info-row"><span class="mdi mdi-phone"></span>
+              {{campaign.partner.phone}}
+            </div>
+
+            <div class="info-row"><span class="mdi mdi-email"></span>
+              {{campaign.partner.email}}
+            </div>
+
             <div *ngIf="contactsList">
               <div class="contacts" *ngFor="let contact of contactsList">
                 <a *ngIf="contact.value" href="{{contact.prefix}}{{contact.value}}" target="_blank"><span
-        class="mdi mdi-{{contact.icon}}"></span> </a>
+                    class="mdi mdi-{{contact.icon}}"></span> </a>
               </div>
             </div>
+
           </div>
+          
           <div class="col-md-8">
-            <p [innerHTML]="campaign.description"></p>
+            <sng-rich-editor-view [description]="campaign.description"></sng-rich-editor-view>
+            <!-- <div class="editor-content" [innerHTML]="campaign.description"></div> -->
+            <!-- <p [innerHTML]="campaign.description"></p> -->
           </div>
+        
         </div>
+      
       </div>
     </div>
 
     <!--begin::Map Widget-->
-    <sng-map id="map-widget-campaign" [partner_id]='campaign.partner_id'></sng-map>
+    <sng-map id="map-widget-campaign" [partner_id]='campaign.partner._id'></sng-map>
     <!--end::Map Widget-->
 
   </div>

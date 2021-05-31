@@ -1,26 +1,13 @@
-import {
-  PartnerAddress,
-  PartnerPayment,
-  PartnerContact
-} from '../partner';
-
 import { MicrocreditTransaction } from './transaction.model';
 import { MicrocreditCampaign } from './campaign.model';
 
+export enum SupportStatus {
+  COMPLETED = 'completed',
+  PAID = 'paid',
+  UNPAID = 'unpaid'
+}
+
 export interface MicrocreditSupport {
-  // partner_id: string;
-  // partner_name: string;
-  //
-  // partner_address: PartnerAddress;
-  // partner_payments: PartnerPayment[];
-  // partner_contacts: PartnerContact[];
-  //
-  // campaign_id: string;
-  // campaign_imageURL: string;
-  // title: string;
-  // terms: string;
-  // redeemStarts: number;
-  // redeemEnds: number;
 
   campaign: MicrocreditCampaign;
   support_id: string;
@@ -29,7 +16,7 @@ export interface MicrocreditSupport {
   initialTokens: number;
   currentTokens: number;
 
-  status: string;
+  status: SupportStatus;
   type: string;
   amount: number;
   method: string;

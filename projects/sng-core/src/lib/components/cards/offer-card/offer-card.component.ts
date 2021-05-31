@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Offer } from '../../../model';
+import { LoyaltyOffer } from '../../../model';
 
 @Component({
   selector: 'sng-offer-card',
@@ -7,7 +7,7 @@ import { Offer } from '../../../model';
   styleUrls: ['./offer-card.component.scss']
 })
 export class OfferCardComponent implements OnInit {
-  @Input() offer: Offer;
+  @Input() offer: LoyaltyOffer;
   @Input() type: string; // single (one partner), all (many partners), internal (belongs to partenr)
 
   public hasExpired: boolean = false;

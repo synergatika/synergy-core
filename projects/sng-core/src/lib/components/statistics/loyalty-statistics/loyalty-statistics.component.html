@@ -1,4 +1,4 @@
-<div class="statistics" *ngIf="statisticsEarn||statisticsRedeem">
+<div class="statistics statistics-loyalty" *ngIf="statisticsEarn||statisticsRedeem">
   <div class="row section-filter">
     <div class="col-md-12">
       <!-- Date Filter -->
@@ -13,7 +13,7 @@
       </button>
     </div>
   </div>
-  <div *ngIf="statisticsEarn">
+  <div class="statistics-earn" *ngIf="statisticsEarn">
     <h3 class="stat-heading">{{'STATISTICS.LOYALTY_EARN' | translate}}
       <span class="date-filter" *ngIf="dateFilter">
         [{{dateFilter | date: 'dd/MM/yyyy'}}]
@@ -60,7 +60,7 @@
       </button>
     </div>
   </div>
-  <div *ngIf="statisticsRedeem">
+  <div class="statistics-redeem" *ngIf="statisticsRedeem">
     <h3  class="stat-heading">
       {{'STATISTICS.LOYALTY_REDEEM' | translate}}
       <span class="date-filter" *ngIf="dateFilter">

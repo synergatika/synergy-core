@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Offer } from '../../../model';
+import { LoyaltyOffer } from '../../../model';
 
 @Component({
   selector: 'sng-offer-little-card',
@@ -7,7 +7,7 @@ import { Offer } from '../../../model';
   styleUrls: ['./offer-little-card.component.scss']
 })
 export class OfferLittleCardComponent implements OnInit {
-  @Input() offer: Offer;
+  @Input() offer: LoyaltyOffer;
   @Input() type: string;
 
   seconds = 0;

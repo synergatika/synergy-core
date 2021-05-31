@@ -29,9 +29,7 @@
 						<div class="row">
 							<div class="col-sm-12 s_archive-img-container">
 								<div class="s_archive-img">
-									<img *ngIf="post_event.post_event_imageURL" src={{post_event.post_event_imageURL}} alt={{post_event.title}} />
-									<img *ngIf="post_event.post_imageURL" src={{post_event.post_imageURL}} alt={{post_event.title}} />
-									<img *ngIf="post_event.event_imageURL" src={{post_event.event_imageURL}} alt={{post_event.title}} />
+									<img *ngIf="post_event.imageURL" src={{post_event.imageURL}} alt={{post_event.title}} />
 									<div *ngIf="post_event.dateTime" class="s_archive-date">
 										<span class="white mdi mdi-calendar"></span> {{post_event.dateTime | date: 'd.M'}}</div>
 								</div>
@@ -47,11 +45,11 @@
 									<p [innerHTML]="post_event.subtitle"></p>
 								</div>
 							</div>
-							<div class="row" *ngIf="type=='all'">
+							<div class="row" >
 								<div class="col-md-12 s_archive-info">
 									<div class="s_archive-partner">
-										<div class="s_archive-merch-name">
-											<span class="mdi mdi-shopping"></span> {{post_event.partner_name}}
+										<div class="s_archive-merch-name" *ngIf="type=='all'">
+											<span class="mdi mdi-shopping"></span> {{post_event.partner.name}}
 										</div>
 										<div class="s_archive-merch-adress" *ngIf="post_event.location">
 											<span class="mdi mdi-map"></span> {{post_event.location}}

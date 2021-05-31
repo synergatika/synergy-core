@@ -10,7 +10,7 @@
             <div class="row">
               <div class="col-sm-12 s_archive-img-container">
                 <div class="s_archive-img">
-                  <img src={{offer.offer_imageURL}} alt={{offer.title}} />
+                  <img src={{offer.imageURL}} alt={{offer.title}} />
                   <div *ngIf="!hasExpired" class="s_archive-date">
                     {{'GENERAL.TO' | translate}} {{offer.expiresAt | date: 'd.M'}}</div>
                   <div *ngIf="hasExpired" class="s_archive-date">
@@ -37,10 +37,10 @@
                 <div class="col-md-12 s_archive-info">
                   <div class="s_archive-partner">
                     <div class="s_archive-merch-name">
-                      <span class="mdi mdi-shopping"></span> {{offer.partner_name}}
+                      <span class="mdi mdi-shopping"></span> {{offer.partner.name}}
                     </div>
-                    <div class="s_archive-merch-adress" *ngIf="offer.partner_address">
-                      <span class="mdi mdi-pin"></span> {{offer.partner_address.street}}, {{offer.partner_address.city}}
+                    <div class="s_archive-merch-adress" *ngIf="offer.partner.address">
+                      <span class="mdi mdi-pin"></span> {{offer.partner.address.street}}, {{offer.partner.address.city}}
                     </div>
                   </div>
                   <sng-share-icon></sng-share-icon>

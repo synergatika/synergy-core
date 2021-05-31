@@ -9,7 +9,7 @@
     <div class="row s_single-img-area">
       <div class="col-md-12 s_single-img-container">
         <div class="s_single-img">
-          <img src={{offer.offer_imageURL}} alt={{offer.title}} />
+          <img src={{offer.imageURL}} alt={{offer.title}} />
         </div>
         <div class="s_single-date">
           {{'GENERAL.TO' | translate}} {{offer.expiresAt | date: 'd.M'}}
@@ -28,39 +28,51 @@
           <div *ngIf="offer.cost > 0" class="col-md-4 s_single-credit">
             <div class="price-item">
               <span class="amount">
-                  <img src="../../../assets/media/images/Synergy-Icon.png" alt="Synergy" />
-                  {{ offer.cost }}
-                </span>
+                <img src="../../../assets/media/images/Synergy-Icon.png" alt="Synergy" />
+                {{ offer.cost }}
+              </span>
             </div>
           </div>
         </div>
+
         <div class="row s_single-description">
+          
           <div class="col-md-4 partner-info s_single-info-container ">
             <h6>{{'CAMPAIGN.PARTNER' | translate}}</h6>
-            <h5>{{offer.partner_name}}</h5>
-            <img src="{{avatar}}" alt="{{offer.partner_name}}">
-            <!-- <img src="{{offer.partner_imageURL}}" alt="{{offer.partner_name}}"> -->
-            <div *ngIf="offer.partner_address" class="info-row info-addess" (click)="scrollTo('map-widget-campaign')">
-              <span class="mdi mdi-pin"></span> {{offer.partner_address.street}}, {{offer.partner_address.city}}
+            <h5>{{offer.partner.name}}</h5>
+            <img src="{{avatar}}" alt="{{offer.partner.name}}">
+
+            <div *ngIf="offer.partner.address" class="info-row info-addess" (click)="scrollTo('map-widget-campaign')">
+              <span class="mdi mdi-pin"></span>
+              {{offer.partner.address.street}}, {{offer.partner.address.city}}
             </div>
-            <div *ngIf="offer.partner_phone" class="info-row"><span class="mdi mdi-phone"></span>{{offer.partner_phone}}</div>
-            <div class="info-row"><span class="mdi mdi-email"></span>{{offer.partner_email}}</div>
+
+            <div *ngIf="offer.partner.phone" class="info-row"><span class="mdi mdi-phone"></span>
+              {{offer.partner.phone}}
+            </div>
+
+            <div class="info-row"><span class="mdi mdi-email"></span>{{offer.partner.email}}</div>
+
             <div *ngIf="contactsList">
               <div class="contacts" *ngFor="let contact of contactsList">
                 <a *ngIf="contact.value" href="{{contact.prefix}}{{contact.value}}" target="_blank"><span
-      class="mdi mdi-{{contact.icon}}"></span> </a>
+                    class="mdi mdi-{{contact.icon}}"></span> </a>
               </div>
             </div>
+
           </div>
+        
           <div class="col-md-8">
             <p [innerHTML]="offer.instructions"></p>
           </div>
+        
         </div>
+
       </div>
     </div>
 
     <!--begin::Map Widget-->
-    <sng-map id="map-widget-campaign" [partner_id]='offer.partner_id'></sng-map>
+    <sng-map id="map-widget-campaign" [partner_id]='offer.partner._id'></sng-map>
     <!--end::Map Widget-->
 
   </div>

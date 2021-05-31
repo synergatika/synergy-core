@@ -1,4 +1,4 @@
-import { Content } from './content.model';
+import { Content } from './content/content.model';
 
 export interface Activity {
   slug: number;

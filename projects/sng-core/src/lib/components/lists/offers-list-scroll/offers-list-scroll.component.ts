@@ -12,7 +12,7 @@ import { IItemsService } from '../../../services';
 /**
  * Models & Interfaces
  */
-import { Offer } from '../../../model';
+import {LoyaltyOffer } from '../../../model';
 
 @Component({
   selector: 'sng-offers-list-scroll',
@@ -34,8 +34,8 @@ export class OffersListScrollComponent implements OnInit, OnDestroy {
   /**
    * Content Variables
    */
-  public offers: Offer[] = [];
-  public offer: Offer;
+  public offers: LoyaltyOffer[] = [];
+  public offer: LoyaltyOffer;
 
   /**
    * Scroll & Modal Variables
@@ -143,7 +143,7 @@ export class OffersListScrollComponent implements OnInit, OnDestroy {
   /**
    * Open Loaylty Offer Modal
    */
-  openLoaylty(offer: Offer): void {
+  openLoaylty(offer: LoyaltyOffer): void {
     this.offer = offer;
     this.controlModalState(true);
     this.modalService.open(
@@ -166,7 +166,7 @@ export class OffersListScrollComponent implements OnInit, OnDestroy {
    */
   mousedown(): void { this.moved = false; }
   mousemove(): void { this.moved = true; }
-  mouseup(data: Offer): void {
+  mouseup(data: LoyaltyOffer): void {
     if (!this.moved) {
       this.openLoaylty(data);
     }

@@ -4,7 +4,7 @@ import { ExportToCsv } from 'export-to-csv';
 /**
  * Services
  */
-import { Offer } from '../../../model';
+import { LoyaltyOffer } from '../../../model';
 import { Statistics } from '../../../model';
 
 @Component({
@@ -16,7 +16,7 @@ export class OfferStatisticsComponent implements OnInit, OnDestroy {
   /**
    * Imported Variables
    */
-  @Input() offer: Offer;
+  @Input() offer: LoyaltyOffer;
 
   /**
    * Content Variables
@@ -36,9 +36,6 @@ export class OfferStatisticsComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.maxDate = new Date();
-
-    console.log("Statistics in Loyalty Offer Statistics", this.offer.statistics);
-
     this.validatedDates = (this.offer.statistics) ? this.offer.statistics.byDate.map(obj => { return obj.date }) : [];
     this.statistics = (this.offer.statistics) ? this.offer["statistics"] : { _id: "-1", quantity: 0, users: 0, count: 0 };
   }

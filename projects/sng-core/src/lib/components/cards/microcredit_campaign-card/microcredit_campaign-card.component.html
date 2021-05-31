@@ -10,10 +10,9 @@
             <div class="row">
               <div class="col-sm-12 s_archive-img-container">
                 <div class="s_archive-img">
-                  <img src={{campaign.campaign_imageURL}} alt={{campaign.title}} />
+                  <img src={{campaign.imageURL}} alt={{campaign.title}} />
                   <div class="s_archive-date">
-                    {{_text}}
-                    <span *ngIf="_date"> {{_date | date: 'd.M'}}</span>
+                    <span> {{campaign | campaign_status}}</span>
                   </div>
                 </div>
               </div>
@@ -21,7 +20,7 @@
             <div class="s_archive-content container-fluid">
               <div class="s_archive-heading row">
                 <h4 class="s_archive-title col-9">{{campaign.title}}</h4>
-                <div class="s_archive-points col-3">
+                <div class="s_archive-points col-3" *ngIf="campaign.redeemable">
                   <span class="from" *ngIf="campaign.quantitative==true">
                     {{'GENERAL.FROM' | translate}}
                   </span>
@@ -29,6 +28,7 @@
                     {{campaign.minAllowed | currency:'EUR' }}
                   </span>
                 </div>
+
               </div>
               <div class="s_archive-subtitle row">
                 <div class="col-md-12">
@@ -39,10 +39,11 @@
                 <div class="col-md-12 s_archive-info">
                   <div class="s_archive-partner">
                     <div class="s_archive-merch-name">
-                      <span class="mdi mdi-shopping"></span> {{campaign.partner_name}}
+                      <span class="mdi mdi-shopping"></span> {{campaign.partner.name}}
                     </div>
-                    <div class="s_archive-merch-adress" *ngIf="campaign.partner_address">
-                      <span class="mdi mdi-pin"></span> {{campaign.partner_address.street}} , {{campaign.partner_address.city}}
+                    <div class="s_archive-merch-adress" *ngIf="campaign.partner.address">
+                      <span class="mdi mdi-pin"></span>
+                      {{campaign.partner.address.street}}, {{campaign.partner.address.city}}
                     </div>
                   </div>
                 </div>
