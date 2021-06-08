@@ -116,6 +116,7 @@ export class MicrocreditCampaignStatisticsComponent implements OnInit, OnDestroy
       csvExporter.generateCsv(oneDate);
     } else {
       const byDate = data['byDate'].map(obj => ({ date: (obj.date).toString(), amount: obj.tokens, count: obj.count, users: obj.users }))
+        .sort((a, b) => a.date.localeCompare(b.date));
       const total =
         [
           { date: 'total', amount: data['tokens'], count: data['count'], users: data['users'] },
