@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Sector } from '../model';
-import { IContentService } from '../services';
+import { IContentService, IStaticContentService } from '../services';
 
 @Pipe({
   name: 'sector_filter',
@@ -13,16 +13,34 @@ export class SectorFilterPipe implements PipeTransform {
 
   private sectors: Sector[];
 
-  constructor(public translate: TranslateService,
-    private contentService: IContentService
+  constructor(
+    public translate: TranslateService,
+    private staticContentService: IStaticContentService,
+    // private contentService: IContentService
   ) {
-    this.contentService.readSectors().subscribe((data) => {
-      this.sectors = data;
-      console.log("this.sectors");
-      console.log(this.sectors);
 
-    })
+    this.sectors = this.staticContentService.sectors;
+
+    // this.contentService.readSectors().subscribe((data) => {
+    //   this.sectors = data;
+    //   console.log("this.sectors");
+    //   console.log(this.sectors);
+    // })
   }
+
+  transform(value: string, args?: Sector[]): any {
+    const lang = this.translate.currentLang;
+
+    if (this.sectors) {
+      const sector: Sector = this.sectors.filter((o) => { return o._id == value })[0];
+      if (sector) return sector[`${lang}_title`];
+      else return '';
+    } else {
+      return '';
+    }
+
+  }
+}
 
   // sectors = [{
   //   "_id": "606daa442bc8e70588534115",
@@ -73,17 +91,3 @@ export class SectorFilterPipe implements PipeTransform {
   //   "el_title": "Αναλώσιμα",
   //   "en_title": "Durables",
   // }]
-
-  transform(value: string, args?: Sector[]): any {
-    const lang = this.translate.currentLang;
-
-    if (this.sectors) {
-      const sector: Sector = this.sectors.filter((o) => { return o._id == value })[0];
-      if (sector) return sector[`${lang}_title`];
-      else return '';
-    } else {
-      return '';
-    }
-
-  }
-}

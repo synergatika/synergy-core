@@ -52,7 +52,7 @@ export class QRCodeCardComponent implements OnInit, OnDestroy {
 	 */
   ngOnInit(): void {
     this.myAngularxQrCode = this.authenticationService.currentUserValue.user['email'];
-    this.fetchQRCodeContent();
+    // this.fetchQRCodeContent();
   }
 
 	/**
@@ -92,24 +92,24 @@ export class QRCodeCardComponent implements OnInit, OnDestroy {
 	/**
 	 * Fetch QR Code Contentent
 	 */
-  fetchQRCodeContent(): void {
-    this.contentService.readContentById('QR Code')
-      .pipe(
-      tap(
-        data => {
-          this.qrcode = { text: data };
-        },
-        error => {
-          console.log(error);
-        }
-      ),
-      takeUntil(this.unsubscribe),
-      finalize(() => {
-        this.loading = false;
-        this.cdRef.markForCheck();
-      })
-      ).subscribe();
-  }
+ // fetchQRCodeContent(): void {
+    // this.contentService.readContentById('QR Code')
+    //   .pipe(
+    //   tap(
+    //     data => {
+    //       this.qrcode = { text: data };
+    //     },
+    //     error => {
+    //       console.log(error);
+    //     }
+    //   ),
+    //   takeUntil(this.unsubscribe),
+    //   finalize(() => {
+    //     this.loading = false;
+    //     this.cdRef.markForCheck();
+    //   })
+    //   ).subscribe();
+ // }
 
 	/**
 	 * Open QR Modal

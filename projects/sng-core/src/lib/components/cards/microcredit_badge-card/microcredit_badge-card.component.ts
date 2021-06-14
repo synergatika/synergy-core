@@ -111,22 +111,22 @@ export class MicrocreditBadgeCardComponent implements OnInit, OnDestroy {
         break;
     }
     // Get static content of Badge
-    this.contentService.readContentById(this.microcredit_badge.text_id)
-      // this.staticContentService.readText(this.badge.text_id)
-      .pipe(
-      tap(
-        data => {
-          this.microcredit_badge.text = data;
-        },
-        error => {
-          console.log(error);
-        }
-      ),
-      takeUntil(this.unsubscribe),
-      finalize(() => {
-        this.loading = false;
-        this.cdRef.markForCheck();
-      })
-      ).subscribe();
+    // this.contentService.readContentById(this.microcredit_badge.text_id)
+    //   // this.staticContentService.readText(this.badge.text_id)
+    //   .pipe(
+    //   tap(
+    //     data => {
+    //       this.microcredit_badge.text = data;
+    //     },
+    //     error => {
+    //       console.log(error);
+    //     }
+    //   ),
+    //   takeUntil(this.unsubscribe),
+    //   finalize(() => {
+    //     this.loading = false;
+    //     this.cdRef.markForCheck();
+    //   })
+    //   ).subscribe();
   }
 }

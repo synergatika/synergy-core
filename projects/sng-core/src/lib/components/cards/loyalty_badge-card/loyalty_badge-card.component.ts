@@ -7,7 +7,8 @@ import { TranslateService } from '@ngx-translate/core';
 import {
   IStaticDataService,
   IContentService,
-  ILoyaltyService
+  ILoyaltyService,
+  IStaticContentService
 } from '../../../services';
 
 import { Activity } from '../../../model';
@@ -24,6 +25,7 @@ export class LoyaltyBadgeCardComponent implements OnInit, OnDestroy {
    */
   public loyalty_badge: Activity; //The loyalty badge of member
   badgesImages: any;
+  staticTextSlug: string = '';
 
   loading: boolean = false;
   private unsubscribe: Subject<any>;
@@ -42,7 +44,9 @@ export class LoyaltyBadgeCardComponent implements OnInit, OnDestroy {
     private staticDataService: IStaticDataService,
     private contentService: IContentService,
     private loyaltyService: ILoyaltyService,
+    private staticContentService: IStaticContentService
   ) {
+    console.log(this.staticContentService.content)
     this.badgesImages = this.staticDataService.getBadgesImages;
     this.unsubscribe = new Subject();
   }
@@ -70,20 +74,20 @@ export class LoyaltyBadgeCardComponent implements OnInit, OnDestroy {
   fetchLoyaltyBadgeData(): void {
     this.loyaltyService.readBadge()
       .pipe(
-      tap(
-        data => {
-          this.loyalty_badge = data;
-          console.log('Loyalty Badge Card', this.loyalty_badge);
-          this.fetchBadgeContent();
-        },
-        error => {
-          console.log(error);
-        }),
-      takeUntil(this.unsubscribe),
-      finalize(() => {
-        this.loading = false;
-        this.cdRef.markForCheck();
-      })
+        tap(
+          data => {
+            this.loyalty_badge = data;
+            console.log('Loyalty Badge Card', this.loyalty_badge);
+            this.fetchBadgeContent();
+          },
+          error => {
+            console.log(error);
+          }),
+        takeUntil(this.unsubscribe),
+        finalize(() => {
+          this.loading = false;
+          this.cdRef.markForCheck();
+        })
       )
       .subscribe();
   }
@@ -108,23 +112,23 @@ export class LoyaltyBadgeCardComponent implements OnInit, OnDestroy {
         this.loyalty_badge.text_id = 'One of Us';
         break;
     }
-    // Get static content of Badge
-    this.contentService.readContentById(this.loyalty_badge.text_id)
-      // this.staticContentService.readText(this.badge.text_id)
-      .pipe(
-      tap(
-        data => {
-          this.loyalty_badge.text = data;
-        },
-        error => {
-          console.log(error);
-        }
-      ),
-      takeUntil(this.unsubscribe),
-      finalize(() => {
-        this.loading = false;
-        this.cdRef.markForCheck();
-      })
-      ).subscribe();
+    //   // Get static content of Badge
+    //   this.contentService.readContentById(this.loyalty_badge.text_id)
+    //     // this.staticContentService.readText(this.badge.text_id)
+    //     .pipe(
+    //     tap(
+    //       data => {
+    //         this.loyalty_badge.text = data;
+    //       },
+    //       error => {
+    //         console.log(error);
+    //       }
+    //     ),
+    //     takeUntil(this.unsubscribe),
+    //     finalize(() => {
+    //       this.loading = false;
+    //       this.cdRef.markForCheck();
+    //     })
+    //     ).subscribe();
   }
 }

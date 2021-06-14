@@ -2,13 +2,17 @@
   <!--begin::Loyalty Points (Balance)-->
   <!-- <div *ngIf="configAccess[1]"> -->
   <div *ngIf="balance" class="single row wallet-row" (click)="openBalance()">
-    <div class="col-9 single-content" *ngIf="balance.text">
+    <div class="col-9 single-content">
       <span class="wallet-img">
         <img src="../../../assets/media/images/Synergy-Icon.png" alt="Synergy" />
       </span>
       <div>
-        <div class="single-title">{{balance.text | content_translate: 'title'}}</div>
-        <div class="single-subtitle"><span class="mdi mdi-shopping"></span>{{'MEMBER.DASHBOARD.WALLET_SUBTITLE' | translate}}
+
+        <div class="single-title">{{'Synergy Points' | content_translate: 'title'}}</div>
+
+        <!-- <div class="single-title">{{balance.text | content_translate: 'title'}}</div> -->
+        <div class="single-subtitle"><span class="mdi mdi-shopping"></span>{{'MEMBER.DASHBOARD.WALLET_SUBTITLE' |
+          translate}}
         </div>
       </div>
     </div>
@@ -33,8 +37,8 @@
           <img src="../../../assets/media/images/Synergy-Icon.png" alt="Synergy" />
         </span>
       </div>
-      <div *ngIf="balance.text" class="">
-        <h3 class="balance-title">{{balance.text | content_translate: 'title'}}</h3>
+      <div class="">
+        <h3 class="balance-title">{{'Synergy Points' | content_translate: 'title'}}</h3>
       </div>
       <div *ngIf="balance" class="balance-amount">
         <div>
@@ -42,8 +46,8 @@
         </div>
       </div>
     </div>
-    <div *ngIf="balance.text" class="balance-text mt-3">
-      <p [innerHTML]="balance.text | content_translate: 'content'"></p>
+    <div class="balance-text mt-3">
+      <p [innerHTML]="'Synergy Points' | content_translate: 'content'"></p>
     </div>
   </div>
 </ng-template>
