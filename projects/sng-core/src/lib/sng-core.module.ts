@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -74,6 +74,7 @@ import {
 } from './components';
 
 import { ContentTranslatePipe, SectorFilterPipe, SupportPaymentPipe, CampaignStatusPipe } from './pipes';
+import { IStaticContentService } from './services';
 
 const PIPES = [
   ContentTranslatePipe,
@@ -161,6 +162,24 @@ const COMPONENTS = [
   ],
   exports: [
     ...PIPES, ...COMPONENTS,
+  ],
+  providers: [
+    {
+			provide: APP_INITIALIZER, useFactory: contentProviderFactory, deps: [IStaticContentService], multi: true
+		},
+		{
+			provide: APP_INITIALIZER, useFactory: sectorProviderFactory, deps: [IStaticContentService], multi: true
+		},
   ]
 })
 export class SngCoreModule { }
+
+export function contentProviderFactory(provider: IStaticContentService) {
+	console.log("Call Provider")
+	return () => provider.readContent();
+}
+
+export function sectorProviderFactory(provider: IStaticContentService) {
+	console.log("Call Provider")
+	return () => provider.readSectors();
+}

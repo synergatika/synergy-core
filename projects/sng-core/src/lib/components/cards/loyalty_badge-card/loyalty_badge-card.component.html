@@ -8,9 +8,11 @@
     <div class="mr-4">
       <img *ngIf="loyalty_badge.image" [src]="loyalty_badge.image">
     </div>
-    <div *ngIf="loyalty_badge.text" class="bagde-text">
-      <h2>{{ loyalty_badge.text | content_translate: 'title' }}</h2>
-      <p [innerHTML]="loyalty_badge.text | content_translate: 'content'"></p>
+    <div *ngIf="loyalty_badge.text_id" class="bagde-text">
+      <h2>{{ loyalty_badge.text_id | content_translate: 'title' }}</h2>
+      <p [innerHTML]="loyalty_badge.text_id | content_translate: 'content'"></p>
+      <!-- <h2>{{ loyalty_badge.text | content_translate: 'title' }}</h2>
+      <p [innerHTML]="loyalty_badge.text | content_translate: 'content'"></p> -->
     </div>
   </div>
 </div>

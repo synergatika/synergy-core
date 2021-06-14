@@ -8,9 +8,11 @@
     <div class="mr-4">
       <img *ngIf="microcredit_badge.image" [src]="microcredit_badge.image">
     </div>
-    <div *ngIf="microcredit_badge.text" class="bagde-text">
-      <h2>{{microcredit_badge.text | content_translate: 'title'}}</h2>
-      <p [innerHTML]="microcredit_badge.text | content_translate: 'content'"></p>
+    <div *ngIf="microcredit_badge.text_id" class="bagde-text">
+      <h2>{{ microcredit_badge.text_id | content_translate: 'title' }}</h2>
+      <p [innerHTML]="microcredit_badge.text_id | content_translate: 'content'"></p>
+      <!-- <h2>{{microcredit_badge.text | content_translate: 'title'}}</h2>
+      <p [innerHTML]="microcredit_badge.text | content_translate: 'content'"></p> -->
     </div>
   </div>
 </div>

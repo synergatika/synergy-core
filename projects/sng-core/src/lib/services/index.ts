@@ -9,3 +9,4 @@ export * from './microcredit.interface';
 export * from './loyalty.interface';
 export * from './content.interface';
 export * from './stepper.interface';
+export * from './static_content.interface';
