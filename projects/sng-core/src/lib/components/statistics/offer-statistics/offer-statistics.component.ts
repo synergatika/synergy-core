@@ -105,6 +105,7 @@ export class OfferStatisticsComponent implements OnInit, OnDestroy {
       csvExporter.generateCsv(oneDate);
     } else {
       const byDate = data['byDate'].map(obj => ({ date: (obj.date).toString(), quantity: obj.quantity, count: obj.count, users: obj.users }))
+        .sort((a, b) => a.date.localeCompare(b.date));
       const total =
         [
           { date: 'total', quantity: data['quantity'], count: data['count'], users: data['users'] },

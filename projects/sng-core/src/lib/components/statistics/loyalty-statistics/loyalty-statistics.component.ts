@@ -97,26 +97,26 @@ export class LoyaltyStatisticsComponent implements OnInit, OnDestroy {
 
   /**
    * Fetch Loyalty Statistics
-   */ 
+   */
   fetchLoyaltyStatistics() {
     this.loyaltyService.readStatistics()
       .pipe(
-      tap(
-        data => {
-          this.statistics = data;
-          const datesRedeem = (this.statistics.statisticsRedeem) ? this.statistics.statisticsRedeem.byDate.map(obj => { return obj.date }) : [];
-          const datesEarn = (this.statistics.statisticsEarn) ? this.statistics.statisticsEarn.byDate.map(obj => { return obj.date }) : [];
-          this.validatedDates = datesRedeem.concat(datesEarn);
-          this.statisticsEarn = (this.statistics.statisticsEarn) ? this.statistics.statisticsEarn : { amount: 0, users: 0, count: 0 };
-          this.statisticsRedeem = (this.statistics.statisticsRedeem) ? this.statistics.statisticsRedeem : { amount: 0, users: 0, count: 0 };
-        },
-        error => {
-        }),
-      takeUntil(this.unsubscribe),
-      finalize(() => {
-        this.loading = false;
-        this.cdRef.markForCheck();
-      })
+        tap(
+          data => {
+            this.statistics = data;
+            const datesRedeem = (this.statistics.statisticsRedeem) ? this.statistics.statisticsRedeem.byDate.map(obj => { return obj.date }) : [];
+            const datesEarn = (this.statistics.statisticsEarn) ? this.statistics.statisticsEarn.byDate.map(obj => { return obj.date }) : [];
+            this.validatedDates = datesRedeem.concat(datesEarn);
+            this.statisticsEarn = (this.statistics.statisticsEarn) ? this.statistics.statisticsEarn : { amount: 0, users: 0, count: 0 };
+            this.statisticsRedeem = (this.statistics.statisticsRedeem) ? this.statistics.statisticsRedeem : { amount: 0, users: 0, count: 0 };
+          },
+          error => {
+          }),
+        takeUntil(this.unsubscribe),
+        finalize(() => {
+          this.loading = false;
+          this.cdRef.markForCheck();
+        })
       )
       .subscribe();
   }
@@ -147,6 +147,7 @@ export class LoyaltyStatisticsComponent implements OnInit, OnDestroy {
       csvExporter.generateCsv(oneDate);
     } else {
       const byDate = data['byDate'].map(obj => ({ date: (obj.date).toString(), amount: obj.amount, count: obj.count, users: obj.users }))
+        .sort((a, b) => a.date.localeCompare(b.date));
       const total =
         [
           { date: 'total', amount: data['amount'], count: data['count'], users: data['users'] },
