@@ -5,7 +5,7 @@ import { Component, OnInit, OnDestroy, Input, TemplateRef } from '@angular/core'
 import { Subject } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 
-import { MicrocreditCampaign, ContactList } from '../../../model';
+import { MicrocreditCampaign, ContactList, MicrocreditSupport } from '../../../model';
 import { IStepperService, IAuthenticationService, IStaticDataService } from '../../../services';
 
 @Component({
@@ -24,7 +24,8 @@ export class MicrocreditCampaignSingleComponent implements OnInit, OnDestroy {
 public avatar: string = '';
 
   public viewSupportButton: boolean = false;
-  public canSupportCampaign: boolean = false;
+  public canSupportCampaignTime: boolean = false;
+  public cannotSupportCampaignAmount: boolean = true;
   public canRedeemCampaign: boolean = false;
 
   public _text: string = '';
@@ -58,9 +59,12 @@ public avatar: string = '';
     const seconds: number = parseInt(now.getTime().toString());
 
     this.viewSupportButton = (this.authenticationService.currentUserValue.user["access"] == 'member');
-    this.canSupportCampaign = ((this.campaign.startsAt < seconds) && (this.campaign.expiresAt > seconds));
-    this.canRedeemCampaign = ((this.campaign.redeemStarts < seconds) && (this.campaign.redeemEnds > seconds));
+    this.canSupportCampaignTime = ((this.campaign.startsAt < seconds) && (this.campaign.expiresAt > seconds));
+    this.canRedeemCampaign = ((this.campaign.redeemStarts > seconds) && (this.campaign.redeemEnds < seconds));
+    this.cannotSupportCampaignAmount = (!(this.campaign.redeemable) && (this.campaign.tokens.paidTokens > this.campaign.maxAmount)) ;
 
+    console.log(this.canSupportCampaignTime, this.cannotSupportCampaignAmount)
+    console.log(!this.canSupportCampaignTime || this.cannotSupportCampaignAmount)
     /**begin:Social Media*/
     const currentContactsArray = (this.campaign.partner.contacts).map(a => a.slug);
     const validateContactsList = this.contactsList.filter(function(el) {
