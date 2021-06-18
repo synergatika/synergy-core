@@ -59,13 +59,32 @@
                 }}</span>
               <span *ngIf="campaign.quantitative!=true">{{campaign.minAllowed | currency:'EUR' }}</span>
             </div>
+
+            <div class="price-item" *ngIf="!campaign.redeemable">
+              <span>{{ 'CAMPAIGN.TARGET' | translate }}</span>
+              <br>
+              <span>{{campaign.maxAmount | currency:'EUR' }}</span>
+            </div>
+
             <div *ngIf="viewSupportButton">
               <button mat-raised-button class="plegde-button" (click)="pledgeModal(campaign)"
-                [disabled]="!canSupportCampaign">
-                <span matTooltip="{{'CAMPAIGN.PLEDGE_DISABLE' | translate}}" [matTooltipPosition]="'left'"
-                  [matTooltipDisabled]="canSupportCampaign">{{'CAMPAIGN.PLEDGE' | translate}}</span>
+                [disabled]="!canSupportCampaignTime || cannotSupportCampaignAmount">
+                <!-- <span matTooltip="{{'CAMPAIGN.PLEDGE_DISABLE_TIME' | translate}}" [matTooltipPosition]="'left'"
+                  [matTooltipDisabled]="canSupportCampaignTime">{{'CAMPAIGN.PLEDGE' | translate}} </span> -->
+                {{'CAMPAIGN.PLEDGE' | translate}}
               </button>
             </div>
+            <div *ngIf="viewSupportButton && !canSupportCampaignTime">
+              <span>
+                {{'CAMPAIGN.PLEDGE_DISABLE_TIME' | translate}}
+              </span>
+            </div>
+            <div *ngIf="viewSupportButton && canSupportCampaignTime && cannotSupportCampaignAmount">
+              <span>
+                {{'CAMPAIGN.PLEDGE_DISABLE_AMOUNT' | translate}}
+              </span>
+            </div>
+
           </div>
         </div>
 
@@ -98,15 +117,15 @@
             </div>
 
           </div>
-          
+
           <div class="col-md-8">
             <sng-rich-editor-view [description]="campaign.description"></sng-rich-editor-view>
             <!-- <div class="editor-content" [innerHTML]="campaign.description"></div> -->
             <!-- <p [innerHTML]="campaign.description"></p> -->
           </div>
-        
+
         </div>
-      
+
       </div>
     </div>
 

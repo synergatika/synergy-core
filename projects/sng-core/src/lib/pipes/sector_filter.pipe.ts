@@ -16,16 +16,8 @@ export class SectorFilterPipe implements PipeTransform {
   constructor(
     public translate: TranslateService,
     private staticContentService: IStaticContentService,
-    // private contentService: IContentService
   ) {
-
     this.sectors = this.staticContentService.sectors;
-
-    // this.contentService.readSectors().subscribe((data) => {
-    //   this.sectors = data;
-    //   console.log("this.sectors");
-    //   console.log(this.sectors);
-    // })
   }
 
   transform(value: string, args?: Sector[]): any {
