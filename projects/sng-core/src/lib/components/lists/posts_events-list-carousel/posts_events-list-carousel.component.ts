@@ -133,14 +133,7 @@ export class PostsEventsListCarouselComponent implements OnInit, OnDestroy {
       tap(
         data => {
           this.posts_events = data;
-
-          console.log("Posts/Events in List-Carousel", this.posts_events);
-
-          // Temp for DEMO
-          if (this.posts_events.length < 3) {
-            this.posts_events.push(this.posts_events[0]);
-            this.posts_events.push(this.posts_events[0]);
-          }
+          //console.log("Posts/Events in List-Carousel", this.posts_events);
         },
         error => {
           console.log(error);
@@ -163,11 +156,6 @@ export class PostsEventsListCarouselComponent implements OnInit, OnDestroy {
       tap(
         data => {
           this.posts_events = data;
-          // TEMP FOR DEMO
-          if (this.posts_events.length && this.posts_events.length < 3) {
-            this.posts_events.push(this.posts_events[0]);
-            this.posts_events.push(this.posts_events[0]);
-          }
         },
         error => {
           console.log(error);

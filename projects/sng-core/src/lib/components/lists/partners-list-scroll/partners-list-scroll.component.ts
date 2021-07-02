@@ -110,7 +110,7 @@ export class PartnersListScrollComponent implements OnInit, OnDestroy {
       tap(
         data => {
           this.partners = this.partners.concat(data);
-          console.log("Partners in List-Scroll", this.partners);
+          //console.log("Partners in List-Scroll", this.partners);
         },
         () => {
         }),
@@ -129,7 +129,7 @@ export class PartnersListScrollComponent implements OnInit, OnDestroy {
   onScroll(): void {
     this.counter = this.counter + 1;
     this.fetchPartnersData(this.counter);
-    console.log('scrolled!!');
+    //console.log('scrolled!!');
     this.cdRef.markForCheck();
   }
 

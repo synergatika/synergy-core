@@ -4,4 +4,7 @@
 	padding-top: 10px;
 	padding-bottom: 10px;
   text-transform: capitalize;
+	@media (max-width: 576px) {
+		font-size: 1.6rem;
+	}
 }

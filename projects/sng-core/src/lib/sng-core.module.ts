@@ -39,7 +39,6 @@ import {
   FooterComponent,
   LanguageSwitcherComponent,
   MenuComponent,
-  TabMenuComponent,
   TopbarComponent,
   UserMenuComponent,
 
@@ -101,7 +100,6 @@ const COMPONENTS = [
   FooterComponent,
   LanguageSwitcherComponent,
   MenuComponent,
-  TabMenuComponent,
   TopbarComponent,
   UserMenuComponent,
 

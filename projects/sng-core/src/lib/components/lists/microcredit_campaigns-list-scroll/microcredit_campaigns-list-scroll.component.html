@@ -1,6 +1,6 @@
 <!--begin::Microcredit Campaigns List-->
 <div *ngIf="campaigns && campaigns.length" class="row section-list" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
-  <div class="col-md-4 item-wrapper" *ngFor="let campaign of (campaigns)">
+  <div class="col-md-6 col-lg-4 item-wrapper" *ngFor="let campaign of (campaigns)">
     <sng-microcredit_campaign-card [campaign]=" campaign" type="{{type}}" (mousedown)="mousedown()" (mousemove)="mousemove()" (mouseup)="mouseup(campaign)">
     </sng-microcredit_campaign-card>
   </div>

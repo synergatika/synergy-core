@@ -127,7 +127,7 @@ export class PartnersListCarouselComponent implements OnInit, OnDestroy {
       tap(
         data => {
           this.partners = this.shuffle(data);
-          console.log("Partners in List-Carousel", this.partners);
+          //console.log("Partners in List-Carousel", this.partners);
         },
         error => {
           console.log(error);

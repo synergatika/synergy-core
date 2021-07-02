@@ -3,9 +3,9 @@
     <div *ngFor="let item of menu" [ngClass]="getItemCssClasses(item.link)">
       <a [routerLink]="['/'+item.link]">
         <span class="mdi mdi-{{item.icon}}"></span>
-        <div>
+        <span class="menu-title">
           {{item.title | translate}}
-        </div>
+        </span>
       </a>
     </div>
   </div>

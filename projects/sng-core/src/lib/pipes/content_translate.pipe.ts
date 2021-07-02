@@ -16,8 +16,8 @@ export class ContentTranslatePipe implements PipeTransform {
      private staticContentService: IStaticContentService
   ) {
      this.content = this.staticContentService.content;
-     console.log("Pipe")
-     console.log(this.content)
+     //console.log("Pipe")
+     //console.log(this.content)
   }
 
   // transform(content: Content[], args?: string[]) {
@@ -37,7 +37,7 @@ export class ContentTranslatePipe implements PipeTransform {
   // }
   transform(value: string, args?: string): any {
     const lang = this.translate.currentLang;
-    console.log(this.content)
+    //console.log(this.content)
     if (this.content) {
       const content: Content = this.content.filter((o) => { return o.name == value })[0];
       if (content) return content[`${lang}_${args}`];
