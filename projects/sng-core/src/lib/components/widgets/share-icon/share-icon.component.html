@@ -1,22 +1,18 @@
-<div ngbDropdown placement="left" class="share-dropdown">
-  <div ngbDropdownToggle class="share-dropdown-wrapper">
-    <div class="share">
+<div class="share-dropdown">
+  <div class="share-dropdown-wrapper">
+    <div class="share" (click)="openShare()">
       <span class="mdi mdi-share-variant share-icon"></span>
       <!--<img src="../../../assets/media/images/Share.png" alt="share" />-->
     </div>
   </div>
-  <div ngbDropdownMenu class="dropdown-menu dropdown-menu-fit dropdown-menu-right">
+  <div *ngIf="showNav" class="share-menu">
     <!--begin::Navigation-->
-    <div class="navigation">
-      <a ngbDropdownItem href="javascript:;" class="navigation-item">
-        <div class="navigation-item-details">
+    <div>
+      <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{shareUrl}}">
           <span class="mdi mdi-facebook"></span>
-        </div>
       </a>
-      <a ngbDropdownItem href="javascript:;" class="navigation-item">
-        <div class="navigation-item-details">
+      <a target="_blank" href="https://twitter.com/intent/tweet?text={{item.title}} {{shareUrl}}">
           <span class="mdi mdi-twitter"></span>
-        </div>
       </a>
     </div>
     <!--end::Navigation-->
