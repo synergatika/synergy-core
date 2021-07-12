@@ -15,45 +15,41 @@ export class ShareIconComponent {
   @Input() item: any;
 
   /**
-   * Other ariables
+   * Other variables
    */
-  public showNav = false;
-  public shareUrl : string;
+  public shareMobileFlag = false;
+  public shareUrl: string;
 
   constructor() {
-    this.unsubscribe = new Subject();
   }
 
   /**
    * On Init
    */
   ngOnInit(): void {
-    console.log(this.item);
-    this.shareUrl = "https://synergatika.gr/"+this.item.type+"/"+this.item.slug
+    this.shareUrl = "https://synergatika.gr/" + this.item.type + "/" + this.item.slug;
+    if (navigator.share) {
+      this.shareMobileFlag = true;
+    }
   }
 
   /**
    * On destroy
    */
   ngOnDestroy(): void {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
-    this.loading = false;
-
   }
 
-  openShare() {
-    if (navigator.share) {
-      navigator.share({
-        title: this.item.title,
-        url:   this.shareUrl,
-      }).then(() => {
-        //Nothing
-      })
-        .catch(console.error);
-    } else {
-      this.showNav = true;
-    }
+  /**
+   * Share for Mobile
+   */
+  shareMobile() {
+    navigator.share({
+      title: this.item.title,
+      url: this.shareUrl,
+    }).then(() => {
+      //Nothing
+    })
+      .catch(console.error);
   }
 
 }
