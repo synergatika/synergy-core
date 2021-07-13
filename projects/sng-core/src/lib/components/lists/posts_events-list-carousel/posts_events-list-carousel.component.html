@@ -1,15 +1,16 @@
 <!--begin::Posts/Events List-->
 <div *ngIf="posts_events && posts_events.length" class="row section-list">
-  <div class="col-md-12">
-    <h3 class="list-tiltle">{{ 'POST_EVENT.PLURAL' | translate }}</h3>
+  <div class="col-md-12"> 
+    <h3 class="list-tiltle"><span>{{access === 'partners' ? ('POST_EVENT.INTERNAL' | translate) : ('POST_EVENT.GENERAL' | translate)}} </span>{{ 'POST_EVENT.PLURAL' | translate }}</h3>
     <owl-carousel-o [options]="customOptions">
       <ng-template carouselSlide *ngFor="let post_event of (posts_events)">
         <sng-post_event-card [post_event]="post_event" type="{{type}}" (mousedown)="mousedown()" (mousemove)="mousemove()" (mouseup)="mouseup(post_event)"></sng-post_event-card>
       </ng-template>
     </owl-carousel-o>
-    <div *ngIf="type==='all'" class="section-list-footer"><a [routerLink]="['/posts']">{{ 'POST_EVENT.ALL' | translate }}</a>
+    <div *ngIf="type==='all'" class="section-list-footer"><a [routerLink]="['/posts', access]">{{ 'POST_EVENT.ALL' | translate }}</a>
     </div>
   </div>
+  <!--  + access == 'partners' ? '/internal' : '' -->
 </div>
 <!--end::Posts/Events List-->
 
