@@ -25,6 +25,7 @@ export class PostsEventsListScrollComponent implements OnInit, OnDestroy {
    * Imported Variables
    */
   @Input() type: string; // single (one partner), all (many partners), internal (belongs to partenr)
+  @Input() access: string;
 
   /**
    * Children Modals
@@ -105,21 +106,23 @@ export class PostsEventsListScrollComponent implements OnInit, OnDestroy {
    * Fetch Post & Events List
    */
   fetchPostsEventsData(counter: number): void {
-    this.itemsService.readAllPrivatePostsEvents(`${this.scroll.toString()}-${counter.toString()}-0`)
+    console.log(this.access)
+    console.log(`${this.access === 'internal' ? '1' : '0'}`)
+    this.itemsService.readAllPrivatePostsEvents(`${this.scroll.toString()}-${counter.toString()}-0-${this.access === 'internal' ? '1' : '0'}`)
       .pipe(
-      tap(
-        data => {
-          this.posts_events = this.posts_events.concat(data);
+        tap(
+          data => {
+            this.posts_events = this.posts_events.concat(data);
 
-          console.log("Posts/Events in List-Scroll", this.posts_events);
-        },
-        () => {
-        }),
-      takeUntil(this.unsubscribe),
-      finalize(() => {
-        this.loading = false;
-        this.cdRef.markForCheck();
-      })
+            console.log("Posts/Events in List-Scroll", this.posts_events);
+          },
+          () => {
+          }),
+        takeUntil(this.unsubscribe),
+        finalize(() => {
+          this.loading = false;
+          this.cdRef.markForCheck();
+        })
       )
       .subscribe();
   }
@@ -151,8 +154,8 @@ export class PostsEventsListScrollComponent implements OnInit, OnDestroy {
       }
     )
       .result.then(
-      () => { this.controlModalState(false); console.log('closed'); },
-      () => { this.controlModalState(false); console.log('dismissed'); });
+        () => { this.controlModalState(false); console.log('closed'); },
+        () => { this.controlModalState(false); console.log('dismissed'); });
   }
 
 

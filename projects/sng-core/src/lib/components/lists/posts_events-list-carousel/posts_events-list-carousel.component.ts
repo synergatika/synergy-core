@@ -30,7 +30,8 @@ export class PostsEventsListCarouselComponent implements OnInit, OnDestroy {
    * Imported Variables
    */
   @Input() partner: Partner;
-  @Input() type: string; // single (one partner), all (many partners), internal (belongs to partenr)
+  @Input() type: string; // single (one partner), all (many partners), internal (belongs to partner)
+  @Input() access: string; 
 
   /**
    * Children Modals
@@ -82,6 +83,7 @@ export class PostsEventsListCarouselComponent implements OnInit, OnDestroy {
    * On Init
    */
   ngOnInit(): void {
+    console.log(this.access)
     if (this.type == 'single') {
       this.fetchStorePostsEventsData(this.partner._id);
     } else if (this.type == 'all') {
@@ -133,6 +135,10 @@ export class PostsEventsListCarouselComponent implements OnInit, OnDestroy {
       tap(
         data => {
           this.posts_events = data;
+
+          if(this.access === 'internal') {
+            this.posts_events = this.posts_events.slice().filter(o => o.access === 'partners');
+          }
 
           console.log("Posts/Events in List-Carousel", this.posts_events);
 
