@@ -62,10 +62,16 @@
   .footer-wrapper {
     .footer-content {
       .footer-menu-item {
+        margin: 5px 11px;
+
         a {
           .menu-title {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: normal;
+          }
+
+          .mdi {
+            font-size: 35px;
           }
         }
       }
