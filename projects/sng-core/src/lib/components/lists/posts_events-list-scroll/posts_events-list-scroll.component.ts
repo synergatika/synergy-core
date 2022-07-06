@@ -113,8 +113,7 @@ export class PostsEventsListScrollComponent implements OnInit, OnDestroy {
         tap(
           data => {
             this.posts_events = this.posts_events.concat(data);
-
-            console.log("Posts/Events in List-Scroll", this.posts_events);
+            //console.log("Posts/Events in List-Scroll", this.posts_events);
           },
           () => {
           }),
@@ -133,7 +132,7 @@ export class PostsEventsListScrollComponent implements OnInit, OnDestroy {
   onScroll(): void {
     this.counter = this.counter + 1;
     this.fetchPostsEventsData(this.counter);
-    console.log('scrolled!!');
+    //console.log('scrolled!!');
     this.cdRef.markForCheck();
   }
 

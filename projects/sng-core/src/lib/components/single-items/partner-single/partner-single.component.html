@@ -21,7 +21,7 @@
         <div class="row s_single-info-container">
           <div class="col-md-6 s_single-info">
             <div *ngIf="partner.address" class="info-row info-addess" (click)="scrollTo('map-widget-partner')">
-              <span class="mdi mdi-pin"></span> 
+              <span class="mdi mdi-pin"></span>
               {{partner.address.street}}, {{partner.address.city}}
             </div>
             <div *ngIf="partner.phone" class="info-row"><span class="mdi mdi-phone"></span>{{partner.phone}}
@@ -58,7 +58,8 @@
     <!--end::Loyalty Offers List-->
 
     <!--begin::Post/Events List-->
-    <sng-posts_events-list-carousel [partner]='partner' type="'single'" access='null'></sng-posts_events-list-carousel>
+    <sng-posts_events-list-carousel [partner]='partner' type="'single'" [access]="null">
+    </sng-posts_events-list-carousel>
     <!--end::Post/Events List-->
 
     <!--begin::Map Widget-->

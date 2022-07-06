@@ -13,14 +13,16 @@ export class ContentTranslatePipe implements PipeTransform {
 
   constructor(
     public translate: TranslateService,
-     private staticContentService: IStaticContentService
+    private staticContentService: IStaticContentService
   ) {
-     this.content = this.staticContentService.content;
+    this.content = this.staticContentService.content;
+    //console.log("Pipe")
+    //console.log(this.content)
   }
 
   transform(value: string, args?: string): any {
     const lang = this.translate.currentLang;
-
+    //console.log(this.content)
     if (this.content) {
       const content: Content = this.content.filter((o) => { return o.name == value })[0];
       if (content) return content[`${lang}_${args}`];
@@ -29,4 +31,10 @@ export class ContentTranslatePipe implements PipeTransform {
       return '';
     }
   }
+
+  // transform(value: Content, args?: string): any {
+  //   const lang = this.translate.currentLang;
+  //   return value[`${lang}_${args}`];
+  // }
+  // }
 }

@@ -2,57 +2,79 @@
   -webkit-box-shadow: 17px 22px 45px 8px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 17px 22px 45px 8px rgba(0, 0, 0, 0.2);
   box-shadow: 17px 22px 45px 8px rgba(0, 0, 0, 0.2);
-
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background-color: #fff;
-	width: 100%;
-	padding: 10px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  width: 100%;
+  padding: 10px;
   z-index: 1000;
 
-	.footer-content {
-		max-width: 350px;
-		display: flex;
-		align-items: center;
-		justify-content: space-around;
+  .footer-content {
+    max-width: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     margin: 0 auto;
 
-		a {
-			text-align: center;
-			display: block;
-			font-weight: 600;
-			color: #000;
-
-      &:hover {
-				text-decoration: none;
-			}
-
-      .mdi {
-				font-size: 40px;
-				line-height: 1;
-			}
-    }
-
     .footer-menu-item {
-			opacity: 0.5;
-			margin: 5px 5px;
-			transition: opacity 0.3s;
+      opacity: 0.5;
+      margin: 5px 15px;
+      transition: opacity 0.3s;
+
+      a {
+        text-align: center;
+        display: block;
+        font-weight: 600;
+        color: #000;
+
+        &:hover {
+          text-decoration: none;
+        }
+
+        .mdi {
+          font-size: 40px;
+          line-height: 1;
+        }
+      }
 
       &-active {
-				opacity: 1;
-				a {
-					color: var(--font-primary-color);
-				}
-			}
+        opacity: 1;
+
+        a {
+          color: var(--font-primary-color);
+        }
+      }
 
       &:hover {
-				opacity: 1;
-				a {
-					color: var(--font-primary-color);
-				}
-			}
-		}
-	}
+        opacity: 1;
+
+        a {
+          color: var(--font-primary-color);
+        }
+      }
+    }
+  }
+}
+//Responsive
+@media (max-width: 576px) {
+  .footer-wrapper {
+    .footer-content {
+      .footer-menu-item {
+        margin: 5px 11px;
+
+        a {
+          .menu-title {
+            font-size: 13px;
+            font-weight: normal;
+          }
+
+          .mdi {
+            font-size: 35px;
+          }
+        }
+      }
+    }
+  }
 }

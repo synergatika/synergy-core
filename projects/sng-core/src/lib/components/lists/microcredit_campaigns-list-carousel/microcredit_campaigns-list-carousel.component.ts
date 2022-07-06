@@ -116,13 +116,7 @@ export class MicrocreditCampaignsListCarouselComponent implements OnInit, OnDest
       tap(
         data => {
           this.campaigns = this.shuffle(data);
-          console.log("Microcredit Campaigns in List-Carousel", this.campaigns);
-
-          //TEMP FOR DEMO
-          if (this.campaigns.length && this.campaigns.length < 3) {
-            this.campaigns.push(this.campaigns[0]);
-            this.campaigns.push(this.campaigns[0]);
-          }
+          //console.log("Microcredit Campaigns in List-Carousel", this.campaigns);
         },
         error => {
           console.log(error);
@@ -147,7 +141,7 @@ export class MicrocreditCampaignsListCarouselComponent implements OnInit, OnDest
    * Open Microcredit Campaign Modal
    */
   openMicrocredit(campaign: MicrocreditCampaign): void {
-    console.log('Microcredit Campaign on Open Modal in Carousel', campaign);
+    //console.log('Microcredit Campaign on Open Modal in Carousel', campaign);
     this.campaign = campaign;
     this.controlModalState(true);
     this.modalService.open(
