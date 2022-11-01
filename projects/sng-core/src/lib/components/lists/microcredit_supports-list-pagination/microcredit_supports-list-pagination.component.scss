@@ -72,11 +72,14 @@
   }
 
   &-status {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    font-size: 20px;
+    line-height: 20px;
 
     &.mat-warn {
-      background-color: var(--tertiary-color);
+      background-color: var(--secondary-color);
     }
 
     &.mat-primary {
@@ -110,7 +113,7 @@
 .balance {
   &-title {
     color: var(--font-dark-color);
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
 
   &-amount {
@@ -127,6 +130,14 @@
 
   &:hover {
     background-color: #f0f2f4;
+  }
+
+  &.unpaid {
+    .single-title {
+      span {
+        opacity: 0.6;
+      }
+    }
   }
 }
 

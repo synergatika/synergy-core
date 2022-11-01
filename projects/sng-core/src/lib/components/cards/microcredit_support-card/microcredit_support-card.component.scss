@@ -1,8 +1,9 @@
 // @import "../../../../../variables.scss";
 
 mat-card {
-	padding-top: 0px;
+	padding-top: 0;
 }
+
 .hypertitle {
 	font-size: 10px;
 	color: #000;
@@ -11,9 +12,11 @@ mat-card {
 	display: block;
 	line-height: 3px;
 }
+
 .s_archive-points {
 	font-size: 1.1rem;
 }
+
 .init-amount {
 	.amount {
 		font-size: 1.3rem;
@@ -21,20 +24,48 @@ mat-card {
 		margin-bottom: 20px;
 	}
 }
+
 .current-amount {
 	color: var(--primary-light-color);
 	font-size: 1.6rem;
 }
 
-.tag {
-	color: #000;
+.s_archive-dates {
+	.tag {
+		font-size: 14px;
+	}
+	.dates {
+		color: #000;
+		font-size: 17px;
+	}
+	.desc {
+		font-size: 11px;
+		font-style: italic;
+		color: #707070;
+	}
 }
-.desc {
-	font-size: 12px;
-	font-style: italic;
-}
+
 .s_archive-subtitle {
 	margin-top: 25px;
+	color: #000;
+}
+
+.s_archive-img.unpaid {
+	.s_archive-date {
+		background-color: var(--secondary-color);
+	}
+}
+
+.payment-info{
+	border-bottom: 1px solid #eee;
+	padding-bottom: 7px;
+	margin-bottom: 5px;
+	h4{
+		font-size:17px;
+	}
+	p{
+		color: #707070;
+	}
 }
 
 .modal-content {
