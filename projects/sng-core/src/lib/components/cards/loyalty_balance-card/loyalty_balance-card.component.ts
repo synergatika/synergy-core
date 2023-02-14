@@ -106,38 +106,39 @@ export class LoyaltyBalanceCardComponent implements OnInit, OnDestroy {
   fetchLoyaltyBalanceData(): void {
     this.loyaltyService.readBalance()
       .pipe(
-      tap(
-        data => {
-          this.balance = { points: parseInt(data.points, 16), address: data.address };
-          // Get static content of Balance Points
-          console.log('Loyalty Balance Card', this.balance);
-          // this.contentService.readContentById('Synergy Points')
-          //   // this.staticContentService.readText('18')
-          //   .pipe(
-          //   tap(
-          //     data => {
-          //       this.balance['text'] = data;
-          //       console.log(this.balance);
-          //     },
-          //     error => {
-          //       console.log(error);
-          //     }
-          //   ),
-          //   takeUntil(this.unsubscribe),
-          //   finalize(() => {
-          //     this.loading = false;
-          //     this.cdRef.markForCheck();
-          //   })
-          //   ).subscribe();
-        },
-        error => {
-          console.log(error);
-        }),
-      takeUntil(this.unsubscribe),
-      finalize(() => {
-        this.loading = false;
-        this.cdRef.markForCheck();
-      })
+        tap(
+          data => {
+            // this.balance = { points: parseInt(data.points, 16), address: data.address };
+            this.balance = { points: parseInt(data.points), address: data.address };
+            // Get static content of Balance Points
+            console.log('Loyalty Balance Card', this.balance);
+            // this.contentService.readContentById('Synergy Points')
+            //   // this.staticContentService.readText('18')
+            //   .pipe(
+            //   tap(
+            //     data => {
+            //       this.balance['text'] = data;
+            //       console.log(this.balance);
+            //     },
+            //     error => {
+            //       console.log(error);
+            //     }
+            //   ),
+            //   takeUntil(this.unsubscribe),
+            //   finalize(() => {
+            //     this.loading = false;
+            //     this.cdRef.markForCheck();
+            //   })
+            //   ).subscribe();
+          },
+          error => {
+            console.log(error);
+          }),
+        takeUntil(this.unsubscribe),
+        finalize(() => {
+          this.loading = false;
+          this.cdRef.markForCheck();
+        })
       )
       .subscribe();
   }
@@ -149,7 +150,7 @@ export class LoyaltyBalanceCardComponent implements OnInit, OnDestroy {
     this.controlModalState(true);
     this.modalService.open(this.balanceModal)
       .result.then(
-      () => { this.controlModalState(false); console.log('closed'); },
-      () => { this.controlModalState(false); console.log('dismissed'); });
+        () => { this.controlModalState(false); console.log('closed'); },
+        () => { this.controlModalState(false); console.log('dismissed'); });
   }
 }

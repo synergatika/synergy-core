@@ -133,6 +133,9 @@ export class MicrocreditCampaignsListScrollComponent implements OnInit, OnDestro
    */
   onScroll(): void {
     this.counter = this.counter + 1;
+
+    if (this.campaigns.length < this.counter * this.scroll) return;
+
     this.fetchMicrocreditCampaignsData(this.counter);
     console.log('scrolled!!');
     this.cdRef.markForCheck();
