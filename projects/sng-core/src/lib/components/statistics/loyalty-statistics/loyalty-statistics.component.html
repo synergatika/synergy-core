@@ -1,10 +1,11 @@
-<div class="statistics statistics-loyalty" *ngIf="statisticsEarn||statisticsRedeem">
+<div class="statistics statistics-loyalty" *ngIf="statistics">
   <div class="row section-filter">
     <div class="col-md-12">
       <!-- Date Filter -->
       <mat-form-field>
         <mat-label>{{'SUPPORT.FILTER.DATE.TITLE' | translate}}</mat-label>
-        <input matInput [(ngModel)]="dateFilter" [matDatepickerFilter]="activeDates.bind(this)" [matDatepicker]="startDateFilterPicker" [max]="maxDate" (dateChange)="applyFilterDate($event)">
+        <input matInput [(ngModel)]="dateFilter" [matDatepickerFilter]="activeDates.bind(this)"
+          [matDatepicker]="startDateFilterPicker" [max]="maxDate" (dateChange)="applyFilterDate($event)">
         <mat-datepicker-toggle matSuffix [for]="startDateFilterPicker"></mat-datepicker-toggle>
         <mat-datepicker #startDateFilterPicker></mat-datepicker>
       </mat-form-field>
@@ -13,7 +14,7 @@
       </button>
     </div>
   </div>
-  <div class="statistics-earn" *ngIf="statisticsEarn">
+  <div class="statistics-earn" *ngIf="statistics['earn']">
     <h3 class="stat-heading">{{'STATISTICS.LOYALTY_EARN' | translate}}
       <span class="date-filter" *ngIf="dateFilter">
         [{{dateFilter | date: 'dd/MM/yyyy'}}]
@@ -29,7 +30,7 @@
             {{'STATISTICS.AMOUNT' | translate}}
           </mat-card-title>
           <mat-card-content>
-            {{statisticsEarn.amount | currency: 'EUR'}}
+            {{statistics['earn'].amount | currency: 'EUR'}}
           </mat-card-content>
         </mat-card>
       </div>
@@ -39,7 +40,7 @@
             {{'STATISTICS.USERS' | translate}}
           </mat-card-title>
           <mat-card-content>
-            {{statisticsEarn.users}}
+            {{statistics['earn'].uniqueUsers.length}}
           </mat-card-content>
         </mat-card>
       </div>
@@ -49,19 +50,22 @@
             {{'STATISTICS.TRANSACTIONS' | translate}}
           </mat-card-title>
           <mat-card-content>
-            {{statisticsEarn.count}}
+            {{statistics['earn'].uniqueTransactions.length}}
           </mat-card-content>
         </mat-card>
       </div>
     </div>
     <div>
-      <button mat-raised-button class="export-button" (click)="exportToCSV(statisticsEarn, 'Earn')">
-          <span class="mdi mdi-export-variant"></span>
+      <button mat-raised-button class="export-button" (click)="exportToCSV('earn')">
+        <span class="mdi mdi-export-variant"></span>
       </button>
+      <!-- <button mat-raised-button class="export-button" (click)="exportToCSV(statisticsEarn, 'Earn')">
+          <span class="mdi mdi-export-variant"></span>
+      </button> -->
     </div>
   </div>
-  <div class="statistics-redeem" *ngIf="statisticsRedeem">
-    <h3  class="stat-heading">
+  <div class="statistics-redeem" *ngIf="statistics['earn']">
+    <h3 class="stat-heading">
       {{'STATISTICS.LOYALTY_REDEEM' | translate}}
       <span class="date-filter" *ngIf="dateFilter">
         [{{dateFilter | date: 'dd/MM/yyyy'}}]
@@ -77,7 +81,7 @@
             {{'STATISTICS.AMOUNT' | translate}}
           </mat-card-title>
           <mat-card-content>
-            {{statisticsRedeem.amount | currency: 'EUR'}}
+            {{statistics['redeem'].amount | currency: 'EUR'}}
           </mat-card-content>
         </mat-card>
       </div>
@@ -87,7 +91,7 @@
             {{'STATISTICS.USERS' | translate}}
           </mat-card-title>
           <mat-card-content>
-            {{statisticsRedeem.users}}
+            {{statistics['redeem'].uniqueUsers.length}}
           </mat-card-content>
         </mat-card>
       </div>
@@ -97,14 +101,17 @@
             {{'STATISTICS.TRANSACTIONS' | translate}}
           </mat-card-title>
           <mat-card-content>
-            {{statisticsRedeem.count}}
+            {{statistics['redeem'].uniqueTransactions.length}}
           </mat-card-content>
         </mat-card>
       </div>
     </div>
     <div>
-      <button mat-raised-button class="export-button" (click)="exportToCSV(statisticsRedeem, 'Redeem')">
+      <button mat-raised-button class="export-button" (click)="exportToCSV('redeem')">
         <span class="mdi mdi-export-variant"></span>
       </button>
+      <!-- <button mat-raised-button class="export-button" (click)="exportToCSV(statisticsRedeem, 'Redeem')">
+        <span class="mdi mdi-export-variant"></span>
+      </button> -->
     </div>
   </div>

@@ -26,6 +26,15 @@ export abstract class ILoyaltyService {
   abstract redeemOffer(partnerId: string, offerId: string, to: string, password: string, points: number, quantity: number):
     Observable<Message>;
 
-  abstract readStatistics():
+  abstract readLoyaltyStatistics(_date: string):
     Observable<Statistics>;
+
+  abstract exportLoyaltyStatistics(_date: string, _type:string): string;
+    // :Observable<Statistics>;
+
+  abstract readOfferStatistics(partner_id: string, offer_id: string, _date: string):
+    Observable<Statistics>;
+
+  abstract exportOfferStatistics(partner_id: string, offer_id: string, _date: string): string;
+    // :Observable<Statistics>;
 }
