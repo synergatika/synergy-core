@@ -1,4 +1,4 @@
-<div class="statistics statistics-campagin" *ngIf="campaign">
+<div class="statistics statistics-campagin" *ngIf="statistics">
 
   <h3 class="stat-heading">
     {{'STATISTICS.MICROCREDIT_GENERAL' | translate}}
@@ -11,7 +11,8 @@
           {{'STATISTICS.PAID_TO_EARNED' | translate}}
         </mat-card-title>
         <mat-card-content>
-          {{campaign.tokens.paidTokens | currency:'EUR'}} / {{campaign.tokens.earnedTokens | currency:'EUR'}}
+          {{statistics['receive'].payoff | currency:'EUR'}} / {{(statistics['receive'].payoff +
+          statistics['revert'].payoff) | currency:'EUR'}}
         </mat-card-content>
       </mat-card>
     </div>
@@ -21,7 +22,8 @@
           {{'STATISTICS.REDEEMED_TO_PAID' | translate}}
         </mat-card-title>
         <mat-card-content>
-          {{((-1) * campaign.tokens.redeemedTokens) | currency:'EUR'}} / {{campaign.tokens.paidTokens | currency:'EUR'}}
+          {{((-1) * statistics['spend'].tokens) | currency:'EUR'}} / {{(statistics['receive'].payoff +
+          statistics['revert'].payoff) | currency:'EUR'}}
         </mat-card-content>
       </mat-card>
     </div>
@@ -31,7 +33,8 @@
           {{'STATISTICS.REMAINING_TO_PAID' | translate}}
         </mat-card-title>
         <mat-card-content>
-          {{campaign.tokens.paidTokens - ((-1) * campaign.tokens.redeemedTokens) | currency:'EUR'}} / {{campaign.tokens.paidTokens | currency:'EUR'}}
+          {{(statistics['receive'].payoff + statistics['revert'].payoff) - (statistics['spend'].tokens) |
+          currency:'EUR'}} / {{(statistics['receive'].payoff + statistics['revert'].payoff) | currency:'EUR'}}
         </mat-card-content>
       </mat-card>
     </div>
@@ -43,7 +46,8 @@
     <div class="col-md-12">
       <mat-form-field>
         <mat-label>{{'SUPPORT.FILTER.DATE.TITLE' | translate}}</mat-label>
-        <input matInput [(ngModel)]="dateFilter" [matDatepickerFilter]="activeDates.bind(this)" [matDatepicker]="startDateFilterPicker" [max]="maxDate" (dateChange)="applyFilterDate($event)">
+        <input matInput [(ngModel)]="dateFilter" [matDatepickerFilter]="activeDates.bind(this)"
+          [matDatepicker]="startDateFilterPicker" [max]="maxDate" (dateChange)="applyFilterDate($event)">
         <mat-datepicker-toggle matSuffix [for]="startDateFilterPicker"></mat-datepicker-toggle>
         <mat-datepicker #startDateFilterPicker></mat-datepicker>
       </mat-form-field>
@@ -53,7 +57,7 @@
     </div>
   </div>
 
-  <div *ngIf="statisticsPromise">
+  <div *ngIf="statistics">
     <h3 class="stat-heading">
       {{'STATISTICS.MICROCREDIT_EARN' | translate}}
       <span class="date-filter" *ngIf="dateFilter">
@@ -70,7 +74,7 @@
             {{'STATISTICS.AMOUNT' | translate}}
           </mat-card-title>
           <mat-card-content>
-            {{statisticsPromise.tokens | currency:'EUR'}}
+            {{statistics['promise'].tokens | currency:'EUR'}}
           </mat-card-content>
         </mat-card>
       </div>
@@ -80,7 +84,7 @@
             {{'STATISTICS.USERS' | translate}}
           </mat-card-title>
           <mat-card-content>
-            {{statisticsPromise.users}}
+            {{statistics['promise'].uniqueUsers?.length || 0}}
           </mat-card-content>
         </mat-card>
       </div>
@@ -90,7 +94,7 @@
             {{'STATISTICS.TRANSACTIONS' | translate}}
           </mat-card-title>
           <mat-card-content>
-            {{statisticsPromise.count}}
+            {{statistics['promise'].uniqueSupports?.length || 0}}
           </mat-card-content>
         </mat-card>
       </div>
@@ -104,7 +108,7 @@
   </div>
 
 
-  <div *ngIf="statisticsRedeem">
+  <div *ngIf="statistics">
     <h3 class="stat-heading">
       {{'STATISTICS.MICROCREDIT_REDEEM' | translate}}
       <span class="date-filter" *ngIf="dateFilter">
@@ -121,7 +125,7 @@
             {{'STATISTICS.AMOUNT' | translate}}
           </mat-card-title>
           <mat-card-content>
-            {{statisticsRedeem.tokens | currency:'EUR'}}
+            {{statistics['spend'].tokens | currency:'EUR'}}
           </mat-card-content>
         </mat-card>
       </div>
@@ -131,7 +135,7 @@
             {{'STATISTICS.USERS' | translate}}
           </mat-card-title>
           <mat-card-content>
-            {{statisticsRedeem.users}}
+            {{statistics['spend'].uniqueUsers?.length || 0}}
           </mat-card-content>
         </mat-card>
       </div>
@@ -141,7 +145,7 @@
             {{'STATISTICS.TRANSACTIONS' | translate}}
           </mat-card-title>
           <mat-card-content>
-            {{statisticsRedeem.count}}
+            {{statistics['spend'].uniqueSupports?.length || 0}}
           </mat-card-content>
         </mat-card>
       </div>

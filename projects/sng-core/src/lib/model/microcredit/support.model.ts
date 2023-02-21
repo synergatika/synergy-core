@@ -7,11 +7,24 @@ export enum SupportStatus {
   UNPAID = 'unpaid'
 }
 
+export interface SupportPayment {
+  _id: string;
+  method: {
+    bic: string,
+    name: string,
+    value: string
+  };
+}
+
 export interface MicrocreditSupport {
 
+_id: string;
+
   campaign: MicrocreditCampaign;
-  support_id: string;
-  payment_id: string;
+
+  payment: SupportPayment
+  // support_id: string;
+  // payment_id: string;
 
   initialTokens: number;
   currentTokens: number;
