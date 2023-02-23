@@ -1,5 +1,6 @@
 import { MicrocreditTransaction } from './transaction.model';
 import { MicrocreditCampaign } from './campaign.model';
+import { Member } from '../user/member.model';
 
 export enum SupportStatus {
   COMPLETED = 'completed',
@@ -18,9 +19,10 @@ export interface SupportPayment {
 
 export interface MicrocreditSupport {
 
-_id: string;
+  _id: string;
 
   campaign: MicrocreditCampaign;
+  member: Member;
 
   payment: SupportPayment
   // support_id: string;

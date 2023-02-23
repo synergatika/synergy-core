@@ -49,6 +49,7 @@ export class MicrocreditCampaignStatisticsComponent implements OnInit, OnDestroy
     * On Init
     */
   ngOnInit() {
+    console.log(this.campaign.tokens);
     this.maxDate = new Date();
     this.fetchCampaignStatistics('0');
 
@@ -79,7 +80,8 @@ export class MicrocreditCampaignStatisticsComponent implements OnInit, OnDestroy
       month = (d.getMonth() + 1).toString();
     }
 
-    return d.getFullYear().toString() + "/" + month + "/" + date;
+    // return d.getFullYear().toString() + "/" + month + "/" + date;
+    return `${d.getFullYear().toString()}-${month}-${date}`;
   }
 
   activeDates(d: Date): boolean {
@@ -117,6 +119,7 @@ export class MicrocreditCampaignStatisticsComponent implements OnInit, OnDestroy
 
             if (_date === '0') this.total = data;
             this.validatedDates = this.total.dates;
+            console.log(this.validatedDates)
             // this.statisticsEarn = this.statistics['total'].earn;
             // this.statisticsRedeem = this.statistics['total'].redeem;
 
@@ -135,6 +138,12 @@ export class MicrocreditCampaignStatisticsComponent implements OnInit, OnDestroy
         })
       )
       .subscribe();
+  }
+
+  exportToCSV(_type:string) {
+    if(!this.statistics[_type] || !this.statistics[_type].uniqueSupports.length) return;
+
+    this.microcreditService.exportCampaignStatistics(this.campaign.partner._id, this.campaign._id,this.dateFilter ? this.dateformat(this.dateFilter) : '0', _type);
   }
 
   // setOptionCSV(title: string) {

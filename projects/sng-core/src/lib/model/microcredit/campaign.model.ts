@@ -4,9 +4,12 @@ import { Statistics } from '../statistics.model';
 
 interface Tokens {
   _id: string;
-  earnedTokens: number;
-  paidTokens: number;
-  redeemedTokens: number;
+  total: number;
+  paid: number;
+  current: number;
+  // earnedTokens: number;
+  // paidTokens: number;
+  // redeemedTokens: number;
 }
 
 export interface MicrocreditCampaign {

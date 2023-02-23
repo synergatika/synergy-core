@@ -4,15 +4,14 @@
     {{'STATISTICS.MICROCREDIT_GENERAL' | translate}}
   </h3>
 
-  <div class="row">
+  <div class="row" *ngIf="campaign">
     <div class="col-md-4">
       <mat-card>
         <mat-card-title>
           {{'STATISTICS.PAID_TO_EARNED' | translate}}
         </mat-card-title>
         <mat-card-content>
-          {{statistics['receive'].payoff | currency:'EUR'}} / {{(statistics['receive'].payoff +
-          statistics['revert'].payoff) | currency:'EUR'}}
+          {{ campaign['tokens'].paid | currency:'EUR' }} / {{ campaign['tokens'].total | currency:'EUR' }}
         </mat-card-content>
       </mat-card>
     </div>
@@ -22,19 +21,18 @@
           {{'STATISTICS.REDEEMED_TO_PAID' | translate}}
         </mat-card-title>
         <mat-card-content>
-          {{((-1) * statistics['spend'].tokens) | currency:'EUR'}} / {{(statistics['receive'].payoff +
-          statistics['revert'].payoff) | currency:'EUR'}}
+          {{ (campaign['tokens'].paid - campaign['tokens'].current) | currency:'EUR' }} / {{ campaign['tokens'].paid | currency:'EUR' }}
         </mat-card-content>
       </mat-card>
     </div>
+
     <div class="col-md-4">
       <mat-card>
         <mat-card-title>
           {{'STATISTICS.REMAINING_TO_PAID' | translate}}
         </mat-card-title>
         <mat-card-content>
-          {{(statistics['receive'].payoff + statistics['revert'].payoff) - (statistics['spend'].tokens) |
-          currency:'EUR'}} / {{(statistics['receive'].payoff + statistics['revert'].payoff) | currency:'EUR'}}
+          {{ campaign['tokens'].current | currency:'EUR' }} / {{ campaign['tokens'].paid | currency:'EUR' }}
         </mat-card-content>
       </mat-card>
     </div>
@@ -42,7 +40,7 @@
 
   <hr>
 
-  <div class="row section-filter">
+  <div class="row section-filter" *ngIf="statistics">
     <div class="col-md-12">
       <mat-form-field>
         <mat-label>{{'SUPPORT.FILTER.DATE.TITLE' | translate}}</mat-label>
@@ -74,7 +72,7 @@
             {{'STATISTICS.AMOUNT' | translate}}
           </mat-card-title>
           <mat-card-content>
-            {{statistics['promise'].tokens | currency:'EUR'}}
+            {{statistics['receive'].tokens | currency:'EUR'}}
           </mat-card-content>
         </mat-card>
       </div>
@@ -84,7 +82,7 @@
             {{'STATISTICS.USERS' | translate}}
           </mat-card-title>
           <mat-card-content>
-            {{statistics['promise'].uniqueUsers?.length || 0}}
+            {{statistics['receive'].uniqueUsers?.length || 0}}
           </mat-card-content>
         </mat-card>
       </div>
@@ -94,17 +92,19 @@
             {{'STATISTICS.TRANSACTIONS' | translate}}
           </mat-card-title>
           <mat-card-content>
-            {{statistics['promise'].uniqueSupports?.length || 0}}
+            {{statistics['receive'].uniqueSupports?.length || 0}}
           </mat-card-content>
         </mat-card>
       </div>
     </div>
-
-    <div>
+    <!-- <button mat-raised-button class="export-button" (click)="exportToCSV('')">
+      <span class="mdi mdi-export-variant"></span>
+    </button> -->
+    <!-- <div>
       <button mat-raised-button class="export-button" (click)="exportToCSV(statisticsPromise, 'Promise')">
         <span class="mdi mdi-export-variant"></span>
       </button>
-    </div>
+    </div> -->
   </div>
 
 
@@ -151,9 +151,12 @@
       </div>
     </div>
     <div>
-      <button mat-raised-button class="export-button" (click)="exportToCSV(statisticsRedeem, 'Redeem')">
+      <button mat-raised-button class="export-button" (click)="exportToCSV('receive')">
         <span class="mdi mdi-export-variant"></span>
       </button>
+      <!-- <button mat-raised-button class="export-button" (click)="exportToCSV(statisticsRedeem, 'Redeem')">
+        <span class="mdi mdi-export-variant"></span>
+      </button> -->
     </div>
   </div>
 

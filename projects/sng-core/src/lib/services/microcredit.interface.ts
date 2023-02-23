@@ -31,10 +31,9 @@ export abstract class IMicrocreditService {
   abstract redeemTokens(partnerId: string, campaignId: string, to: string, tokens: number, password: string, supportId: string):
     Observable<Message>;
 
-  abstract readCampaignStatistics(partner_id: string, offer_id: string, _date: string):
+  abstract readCampaignStatistics(partner_id: string, campaign_id: string, _date: string):
     Observable<Statistics>;
 
-  abstract exportCampaignStatistics(partner_id: string, offer_id: string, _date: string): string;
+  abstract exportCampaignStatistics(partner_id: string, campaign_id: string, _date: string, _type: string): string;
     // :Observable<Statistics>;
-
 }

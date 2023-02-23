@@ -136,7 +136,8 @@ export class LoyaltyStatisticsComponent implements OnInit, OnDestroy {
     if(!this.statistics[_type] || !this.statistics[_type].uniqueTransactions.length) return;
 
     this.loyaltyService.exportLoyaltyStatistics(this.dateFilter ? this.dateformat(this.dateFilter) : '0', _type);
-    // this.loyaltyService.exportLoyaltyStatistics(, _type)
+  }
+  // this.loyaltyService.exportLoyaltyStatistics(, _type)
     //   .pipe(
     //     tap(
     //       data => {
@@ -151,7 +152,6 @@ export class LoyaltyStatisticsComponent implements OnInit, OnDestroy {
     //   )
     //   .subscribe();
   
-  }
 
   // setOptionCSV(title: string) {
   //   return {
