@@ -18,7 +18,7 @@
     </div>
     <div class="col-3 single-amount">
       <div *ngIf="balance">
-        <span class="points">{{balance.points}}</span>
+        <span class="points">{{balance.currentPoints}}</span>
       </div>
     </div>
   </div>
@@ -35,7 +35,7 @@
       <span class="wallet-img">
         <img src="../../../assets/media/images/Synergy-Icon.png" alt="Synergy" />
       </span>
-      <span *ngIf="balance" class="points">{{balance.points}}</span>
+      <span *ngIf="balance" class="points">{{balance.currentPoints}}</span>
       <h4 class="balance-title">{{'Synergy Points' | content_translate: 'title'}}</h4>
     </div>
     <div class="balance-text mt-3">

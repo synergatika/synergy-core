@@ -1,10 +1,10 @@
 import { Observable } from 'rxjs';
 
-import { Points, Activity, Message, LoyaltyTransaction, Statistics } from '../model';
+import { Points, Activity, Message, LoyaltyTransaction, Statistics, Balance } from '../model';
 
 export abstract class ILoyaltyService {
 
-  abstract readBalance(): Observable<Points>;
+  abstract readBalance(): Observable<Balance>;
 
   abstract readBadge(): Observable<Activity>;
 

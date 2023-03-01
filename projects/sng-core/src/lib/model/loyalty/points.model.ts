@@ -1,4 +1,4 @@
 export interface Points {
   address: string;
-  points: string;
+  points: number;
 }

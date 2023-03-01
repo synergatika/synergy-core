@@ -1,5 +1,9 @@
+import { Member } from "../user";
+
 export interface Balance {
-  address: string;
-  points: number;
-  text?: any;
+member: string,
+currentPoints: number;
+  // address: string;
+  // points: number;
+  // text?: any;
 }

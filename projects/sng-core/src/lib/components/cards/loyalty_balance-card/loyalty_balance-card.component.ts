@@ -109,7 +109,7 @@ export class LoyaltyBalanceCardComponent implements OnInit, OnDestroy {
         tap(
           data => {
             // this.balance = { points: parseInt(data.points, 16), address: data.address };
-            this.balance = { points: parseInt(data.points), address: data.address };
+            this.balance = { currentPoints: data.currentPoints, member: data.member };
             // Get static content of Balance Points
             console.log('Loyalty Balance Card', this.balance);
             // this.contentService.readContentById('Synergy Points')

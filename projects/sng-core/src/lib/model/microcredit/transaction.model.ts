@@ -5,13 +5,13 @@ export interface MicrocreditTransaction {
 
   support: MicrocreditSupport;
 
-/**  */
+  /**  */
   member_id: string;
   partner_id: string;
   campaign_id: string;
   campaign_title: string;
   support_id: string,
-/**  */
+  /**  */
 
   initialTokens: number,
   currentTokens: number,
