@@ -8120,7 +8120,7 @@
                 "OnInit",
                 "OnDestroy"
             ],
-            "templateData": "<!--begin::Loaylty Offers List-->\r\n<div *ngIf=\"offers && offers.length\" class=\"row section-list\">\r\n  <div class=\"col-md-12\">\r\n    <h3 class=\"list-tiltle\">{{ 'OFFER.PLURAL' | translate }}</h3>\r\n    <owl-carousel-o [options]=\"customOptions\">\r\n      <ng-template carouselSlide *ngFor=\"let offer of (offers);\">\r\n        <sng-offer-card [offer]=\"offer\" type=\"single\"></sng-offer-card>\r\n      </ng-template>\r\n    </owl-carousel-o>\r\n  </div>\r\n</div>\r\n<!--end::Loaylty Offers List-->\r\n"
+            "templateData": "<!--begin::Loyalty Offers List-->\r\n<div *ngIf=\"offers && offers.length\" class=\"row section-list\">\r\n  <div class=\"col-md-12\">\r\n    <h3 class=\"list-tiltle\">{{ 'OFFER.PLURAL' | translate }}</h3>\r\n    <owl-carousel-o [options]=\"customOptions\">\r\n      <ng-template carouselSlide *ngFor=\"let offer of (offers);\">\r\n        <sng-offer-card [offer]=\"offer\" type=\"single\"></sng-offer-card>\r\n      </ng-template>\r\n    </owl-carousel-o>\r\n  </div>\r\n</div>\r\n<!--end::Loyalty Offers List-->\r\n"
         },
         {
             "name": "OffersListScrollComponent",
@@ -8338,7 +8338,7 @@
                 "OnInit",
                 "OnDestroy"
             ],
-            "templateData": "<!--begin::Loaylty Offers List-->\r\n<div *ngIf=\"offers && offers.length\" class=\"row section-list\">\r\n  <div class=\"col-md-12\">\r\n    <h3 class=\"list-tiltle\">{{ 'OFFER.PLURAL' | translate }}</h3>\r\n    <div class=\"row\" infiniteScroll [infiniteScrollDistance]=\"2\" [infiniteScrollThrottle]=\"50\" (scrolled)=\"onScroll()\">\r\n      <div class=\"col-md-4 item-wrapper\" *ngFor=\"let offer of (offers)\">\r\n        <sng-offer-card [offer]=\"offer\"></sng-offer-card>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!--end::Loaylty Offers List-->\r\n"
+            "templateData": "<!--begin::Loyalty Offers List-->\r\n<div *ngIf=\"offers && offers.length\" class=\"row section-list\">\r\n  <div class=\"col-md-12\">\r\n    <h3 class=\"list-tiltle\">{{ 'OFFER.PLURAL' | translate }}</h3>\r\n    <div class=\"row\" infiniteScroll [infiniteScrollDistance]=\"2\" [infiniteScrollThrottle]=\"50\" (scrolled)=\"onScroll()\">\r\n      <div class=\"col-md-4 item-wrapper\" *ngFor=\"let offer of (offers)\">\r\n        <sng-offer-card [offer]=\"offer\"></sng-offer-card>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!--end::Loyalty Offers List-->\r\n"
         },
         {
             "name": "PartnerCardComponent",

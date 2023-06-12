@@ -141,9 +141,9 @@ export class OffersListScrollComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Open Loaylty Offer Modal
+   * Open Loyalty Offer Modal
    */
-  openLoaylty(offer: LoyaltyOffer): void {
+  openLoyalty(offer: LoyaltyOffer): void {
     this.offer = offer;
     this.controlModalState(true);
     this.modalService.open(
@@ -168,7 +168,7 @@ export class OffersListScrollComponent implements OnInit, OnDestroy {
   mousemove(): void { this.moved = true; }
   mouseup(data: LoyaltyOffer): void {
     if (!this.moved) {
-      this.openLoaylty(data);
+      this.openLoyalty(data);
     }
     this.moved = false;
   }
