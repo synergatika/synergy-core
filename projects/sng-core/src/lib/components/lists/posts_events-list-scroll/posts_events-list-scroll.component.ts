@@ -131,6 +131,9 @@ export class PostsEventsListScrollComponent implements OnInit, OnDestroy {
    */
   onScroll(): void {
     this.counter = this.counter + 1;
+
+    if (this.posts_events.length < this.counter * this.scroll) return;
+
     this.fetchPostsEventsData(this.counter);
     //console.log('scrolled!!');
     this.cdRef.markForCheck();

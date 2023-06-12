@@ -61,7 +61,7 @@ public avatar: string = '';
     this.viewSupportButton = (this.authenticationService.currentUserValue.user["access"] == 'member');
     this.canSupportCampaignTime = ((this.campaign.startsAt < seconds) && (this.campaign.expiresAt > seconds));
     this.canRedeemCampaign = ((this.campaign.redeemStarts > seconds) && (this.campaign.redeemEnds < seconds));
-    this.cannotSupportCampaignAmount = (!(this.campaign.redeemable) && (this.campaign.tokens.paidTokens > this.campaign.maxAmount)) ;
+    this.cannotSupportCampaignAmount = (!(this.campaign.redeemable) && (this.campaign.tokens.paid > this.campaign.maxAmount)) ;
 
     console.log(this.canSupportCampaignTime, this.cannotSupportCampaignAmount)
     console.log(!this.canSupportCampaignTime || this.cannotSupportCampaignAmount)

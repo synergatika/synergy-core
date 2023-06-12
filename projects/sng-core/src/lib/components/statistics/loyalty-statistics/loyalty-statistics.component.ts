@@ -26,6 +26,7 @@ export class LoyaltyStatisticsComponent implements OnInit, OnDestroy {
   public statisticsRedeem: Statistics;
   public validatedDates: string[];
 
+  public total;
   loading: boolean = false;
   private unsubscribe: Subject<any>;
 
@@ -47,7 +48,7 @@ export class LoyaltyStatisticsComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.maxDate = new Date();
-    this.fetchLoyaltyStatistics();
+    this.fetchLoyaltyStatistics('0');
   }
 
   /**
@@ -75,7 +76,8 @@ export class LoyaltyStatisticsComponent implements OnInit, OnDestroy {
       month = (d.getMonth() + 1).toString()
     }
 
-    return d.getFullYear().toString() + "/" + month + "/" + date;
+    // return d.getFullYear().toString() + "/" + month + "/" + date;
+    return `${d.getFullYear().toString()}-${month}-${date}`;
   }
 
   activeDates(d: Date): boolean {
@@ -83,32 +85,41 @@ export class LoyaltyStatisticsComponent implements OnInit, OnDestroy {
   }
 
   applyFilterDate(event) {
-    this.statisticsEarn = this.statistics.statisticsEarn.byDate.filter(obj =>
-      obj.date === this.dateformat(event.value))[0];
-    this.statisticsRedeem = this.statistics.statisticsRedeem.byDate.filter(obj =>
-      obj.date === this.dateformat(event.value))[0];
+    this.fetchLoyaltyStatistics(this.dateformat(event.value));
+    // this.statisticsEarn = this.statistics.statisticsEarn.byDate.filter(obj =>
+    //   obj.date === this.dateformat(event.value))[0];
+    // this.statisticsRedeem = this.statistics.statisticsRedeem.byDate.filter(obj =>
+    //   obj.date === this.dateformat(event.value))[0];
   }
 
   clearFilterDate() {
     this.dateFilter = null;
-    this.statisticsEarn = this.statistics.statisticsEarn;
-    this.statisticsRedeem = this.statistics.statisticsRedeem;
+    this.statistics = this.total;
+    // this.statisticsEarn = this.statistics['total'].earn;
+    // this.statisticsRedeem = this.statistics['total'].redeem;
   }
 
   /**
    * Fetch Loyalty Statistics
    */
-  fetchLoyaltyStatistics() {
-    this.loyaltyService.readStatistics()
+  fetchLoyaltyStatistics(_date: string) {
+    this.loyaltyService.readLoyaltyStatistics(_date)
       .pipe(
         tap(
           data => {
             this.statistics = data;
-            const datesRedeem = (this.statistics.statisticsRedeem) ? this.statistics.statisticsRedeem.byDate.map(obj => { return obj.date }) : [];
-            const datesEarn = (this.statistics.statisticsEarn) ? this.statistics.statisticsEarn.byDate.map(obj => { return obj.date }) : [];
-            this.validatedDates = datesRedeem.concat(datesEarn);
-            this.statisticsEarn = (this.statistics.statisticsEarn) ? this.statistics.statisticsEarn : { amount: 0, users: 0, count: 0 };
-            this.statisticsRedeem = (this.statistics.statisticsRedeem) ? this.statistics.statisticsRedeem : { amount: 0, users: 0, count: 0 };
+            console.log(this.statistics)
+
+            if (_date === '0') this.total = data;
+            this.validatedDates = this.total.dates;
+            // this.statisticsEarn = this.statistics['total'].earn;
+            // this.statisticsRedeem = this.statistics['total'].redeem;
+
+            // const datesRedeem = (this.statistics.statisticsRedeem) ? this.statistics.statisticsRedeem.byDate.map(obj => { return obj.date }) : [];
+            // const datesEarn = (this.statistics.statisticsEarn) ? this.statistics.statisticsEarn.byDate.map(obj => { return obj.date }) : [];
+            // this.validatedDates = datesRedeem.concat(datesEarn);
+            // this.statisticsEarn = (this.statistics.statisticsEarn) ? this.statistics.statisticsEarn : { amount: 0, users: 0, count: 0 };
+            // this.statisticsRedeem = (this.statistics.statisticsRedeem) ? this.statistics.statisticsRedeem : { amount: 0, users: 0, count: 0 };
           },
           error => {
           }),
@@ -121,42 +132,62 @@ export class LoyaltyStatisticsComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  setOptionCSV(title: string) {
-    return {
-      fieldSeparator: ',',
-      filename: title,
-      quoteStrings: '"',
-      decimalSeparator: '.',
-      showLabels: true,
-      // showTitle: true,
-      // title: 'My Awesome CSV',
-      useTextFile: false,
-      useBom: true,
-      //  useKeysAsHeaders: true,
-      headers: ['Date', 'Amount', 'Total Transactions', 'Unique Users']//<-- Won't work with useKeysAsHeaders present!
-    };
+  exportToCSV(_type:string) {
+    if(!this.statistics[_type] || !this.statistics[_type].uniqueTransactions.length) return;
+
+    this.loyaltyService.exportLoyaltyStatistics(this.dateFilter ? this.dateformat(this.dateFilter) : '0', _type);
   }
+  // this.loyaltyService.exportLoyaltyStatistics(, _type)
+    //   .pipe(
+    //     tap(
+    //       data => {
+    //       },
+    //       error => {
+    //       }),
+    //     takeUntil(this.unsubscribe),
+    //     finalize(() => {
+    //       this.loading = false;
+    //       this.cdRef.markForCheck();
+    //     })
+    //   )
+    //   .subscribe();
+  
 
-  exportToCSV(data: Statistics, type: string) {
+  // setOptionCSV(title: string) {
+  //   return {
+  //     fieldSeparator: ',',
+  //     filename: title,
+  //     quoteStrings: '"',
+  //     decimalSeparator: '.',
+  //     showLabels: true,
+  //     // showTitle: true,
+  //     // title: 'My Awesome CSV',
+  //     useTextFile: false,
+  //     useBom: true,
+  //     //  useKeysAsHeaders: true,
+  //     headers: ['Date', 'Amount', 'Total Transactions', 'Unique Users']//<-- Won't work with useKeysAsHeaders present!
+  //   };
+  // }
 
-    if (!data.count) return;
+  // exportToCSV(data: Statistics, type: string) {
 
-    if (this.dateFilter) {
-      const oneDate = [{ date: data["date"], amount: data['amount'], count: data['count'], users: data['users'] }];
-      const csvExporter = new ExportToCsv(this.setOptionCSV(data.date + " - Total Loyalty (" + type + ")"));
-      csvExporter.generateCsv(oneDate);
-    } else {
-      const byDate = data['byDate'].map(obj => ({ date: (obj.date).toString(), amount: obj.amount, count: obj.count, users: obj.users }))
-        .sort((a, b) => a.date.localeCompare(b.date));
-      const total =
-        [
-          { date: 'total', amount: data['amount'], count: data['count'], users: data['users'] },
-          { date: '', amount: '', count: '', users: '', },
-        ];
+  //   if (!data.count) return;
 
-      const csvExporter = new ExportToCsv(this.setOptionCSV("Total Loyalty (" + type + ")"));
-      csvExporter.generateCsv(total.concat(byDate));
-    }
+  //   if (this.dateFilter) {
+  //     const oneDate = [{ date: data["date"], amount: data['amount'], count: data['count'], users: data['users'] }];
+  //     const csvExporter = new ExportToCsv(this.setOptionCSV(data.date + " - Total Loyalty (" + type + ")"));
+  //     csvExporter.generateCsv(oneDate);
+  //   } else {
+  //     const byDate = data['byDate'].map(obj => ({ date: (obj.date).toString(), amount: obj.amount, count: obj.count, users: obj.users }))
+  //       .sort((a, b) => a.date.localeCompare(b.date));
+  //     const total =
+  //       [
+  //         { date: 'total', amount: data['amount'], count: data['count'], users: data['users'] },
+  //         { date: '', amount: '', count: '', users: '', },
+  //       ];
 
-  }
+  //     const csvExporter = new ExportToCsv(this.setOptionCSV("Total Loyalty (" + type + ")"));
+  //     csvExporter.generateCsv(total.concat(byDate));
+  //   }
+  // }
 }

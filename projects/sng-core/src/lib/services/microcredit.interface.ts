@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { Activity, MicrocreditSupport, PaymentDetails, MicrocreditTransaction, Message } from '../model';
+import { Activity, MicrocreditSupport, PaymentDetails, MicrocreditTransaction, Message, Statistics } from '../model';
 
 export abstract class IMicrocreditService {
 
@@ -31,4 +31,9 @@ export abstract class IMicrocreditService {
   abstract redeemTokens(partnerId: string, campaignId: string, to: string, tokens: number, password: string, supportId: string):
     Observable<Message>;
 
+  abstract readCampaignStatistics(partner_id: string, campaign_id: string, _date: string):
+    Observable<Statistics>;
+
+  abstract exportCampaignStatistics(partner_id: string, campaign_id: string, _date: string, _type: string): string;
+    // :Observable<Statistics>;
 }

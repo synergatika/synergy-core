@@ -45,11 +45,22 @@
   }
 }
 
+
+
 .single {
   //border-bottom: 1px solid #eee;
   padding-top: 5px;
   padding-bottom: 5px;
   margin-bottom: 20px;
+
+  &.balance-title{
+    justify-content:left !important;
+    .points{
+      color:#000;
+      font-size: 30px;
+      margin-right: 20px;
+    }
+  }
 
   &-content {
   display: flex;

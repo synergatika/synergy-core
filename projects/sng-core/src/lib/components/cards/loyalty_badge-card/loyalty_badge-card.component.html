@@ -1,19 +1,13 @@
-<!-- <div class="dashboard">
-  <div class="row">
-    <div class="col-md-6"> -->
-
 <!--begin::Loyalty Badge-->
-<div class="row">
-  <div *ngIf="loyalty_badge" class="badge-container">
-    <div class="mr-4">
+  <div *ngIf="loyalty_badge" class="badge-container row">
+    <div class="col-sm-4">
       <img *ngIf="loyalty_badge.image" [src]="loyalty_badge.image">
     </div>
-    <div *ngIf="loyalty_badge.text_id" class="bagde-text">
+    <div *ngIf="loyalty_badge.text_id" class="bagde-text col-sm-8">
       <h2>{{ loyalty_badge.text_id | content_translate: 'title' }}</h2>
       <p [innerHTML]="loyalty_badge.text_id | content_translate: 'content'"></p>
       <!-- <h2>{{ loyalty_badge.text | content_translate: 'title' }}</h2>
       <p [innerHTML]="loyalty_badge.text | content_translate: 'content'"></p> -->
     </div>
   </div>
-</div>
 <!--end::Loyalty Badge-->

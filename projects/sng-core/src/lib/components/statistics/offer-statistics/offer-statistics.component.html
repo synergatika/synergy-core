@@ -30,7 +30,7 @@
             {{'STATISTICS.QUANTITY' | translate}}
           </mat-card-title>
           <mat-card-content>
-            {{statistics.quantity}}
+            {{statistics['redeem'].quantity}}
           </mat-card-content>
         </mat-card>
       </div>
@@ -40,7 +40,7 @@
             {{'STATISTICS.USERS' | translate}}
           </mat-card-title>
           <mat-card-content>
-            {{statistics.users}}
+            {{statistics['redeem'].uniqueUsers.length}}
           </mat-card-content>
         </mat-card>
       </div>
@@ -50,15 +50,18 @@
             {{'STATISTICS.TRANSACTIONS' | translate}}
           </mat-card-title>
           <mat-card-content>
-            {{statistics.count}}
+            {{statistics['redeem'].uniqueTransactions.length}}
           </mat-card-content>
         </mat-card>
       </div>
     </div>
     <div>
-      <button mat-raised-button class="export-button" (click)="exportToCSV(statistics)">
+      <button mat-raised-button class="export-button" (click)="exportToCsv()">
         <span class="mdi mdi-export-variant"></span>
       </button>
+      <!-- <button mat-raised-button class="export-button" (click)="exportToCSV(statistics)">
+        <span class="mdi mdi-export-variant"></span>
+      </button> -->
     </div>
   </div>
 </div>

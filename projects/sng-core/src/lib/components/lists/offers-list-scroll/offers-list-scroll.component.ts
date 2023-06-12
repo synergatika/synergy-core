@@ -12,7 +12,7 @@ import { IItemsService } from '../../../services';
 /**
  * Models & Interfaces
  */
-import {LoyaltyOffer } from '../../../model';
+import { LoyaltyOffer } from '../../../model';
 
 @Component({
   selector: 'sng-offers-list-scroll',
@@ -112,19 +112,19 @@ export class OffersListScrollComponent implements OnInit, OnDestroy {
   fetchLoyaltyOffersData(counter: number): void {
     this.itemsService.readAllOffers(`${this.scroll.toString()}-${counter.toString()}-1`)
       .pipe(
-      tap(
-        data => {
-          this.offers = this.offers.concat(data);
-          console.log("Loyalty Offers in List-Scroll", this.offers);
-        },
-        error => {
-          console.log(error);
-        }),
-      takeUntil(this.unsubscribe),
-      finalize(() => {
-        this.loading = false;
-        this.cdRef.markForCheck();
-      })
+        tap(
+          data => {
+            this.offers = this.offers.concat(data);
+            console.log("Loyalty Offers in List-Scroll", this.offers);
+          },
+          error => {
+            console.log(error);
+          }),
+        takeUntil(this.unsubscribe),
+        finalize(() => {
+          this.loading = false;
+          this.cdRef.markForCheck();
+        })
       )
       .subscribe();
   }
@@ -133,7 +133,11 @@ export class OffersListScrollComponent implements OnInit, OnDestroy {
    * On Scroll
    */
   onScroll() {
+
     this.counter = this.counter + 1;
+
+    if (this.offers.length < this.counter * this.scroll) return;
+
     this.fetchLoyaltyOffersData(this.counter);
     console.log('scrolled!!');
     //	this.offers = this.offers.concat(this.offers);

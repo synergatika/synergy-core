@@ -35,7 +35,7 @@ export class LoyaltyBalanceCardComponent implements OnInit, OnDestroy {
   /**
    * Content Variables
    */
-  public balance: Balance; // The loyalty badge of member
+  public balance: any; // The loyalty badge of member
 
   loading = false;
   private unsubscribe: Subject<any>;
@@ -108,8 +108,8 @@ export class LoyaltyBalanceCardComponent implements OnInit, OnDestroy {
       .pipe(
         tap(
           data => {
-            this.balance = { points: +data['currentPoints'], address: data.address };
             // this.balance = { points: parseInt(data.points, 16), address: data.address };
+            this.balance = { currentPoints: data['currentPoints'], member: data['member'] };
             // Get static content of Balance Points
             console.log('Loyalty Balance Card', this.balance);
             // this.contentService.readContentById('Synergy Points')
